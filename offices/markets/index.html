@@ -1,0 +1,363 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@400;500;600&display=swap');
+/* suroast HQ look: roast-dark ground, cream ink, Fraunces italic, status colours run light→dark like Agtron (lighter = sooner) */
+.sr {
+  --sr-bg: #17100A; --sr-panel: #1F160D; --sr-panel2: #231812; --sr-ink: #F7EAD6; --sr-muted: #9A8468; --sr-accent: #C48248; --sr-line: #2E2114;
+  --st-base: #DCA564; --st-w1: #C48248; --st-w2: #A5582A; --st-w3: #8A3E1C; --st-later: #3C1204;
+  --sr-serif: "Fraunces", Georgia, "Times New Roman", serif; --sr-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --color-panel: var(--sr-panel); --color-fg: var(--sr-ink); --color-fg-muted: var(--sr-muted); --color-border-line: var(--sr-line);
+  --color-bad: #E58A6E; --color-warn: #DCA564; --color-ok: #A9C08A;
+  --cds-chart-grid: var(--sr-line); --cds-chart-axis: #4A3826; --cds-surface-popover: var(--sr-panel2); --cds-border: var(--sr-line); --cds-text-secondary: var(--sr-muted);
+  --font-anthropic-serif: var(--sr-serif);
+  color-scheme: dark; background: var(--sr-bg); color: var(--sr-ink); border-radius: 18px;
+  padding: clamp(18px, 4vw, 48px);
+  font-family: var(--sr-sans); display: grid; gap: var(--cds-gap-xl); max-width: 72rem; margin-inline: auto; position: relative; overflow: hidden; }
+.sr > * { position: relative; min-width: 0; }
+.sr-eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--sr-accent); font-weight: 500; }
+.sr-head { display: grid; gap: var(--cds-gap-sm); }
+.sr-dots { width: 72px; height: 68px; display: block; overflow: visible; }
+.sr-title { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(38px, 6.5vw, 72px) !important; line-height: 1; margin: 0; text-wrap: balance; }
+.sr-title .wm { font-style: normal; font-weight: 340; }
+.sr-title .hq { color: var(--sr-accent); }
+.sr-take { color: #E8DCC8; font-family: var(--sr-serif); font-style: italic; font-size: 1.15rem; line-height: 1.5; margin: 0; max-width: 62ch; }
+.sr-tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); }
+.sr-tab { font: inherit; font-size: 14px; background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
+.sr-tab[aria-selected="true"] { color: var(--sr-ink); border-bottom-color: var(--sr-accent); }
+.sr-tab:focus-visible, .sr-chip:focus-visible, .sr-tile:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.sr-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-kpi { background: rgba(35,24,18,.82); border: 1px solid var(--color-border-line); border-radius: 14px; padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.sr-kpi .lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sr-accent); font-weight: 600; }
+.sr-kpi .big { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 4.5vw, 52px) !important; line-height: 1; font-variant-numeric: tabular-nums; }
+.sr-kpi .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: 14px; padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.sr-card h2 { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); margin: 0; }
+.sr-card .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.sr-wide { grid-column: 1 / -1; }
+.sr-tw { overflow-x: auto; }
+.sr table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.sr th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); white-space: nowrap; }
+.sr td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.sr td.num, .sr th.num { text-align: right; white-space: nowrap; }
+.sr td.dim { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sr tr.sel td { background: var(--sr-panel2); }
+.sr .pill { display: inline-flex; align-items: center; gap: 6px; padding: 2px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid var(--sr-line); white-space: nowrap; }
+.sr .pill i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.sr-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); }
+.sr-chip { font: inherit; font-size: var(--cds-font-size-caption); background: none; color: var(--color-fg-muted); border: 1px solid var(--sr-line); border-radius: 999px; padding: 4px 10px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.sr-chip i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.sr-chip[aria-pressed="true"] { color: var(--sr-ink); border-color: var(--sr-accent); background: var(--sr-panel2); }
+.sr-mapwrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--cds-gap-lg); align-items: start; }
+@media (max-width: 760px) { .sr-mapwrap { grid-template-columns: 1fr; } }
+.sr-map { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 5px; position: relative; min-height: 200px; }
+.sr-tile { aspect-ratio: 1; max-width: 100%; border-radius: 10px; border: 1px solid transparent; display: grid; align-content: space-between; padding: 5px 6px; cursor: pointer; font: inherit; text-align: left; color: #1A120A; min-width: 0; }
+.sr-tile b { font-size: clamp(10px, 1.6vw, 15px); font-weight: 600; letter-spacing: .04em; }
+.sr-tile span { font-size: clamp(8px, 1.1vw, 11px); opacity: .8; font-variant-numeric: tabular-nums; }
+.sr-tile.dark { color: var(--sr-ink); border-color: #4A3826; }
+.sr-tile.dim { opacity: .18; }
+.sr-tile.on { outline: 2px solid var(--sr-ink); outline-offset: 2px; }
+.sr-detail { display: grid; gap: var(--cds-gap-sm); }
+.sr-detail h3 { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: 30px; margin: 0; }
+.sr-dl { display: grid; grid-template-columns: auto 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
+.sr-dl dt { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); padding-top: 2px; }
+.sr-dl dd { margin: 0; }
+.sr-waves { display: grid; gap: 10px; }
+.sr-wave { display: grid; grid-template-columns: 6.5rem 1fr auto; gap: 10px; align-items: center; font-size: 14px; }
+.sr-wave .bar { height: 14px; border-radius: 7px; background: var(--sr-line); overflow: hidden; }
+.sr-wave .bar i { display: block; height: 100%; border-radius: 7px; }
+.sr-wave .v { font-variant-numeric: tabular-nums; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); white-space: nowrap; }
+.sr-input { font: inherit; font-size: 14px; background: var(--sr-bg); color: var(--sr-ink); border: 1px solid var(--sr-line); border-radius: 8px; padding: 6px 10px; width: min(100%, 16rem); }
+.sr-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); z-index: 3; white-space: nowrap; }
+.sr-tip .d { color: var(--cds-text-secondary); }
+.sr-regions { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-reg { border: 1px solid var(--sr-line); border-radius: 14px; padding: var(--cds-pad-lg); display: grid; gap: 8px; align-content: start; background: var(--sr-panel); }
+.sr-reg h3 { margin: 0; font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: 22px; }
+.sr-reg p { margin: 0; font-size: 14px; }
+.sr-reg .w { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.sr-prose { display: grid; gap: var(--cds-gap-sm); max-width: 65ch; }
+.sr-prose p, .sr-prose ol, .sr-prose ul { margin: 0; }
+.sr-prose ol, .sr-prose ul { padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="sr">
+  <header class="sr-head">
+    <svg class="sr-dots" id="dots" viewBox="0 0 160 150" aria-label="знак suroast"></svg>
+    <span class="sr-eyebrow">Specialty coffee roasters · Praha → Europe → World</span>
+    <h1 class="sr-title" id="top"><span class="wm">suroast</span> <span class="hq">рынки</span></h1>
+    <p class="sr-take" id="take">Где мы уже есть, куда идём следующими и что пока не трогаем.</p>
+  </header>
+
+  <div class="sr-kpis">
+    <div class="sr-kpi"><span class="lbl">Кафе в Праге</span><span class="big dash-skeleton" data-source="brief" data-field="value" data-where="key=prague_cafes">—</span><span class="sub">наша база, по брифу</span></div>
+    <div class="sr-kpi"><span class="lbl">Кафе в Европе</span><span class="big dash-skeleton" data-source="brief" data-field="value" data-where="key=europe_cafes">—</span><span class="sub">в <span data-source="brief" data-field="value" data-where="key=europe_cities">—</span> городах, по брифу</span></div>
+    <div class="sr-kpi"><span class="lbl">Стран в плане</span><span class="big dash-skeleton" data-source="totals" data-field="planned">—</span><span class="sub">из <span data-source="totals" data-field="countries">—</span> в карте; в волне 1: <span data-source="totals" data-field="w1">—</span></span></div>
+    <div class="sr-kpi"><span class="lbl">Клиентов сейчас</span><span class="big dash-skeleton" data-source="totals" data-field="clients">—</span><span class="sub">в странах, где зашли: <span data-source="totals" data-field="entered">—</span></span></div>
+  </div>
+
+  <nav class="sr-tabs" role="tablist">
+    <button class="sr-tab" role="tab" data-tab="europe" aria-selected="true">Европа</button>
+    <button class="sr-tab" role="tab" data-tab="world" aria-selected="false">Мир</button>
+    <button class="sr-tab" role="tab" data-tab="nums" aria-selected="false">Цифры рынка</button>
+    <button class="sr-tab" role="tab" data-tab="how" aria-selected="false">Как выбираем</button>
+  </nav>
+
+  <section class="sr-grid" id="europe" data-panel="europe">
+    <div class="sr-card sr-wide">
+      <h2 id="mapH">Карта Европы по волнам</h2>
+      <p class="note">Каждый квадрат — страна, примерно на своём месте. Чем светлее цвет, тем раньше заходим, как на шкале Agtron. Число — оценка спешелти-кафе. Нажми на страну.</p>
+      <div class="sr-chips" id="chips"></div>
+      <div class="sr-mapwrap">
+        <div class="sr-map" id="map" data-source="countries"></div>
+        <div class="sr-detail" id="detail" data-source="countries"></div>
+      </div>
+    </div>
+    <div class="sr-card">
+      <h2 id="wavesH">Сколько кафе в каждой волне</h2>
+      <p class="note">Сумма оценок по странам волны. Это потолок, а не план продаж.</p>
+      <div class="sr-waves" id="waves" data-source="waveStats"></div>
+    </div>
+    <div class="sr-card">
+      <h2 id="nextH">Ближайшие шаги</h2>
+      <div class="sr-prose"><ol>
+        <li>Прага: набрать 40 кафе к месяцу 5 (веха M5 из финмодели).</li>
+        <li>Брно и Братислава: первые клиенты с доставкой из Праги.</li>
+        <li>Вена, Берлин, Мюнхен, Варшава: по 3–5 пилотных кафе, визит Бориса с dial-in.</li>
+        <li>Чемпионат и события: ездить туда, куда идём в следующей волне.</li>
+      </ol></div>
+      <p class="note">Мой план по брифу. Поправь порядок, и я перестрою волны.</p>
+    </div>
+    <div class="sr-card sr-wide">
+      <h2 id="tableH">Все страны</h2>
+      <p class="note">Население, кофе на человека и число кафе — мои оценки по открытым данным, их стоит проверить. Клиентов пока ноль: пиши, когда появится первый, и я обновлю.</p>
+      <input class="sr-input" id="q" type="search" placeholder="Поиск: страна или город" aria-label="Поиск по странам">
+      <div class="sr-tw"><table id="cT" data-source="countries" data-row-key="iso">
+        <thead><tr><th data-field="iso">Код</th><th data-field="country">Страна</th><th data-field="status">Статус</th><th class="num" data-field="clients">Клиенты</th><th class="num" data-field="cafes_est">Кафе ≈</th><th class="num" data-field="coffee_kg">Кофе, кг/чел</th><th class="num" data-field="pop_m">Население, млн</th><th data-field="hubs">Города</th><th data-field="entry">Как заходим</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="world" data-panel="world" hidden>
+    <div class="sr-card sr-wide">
+      <h2 id="worldH">Регионы мира</h2>
+      <p class="note">По брифу: Европа с первого дня, Азия позже через дистрибьюторов. Остальное — моя оценка, где есть смысл.</p>
+      <div class="sr-regions" id="regs" data-source="regions"></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="nums" data-panel="nums" hidden>
+    <div class="sr-card sr-wide">
+      <h2 id="numsH">Рынок в цифрах брифа</h2>
+      <p class="note">Только то, что записано в брифе suroast.</p>
+      <div class="sr-tw"><table id="bT" data-source="brief" data-row-key="key">
+        <thead><tr><th data-field="key">Ключ</th><th data-field="label">Что</th><th class="num" data-field="value">Значение</th><th data-field="unit">Ед.</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="how" data-panel="how" hidden>
+    <div class="sr-card">
+      <h2>Как ставлю страну в волну</h2>
+      <div class="sr-prose"><ul>
+        <li><b>Логистика.</b> Доставка из Праги за 1–2 дня без таможни идёт первой.</li>
+        <li><b>Плотность кафе.</b> Город с сотней спешелти-кафе важнее страны с большим населением.</li>
+        <li><b>Цена кило.</b> Где кафе платят больше 800 Kč/kg, маржа держится даже с доставкой.</li>
+        <li><b>Вкус к светлой обжарке.</b> Северная школа ближе к нашей шкале, чем итальянский эспрессо.</li>
+        <li><b>Вне ЕС</b> (Великобритания, Швейцария, Норвегия, Сербия) — только через партнёра или когда будет объём.</li>
+      </ul></div>
+    </div>
+    <div class="sr-card">
+      <h2>Статусы</h2>
+      <div class="sr-prose"><ul>
+        <li><b>База</b> — работаем сами, здесь склад и обжарка.</li>
+        <li><b>Волна 1</b> — первый год, соседи по дороге из Праги.</li>
+        <li><b>Волна 2</b> — второй год, зрелые рынки с высокой ценой.</li>
+        <li><b>Волна 3</b> — большие, но дорогие для входа рынки.</li>
+        <li><b>Позже</b> — e-shop и drip-пакеты, без своих продаж.</li>
+      </ul></div>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('totals', {
+  title: 'Итоги по странам', description: 'Сколько стран в карте, сколько в плане (всё, кроме «Позже»), в волне 1, клиентов всего и стран, где они есть.',
+  inputs: ['countries'],
+  fn: (countries) => [{
+    countries: countries.length,
+    planned: countries.filter(c => c.status !== 'Позже').length,
+    w1: countries.filter(c => c.status === 'Волна 1').length,
+    clients: countries.reduce((s, c) => s + Number(c.clients), 0),
+    entered: countries.filter(c => Number(c.clients) > 0).length
+  }]
+});
+dash.calc('waveStats', {
+  title: 'Кафе по волнам', description: 'Число стран и сумма оценок спешелти-кафе по каждому статусу.',
+  inputs: ['countries'],
+  fn: (countries) => ['База', 'Волна 1', 'Волна 2', 'Волна 3', 'Позже'].map(status => {
+    const cs = countries.filter(c => c.status === status);
+    return { status, countries: cs.length, cafes: cs.reduce((s, c) => s + Number(c.cafes_est), 0) };
+  })
+});
+
+(function () {
+  const tabs = [...document.querySelectorAll('.sr-tab')];
+  const ids = tabs.map(t => t.dataset.tab);
+  const show = (id) => {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+    document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== id; });
+    dash.setLink(id);
+  };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  const h = location.hash.slice(1);
+  if (ids.includes(h)) show(h);
+})();
+</script>
+
+<script>
+(function () {
+  const ST = ['База', 'Волна 1', 'Волна 2', 'Волна 3', 'Позже'];
+  const COL = { 'База': 'var(--st-base)', 'Волна 1': 'var(--st-w1)', 'Волна 2': 'var(--st-w2)', 'Волна 3': 'var(--st-w3)', 'Позже': 'var(--st-later)' };
+  const DARK = { 'Волна 3': 1, 'Позже': 1 };
+  const RCOL = { 'В работе': 'var(--st-base)', 'Позже': 'var(--st-w2)', 'Под вопросом': 'var(--st-w3)', 'Не в плане': 'var(--st-later)', 'Источник зерна': '#6F7F4E' };
+  const fmt = (v) => v == null || v === '' ? '' : new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 2 }).format(Number(v));
+  const state = { filter: null, sel: 'CZ', q: '' };
+  const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const pill = (s, map) => { const p = el('span', 'pill'); const i = el('i'); i.style.background = (map || COL)[s] || 'var(--sr-muted)'; p.append(i, document.createTextNode(s)); return p; };
+
+  // brand mark: seven Agtron dots (decoration, brand constants)
+  (function () {
+    const P = [[-58,-30],[-20,18],[18,-38],[52,8],[-40,36],[30,40],[66,-24]], H = ['#DCA564','#C48248','#A5582A','#8A3E1C','#64260C','#3C1204','#0A0A0A'];
+    const svg = document.getElementById('dots');
+    P.forEach((p, i) => { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('cx', 80 + p[0]); c.setAttribute('cy', 75 + p[1]); c.setAttribute('r', 13); c.style.fill = H[i]; if (i === 6) { c.style.stroke = '#3A2A1C'; } svg.appendChild(c); });
+  })();
+
+  // filter chips
+  const chips = document.getElementById('chips');
+  [null, ...ST].forEach(s => {
+    const b = el('button', 'sr-chip'); b.type = 'button';
+    if (s) { const i = el('i'); i.style.background = COL[s]; if (DARK[s]) i.style.border = '1px solid #4A3826'; b.append(i); }
+    b.append(document.createTextNode(s || 'Все'));
+    b.setAttribute('aria-pressed', String(state.filter === s));
+    b.addEventListener('click', () => { state.filter = s; [...chips.children].forEach(c => c.setAttribute('aria-pressed', String(c === b))); draw(); });
+    chips.appendChild(b);
+  });
+  document.getElementById('q').addEventListener('input', (e) => { state.q = e.target.value.trim().toLowerCase(); draw(); });
+
+  function setKpi(node) {
+    const d = dash.data(node.dataset.source);
+    if (d.status !== 'ok') { if (d.status !== 'loading') node.classList.remove('dash-skeleton'); node.textContent = '—'; return; }
+    let row = d.data[0];
+    if (node.dataset.where) { const [k, v] = node.dataset.where.split('='); row = d.data.find(r => String(r[k]) === v); }
+    node.textContent = row ? fmt(row[node.dataset.field]) : '—';
+    node.classList.remove('dash-skeleton');
+  }
+
+  function drawMap(rows) {
+    const map = document.getElementById('map');
+    map.textContent = '';
+    const tip = el('div', 'sr-tip'); tip.hidden = true;
+    rows.forEach(r => {
+      const b = el('button', 'sr-tile'); b.type = 'button';
+      b.style.gridColumn = String(Number(r.col) + 1); b.style.gridRow = String(Number(r.row) + 1);
+      b.style.background = COL[r.status];
+      if (DARK[r.status]) b.classList.add('dark');
+      if (state.filter && r.status !== state.filter) b.classList.add('dim');
+      if (r.iso === state.sel) b.classList.add('on');
+      b.setAttribute('aria-label', r.country + ', ' + r.status);
+      b.append(el('b', null, r.iso), el('span', null, '≈' + fmt(r.cafes_est)));
+      b.addEventListener('click', () => { state.sel = r.iso; draw(); });
+      b.addEventListener('mouseenter', () => {
+        tip.textContent = ''; tip.hidden = false;
+        tip.append(el('div', 'd', r.status), el('div', null, r.country), el('div', null, 'Кафе ≈ ' + fmt(r.cafes_est) + ' · ' + fmt(r.coffee_kg) + ' кг/чел'));
+        const mw = map.clientWidth, tw = tip.offsetWidth;
+        tip.style.left = Math.max(0, Math.min(b.offsetLeft + b.offsetWidth / 2 - tw / 2, mw - tw)) + 'px';
+        tip.style.top = Math.max(0, b.offsetTop - tip.offsetHeight - 6) + 'px';
+      });
+      b.addEventListener('mouseleave', () => { tip.hidden = true; });
+      map.appendChild(b);
+    });
+    map.appendChild(tip);
+  }
+
+  function drawDetail(rows) {
+    const box = document.getElementById('detail');
+    box.textContent = '';
+    const r = rows.find(x => x.iso === state.sel);
+    if (!r) return;
+    box.append(el('span', 'sr-eyebrow', r.iso), el('h3', null, r.country), pill(r.status));
+    const dl = el('dl', 'sr-dl');
+    [['Почему', r.why], ['Города', r.hubs], ['Как заходим', r.entry], ['Кафе ≈', fmt(r.cafes_est)], ['Кофе', fmt(r.coffee_kg) + ' кг на человека в год'], ['Население', fmt(r.pop_m) + ' млн'], ['Клиенты', fmt(r.clients)]]
+      .forEach(([k, v]) => dl.append(el('dt', null, k), el('dd', null, v)));
+    box.append(dl);
+  }
+
+  function drawTable(rows) {
+    const tb = document.querySelector('#cT tbody');
+    tb.textContent = '';
+    const order = (s) => ST.indexOf(s);
+    rows.filter(r => (!state.filter || r.status === state.filter) && (!state.q || (r.country + ' ' + r.hubs + ' ' + r.iso).toLowerCase().includes(state.q)))
+      .sort((a, b) => order(a.status) - order(b.status) || Number(b.cafes_est) - Number(a.cafes_est))
+      .forEach(r => {
+        const tr = el('tr'); if (r.iso === state.sel) tr.className = 'sel';
+        const td = (v, c) => { const t = el('td', c); if (v instanceof Node) t.append(v); else t.textContent = v; tr.append(t); };
+        td(r.iso); td(r.country); td(pill(r.status)); td(fmt(r.clients), 'num'); td(fmt(r.cafes_est), 'num'); td(fmt(r.coffee_kg), 'num'); td(fmt(r.pop_m), 'num'); td(r.hubs, 'dim'); td(r.entry, 'dim');
+        tr.style.cursor = 'pointer';
+        tr.addEventListener('click', () => { state.sel = r.iso; draw(); document.getElementById('mapH').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        tb.append(tr);
+      });
+  }
+
+  function drawWaves() {
+    const box = document.getElementById('waves');
+    box.textContent = '';
+    const d = dash.data('waveStats');
+    if (d.status !== 'ok') return;
+    const max = Math.max(...d.data.map(r => r.cafes), 1);
+    d.data.forEach(r => {
+      const row = el('div', 'sr-wave');
+      const bar = el('div', 'bar'); const i = el('i'); i.style.width = (r.cafes / max * 100) + '%'; i.style.background = COL[r.status]; if (DARK[r.status]) i.style.boxShadow = 'inset 0 0 0 1px #4A3826'; bar.append(i);
+      row.append(el('span', null, r.status), bar, el('span', 'v', fmt(r.cafes) + ' кафе · ' + r.countries + ' стр.'));
+      box.append(row);
+    });
+  }
+
+  function drawRegions() {
+    const box = document.getElementById('regs');
+    box.textContent = '';
+    const d = dash.data('regions');
+    if (d.status !== 'ok') return;
+    d.data.forEach(r => {
+      const c = el('div', 'sr-reg');
+      c.append(el('h3', null, r.region), pill(r.status, RCOL), el('p', 'w', r.where), el('p', null, r.note), el('p', 'w', 'Вход: ' + r.entry));
+      box.append(c);
+    });
+  }
+
+  function drawBrief() {
+    const tb = document.querySelector('#bT tbody');
+    tb.textContent = '';
+    const d = dash.data('brief');
+    if (d.status !== 'ok') return;
+    d.data.forEach(r => {
+      const tr = el('tr');
+      tr.append(el('td', 'dim', r.key), el('td', null, r.label), el('td', 'num', fmt(r.value)), el('td', 'dim', r.unit));
+      tb.append(tr);
+    });
+  }
+
+  function draw() {
+    document.querySelectorAll('.sr-kpi .big, .sr-kpi .sub > span').forEach(setKpi);
+    const c = dash.data('countries');
+    const rows = c.status === 'ok' ? c.data : [];
+    drawMap(rows); drawDetail(rows); drawTable(rows); drawWaves(); drawRegions(); drawBrief();
+    const t = dash.data('totals'), w = dash.data('waveStats');
+    if (t.status === 'ok' && w.status === 'ok') {
+      const T = t.data[0], w1 = w.data.find(r => r.status === 'Волна 1');
+      document.getElementById('take').textContent = T.clients > 0
+        ? `Клиентов: ${fmt(T.clients)} в ${T.entered} странах. В плане ${T.planned} стран, первая волна — ${T.w1} соседа с ≈${fmt(w1.cafes)} кафе.`
+        : `Пока работаем только на старте в Праге. Первая волна — ${T.w1} соседа по дороге из Праги, там ≈${fmt(w1 ? w1.cafes : 0)} спешелти-кафе. Азия позже, через дистрибьюторов.`;
+    }
+  }
+  dash.onData(draw);
+})();
+</script>

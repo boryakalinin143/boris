@@ -1,0 +1,402 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@400;500;600&display=swap');
+/* suroast deck look: roast-dark ground, cream ink, Fraunces italic headings, Agtron colour curtains */
+.sr {
+  --sr-bg: #17100A; --sr-panel: #1F160D; --sr-panel2: #231812; --sr-ink: #F7EAD6; --sr-muted: #9A8468; --sr-accent: #C48248; --sr-line: #2E2114;
+  --sr-serif: "Fraunces", Georgia, "Times New Roman", serif; --sr-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --color-panel: var(--sr-panel); --color-fg: var(--sr-ink); --color-fg-muted: var(--sr-muted); --color-border-line: var(--sr-line);
+  --color-bad: #E58A6E; --color-warn: #DCA564; --color-ok: #A9C08A;
+  --cds-chart-grid: var(--sr-line); --cds-chart-axis: #4A3826; --cds-surface-popover: var(--sr-panel2); --cds-border: var(--sr-line); --cds-text-secondary: var(--sr-muted);
+  --font-anthropic-serif: var(--sr-serif);
+  color-scheme: dark; background: var(--sr-bg); color: var(--sr-ink); border-radius: 18px;
+  padding: clamp(18px, 4vw, 48px);
+  font-family: var(--sr-sans); display: grid; gap: var(--cds-gap-xl); max-width: 72rem; margin-inline: auto; position: relative; overflow: hidden; }
+.sr-curt { position: absolute; top: 0; right: 0; width: min(60%, 520px); height: 300px; pointer-events: none; opacity: .35; }
+.sr-curt::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--sr-bg) 0%, rgba(23,16,10,0) 55%), linear-gradient(0deg, var(--sr-bg) 0%, rgba(23,16,10,0) 60%); }
+.sr > *:not(.sr-curt) { position: relative; }
+.sr-eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--sr-accent); font-weight: 500; }
+.sr-head { display: grid; gap: var(--cds-gap-sm); }
+.sr-dots { width: 96px; height: 90px; display: block; overflow: visible; }
+.sr-dots circle { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) { .sr-dots circle { animation: sr-pop .6s cubic-bezier(.34,1.56,.64,1) both; } }
+@keyframes sr-pop { from { transform: scale(.2); opacity: 0; } to { transform: none; opacity: 1; } }
+.sr-wm { font-weight: 340; font-style: normal; letter-spacing: .01em; }
+.sr-hq { color: var(--sr-accent); font-style: italic; }
+.sr-title { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 80px) !important; line-height: 1; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.sr-take { color: #E8DCC8; font-family: var(--sr-serif); font-style: italic; font-size: 1.15rem; line-height: 1.5; margin: 0; max-width: 60ch; }
+.sr-tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); }
+.sr-tab { font: inherit; font-size: 14px; background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
+.sr-tab[aria-selected="true"] { color: var(--sr-ink); border-bottom-color: var(--sr-accent); }
+.sr-tab:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.sr-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-kpi { background: rgba(35,24,18,.82); border-radius: 14px !important; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.sr-kpi .lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sr-accent); font-weight: 600; }
+.sr-kpi .big { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 4.5vw, 52px) !important; line-height: 1; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.sr-kpi .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.sr-card h2 { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); margin: 0; }
+.sr-card { border-radius: 14px !important; }
+.sr-card .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.sr-wide { grid-column: 1 / -1; }
+.sr-tw { overflow-x: auto; }
+.sr table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.sr th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.sr td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.sr td.num, .sr th.num { text-align: right; white-space: nowrap; }
+.sr .sr-dots { margin-bottom: 4px; }
+.sr .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid currentColor; white-space: nowrap; }
+.sr .p-bad { color: var(--color-bad); } .sr .p-warn { color: var(--color-warn); } .sr .p-ok { color: var(--color-ok); } .sr .p-mute { color: var(--color-fg-muted); }
+.sr-chart { position: relative; min-height: 260px; }
+.sr-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); }
+.sr-tip .d { color: var(--cds-text-secondary); }
+.sr-legend { display: flex; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sr-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.sr-pal { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: var(--cds-gap-sm); }
+.sr-sw { border-radius: var(--cds-radius); overflow: hidden; border: 1px solid var(--color-border-line); }
+.sr-sw .c { height: 64px; }
+.sr-sw .t { padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); display: grid; }
+.sr-sw .t b { font-weight: var(--cds-font-weight-medium); }
+.sr-prose { display: grid; gap: var(--cds-gap-sm); max-width: 65ch; }
+.sr-prose p, .sr-prose ul { margin: 0; }
+.sr-prose ul { padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+<style>
+.sr .lv { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.sr .lv i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1px solid #3A2A1C; }
+.sr-callout { border-left: 3px solid var(--sr-accent); padding: var(--cds-pad-sm) var(--cds-pad-md); background: rgba(196,130,72,.08); border-radius: 0 10px 10px 0; font-size: 14px; line-height: 1.5; }
+.sr th { position: sticky; top: 0; background: var(--color-panel); }
+</style>
+
+<div class="sr">
+  <svg class="sr-curt" id="curt" viewBox="0 0 520 300" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <header class="sr-head">
+    <svg class="sr-dots" id="dots" viewBox="0 0 160 150" aria-label="знак suroast"></svg>
+    <span class="sr-eyebrow">suroast · склад и закупки</span>
+    <h1 class="sr-title" id="top"><span class="sr-wm">suroast</span> <span class="sr-hq">Склад</span></h1>
+    <p class="sr-take" id="take">Зелёное зерно, упаковка и всё, что нужно обжарочной: сколько, когда дозаказывать и во что это обходится.</p>
+  </header>
+
+  <div class="sr-kpis">
+    <div class="sr-kpi"><span class="lbl">Зелёный кофе Y1, т</span><span class="big dash-skeleton" data-source="headline" data-field="y1_t">—</span><span class="sub">в среднем <span data-source="headline" data-field="y1_month_t">—</span> т в месяц</span></div>
+    <div class="sr-kpi"><span class="lbl">Бюджет на зерно Y1, млн Kč</span><span class="big dash-skeleton" data-source="headline" data-field="y1_budget">—</span><span class="sub">по 370 Kč на проданный кг</span></div>
+    <div class="sr-kpi"><span class="lbl">Стартовый запас, т</span><span class="big dash-skeleton" data-source="headline" data-field="start_t">—</span><span class="sub">хватит на <span data-source="headline" data-field="start_months">—</span> мес. года 1</span></div>
+    <div class="sr-kpi"><span class="lbl">Закуплено позиций</span><span class="big dash-skeleton" data-source="headline" data-field="bought">—</span><span class="sub">из <span data-source="headline" data-field="items">—</span> в списке склада</span></div>
+  </div>
+
+  <nav class="sr-tabs" role="tablist">
+    <button class="sr-tab" role="tab" data-tab="green" aria-selected="true">Зелёный кофе</button>
+    <button class="sr-tab" role="tab" data-tab="pack" aria-selected="false">Упаковка и расходники</button>
+    <button class="sr-tab" role="tab" data-tab="equip" aria-selected="false">Склад и оборудование</button>
+    <button class="sr-tab" role="tab" data-tab="plan" aria-selected="false">План закупок Y1–Y5</button>
+  </nav>
+
+  <section class="sr-grid" id="green" data-panel="green">
+    <div class="sr-card sr-wide">
+      <h2 id="lotsH">Портфель лотов, кг зелёного в месяц (год 1)</h2>
+      <p class="note">Стартовый набор, который я собрал под семь уровней обжарки. Это черновик: происхождения, доли и цены — моя оценка, поправь под реальные лоты.</p>
+      <div class="sr-chart" id="lotsC" data-source="lots lotCalc" style="min-height:300px"></div>
+    </div>
+    <div class="sr-card sr-wide">
+      <h2 id="lotsT2">Лоты и точки дозаказа</h2>
+      <p class="note">Точка дозаказа = расход за срок поставки + страховой запас. Как только остаток падает ниже неё, пора заказывать.</p>
+      <div class="sr-callout" id="priceNote" data-source="priceCheck">—</div>
+      <div class="sr-tw" style="max-height:32rem;overflow:auto"><table id="lotsT" data-source="lots" data-row-key="lot">
+        <thead><tr>
+          <th data-field="lot">Лот</th><th data-field="origin">Страна</th><th data-field="region">Регион</th><th data-field="process">Обработка</th><th data-field="level">Обжарка</th><th data-field="role">Роль</th>
+          <th class="num" data-field="share_pct">Доля, %</th>
+          <th class="num" data-source="lotCalc" data-field="kg_month">кг/мес</th>
+          <th class="num" data-field="price_eur_kg">€/кг</th>
+          <th class="num" data-field="lead_weeks">Поставка, нед.</th>
+          <th class="num" data-source="lotCalc" data-field="reorder_kg">Дозаказ при, кг</th>
+          <th class="num" data-field="on_hand_kg">Остаток, кг</th>
+          <th data-field="status">Статус</th>
+        </tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="pack" data-panel="pack" hidden>
+    <div class="sr-card sr-wide">
+      <h2 id="packH">Упаковка, доставка и расходники</h2>
+      <p class="note">Месячная потребность в типичный месяц года 1 (drip — с года 2). Цены за штуку — моя оценка до запроса у поставщиков.</p>
+      <div class="sr-callout" id="packNote" data-source="packCalc">—</div>
+      <div class="sr-tw" style="max-height:32rem;overflow:auto"><table id="supT" data-source="supplies" data-row-key="item">
+        <thead><tr>
+          <th data-field="item">Позиция</th><th data-field="category">Группа</th>
+          <th class="num" data-field="qty_month">В месяц</th><th data-field="unit">Ед.</th>
+          <th class="num" data-field="unit_cost_kc">Kč/ед.</th>
+          <th class="num" data-source="supCalc" data-field="month_kc">Kč/мес</th>
+          <th class="num" data-field="lead_weeks">Поставка, нед.</th>
+          <th data-field="status">Статус</th><th data-field="note">Примечание</th>
+        </tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="equip" data-panel="equip" hidden>
+    <div class="sr-card sr-wide">
+      <h2 id="eqH">Склад и оборудование по вехам</h2>
+      <p class="note">Когда что нужно, привязано к вехам M1–M11 из финмодели.</p>
+      <div class="sr-tw"><table id="eqT" data-source="equipment" data-row-key="item">
+        <thead><tr><th data-field="when">Веха</th><th data-field="item">Что</th><th data-field="area">Зона</th><th data-field="status">Статус</th><th data-field="note">Зачем</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="sr-card sr-wide">
+      <h2 id="rulesH">Правила склада зелёного</h2>
+      <div class="sr-prose"><ul>
+        <li><b>FIFO по лотам.</b> Первым уходит то, что пришло первым. На каждом мешке: лот, дата прихода, вес.</li>
+        <li><b>Приёмка.</b> Вес, влажность зерна и сэмпл-обжарка с каппингом до того, как лот пойдёт в работу.</li>
+        <li><b>Хранение.</b> Прохладно, сухо, темно; мешки на паллетах, не у стены. Дорогие лоты — в GrainPro или вакууме.</li>
+        <li><b>Инвентаризация.</b> Раз в неделю сверка остатков, после неё обновляем эту страницу.</li>
+        <li><b>Основа и сезон.</b> На базовые лоты (Бразилия, Колумбия) — форвард-контракты у импортёра, сезонные — со склада в Европе по мере надобности.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="plan" data-panel="plan" hidden>
+    <div class="sr-card sr-wide">
+      <h2 id="planH">Зелёный кофе по годам, т</h2>
+      <p class="note">Y1 и Y5 из брифа; Y2–Y4 я оценил по выручке финмодели v10. Светлые столбцы — оценка.</p>
+      <div class="sr-chart" id="planC" data-source="planCalc"></div>
+    </div>
+    <div class="sr-card">
+      <h2 id="planT2">Объёмы и бюджет</h2>
+      <p class="note">Обжаренного = зелёное минус усушка. Бюджет = обжаренные кг × 370 Kč.</p>
+      <div class="sr-tw"><table id="planT" data-source="planCalc" data-row-key="year">
+        <thead><tr><th data-field="year">Год</th><th class="num" data-field="green_t">Зелёный, т</th><th class="num" data-field="month_t">т/мес</th><th class="num" data-field="roasted_t">Обжаренный, т</th><th class="num" data-field="budget_mkc">Бюджет, млн Kč</th><th data-field="basis">Основа</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="sr-card">
+      <h2 id="asmH">Допущения</h2>
+      <p class="note">Поменяй любое — пересчитаю всю страницу.</p>
+      <div class="sr-tw"><table id="asmT" data-source="assumptions" data-row-key="label">
+        <thead><tr><th data-field="label">Что</th><th class="num" data-field="value">Значение</th><th data-field="unit">Ед.</th><th data-field="note">Откуда</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('planCalc', {
+  title: 'Объёмы и бюджет по годам', description: 'Зелёный по годам, обжаренный после усушки и бюджет на зерно по 370 Kč на проданный кг.',
+  inputs: ['plan', 'assumptions'],
+  fn: (plan, assumptions) => {
+    const A = (k) => Number(assumptions.find(a => a.key === k).value);
+    const loss = A('roast_loss') / 100, cost = A('cost_per_sold_kg');
+    return plan.map(p => ({ year: p.year, basis: p.basis, green_t: Number(p.green_t), month_t: Math.round(Number(p.green_t) / 12 * 10) / 10,
+      roasted_t: Math.round(Number(p.green_t) * (1 - loss) * 10) / 10, budget_mkc: Math.round(Number(p.green_t) * (1 - loss) * cost / 100) / 10 }));
+  }
+});
+dash.calc('lotCalc', {
+  title: 'Расход и дозаказ по лотам', description: 'Расход лота в месяц года 1 по его доле и точка дозаказа: расход × (поставка + страховой запас) в неделях.',
+  inputs: ['lots', 'plan'],
+  fn: (lots, plan) => {
+    const monthKg = Number(plan.find(p => p.year === 'Y1').green_t) * 1000 / 12;
+    return lots.map(l => { const kg = monthKg * Number(l.share_pct) / 100;
+      return { lot: l.lot, kg_month: Math.round(kg), reorder_kg: Math.round(kg * (Number(l.lead_weeks) + Number(l.safety_weeks)) / 4.33 / 10) * 10 }; });
+  }
+});
+dash.calc('priceCheck', {
+  title: 'Цена зелёного против брифа', description: 'Средневзвешенная цена лотов в Kč за кг зелёного против цены из брифа (370 Kč на проданный кг минус усушка).',
+  inputs: ['lots', 'assumptions'],
+  fn: (lots, assumptions) => {
+    const A = (k) => Number(assumptions.find(a => a.key === k).value);
+    const avg = lots.reduce((s, l) => s + Number(l.price_eur_kg) * Number(l.share_pct), 0) / 100 * A('eur_czk');
+    const brief = A('cost_per_sold_kg') * (1 - A('roast_loss') / 100);
+    return [{ avg_kc: Math.round(avg), brief_kc: Math.round(brief), gap_kc: Math.round(brief - avg) }];
+  }
+});
+dash.calc('supCalc', {
+  title: 'Расходники: стоимость в месяц', description: 'Количество в месяц × цена за единицу.',
+  inputs: ['supplies'],
+  fn: (supplies) => supplies.map(s => ({ item: s.item, month_kc: Math.round(Number(s.qty_month) * Number(s.unit_cost_kc)) }))
+});
+dash.calc('packCalc', {
+  title: 'Упаковка на кило', description: 'Упаковка и доставка в месяц года 1 на обжаренный кг против 30 Kč из брифа.',
+  inputs: ['supplies', 'plan', 'assumptions'],
+  fn: (supplies, plan, assumptions) => {
+    const A = (k) => Number(assumptions.find(a => a.key === k).value);
+    const kg = Number(plan.find(p => p.year === 'Y1').green_t) * 1000 * (1 - A('roast_loss') / 100) / 12;
+    const cost = supplies.filter(s => s.category === 'Упаковка' || s.category === 'Доставка').reduce((t, s) => t + Number(s.qty_month) * Number(s.unit_cost_kc), 0);
+    return [{ per_kg: Math.round(cost / kg * 10) / 10, brief: A('pack_per_kg'), month_kc: Math.round(cost) }];
+  }
+});
+dash.calc('headline', {
+  title: 'Главные цифры склада', description: 'Объём и бюджет года 1, сколько тонн даёт зерновая часть раунда и сколько позиций уже закуплено.',
+  inputs: ['planCalc', 'assumptions', 'lots', 'supplies', 'equipment'],
+  fn: (planCalc, assumptions, lots, supplies, equipment) => {
+    const A = (k) => Number(assumptions.find(a => a.key === k).value);
+    const y1 = planCalc.find(p => p.year === 'Y1');
+    const greenKc = A('cost_per_sold_kg') * (1 - A('roast_loss') / 100);
+    const startT = A('round_green') * 1e6 / greenKc / 1000;
+    const all = [...lots, ...supplies];
+    return [{ y1_t: y1.green_t, y1_month_t: y1.month_t, y1_budget: y1.budget_mkc, start_t: Math.round(startT * 10) / 10,
+      start_months: Math.round(startT / (y1.green_t / 12) * 10) / 10,
+      bought: all.filter(r => r.status !== 'Не закуплено').length + equipment.filter(e => e.status !== 'План').length,
+      items: all.length + equipment.length }];
+  }
+});
+
+(function () {
+  const tabs = [...document.querySelectorAll('.sr-tab')];
+  const ids = tabs.map(t => t.dataset.tab);
+  const show = (id) => {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+    document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== id; });
+    dash.setLink(id);
+    window.__srDraw && window.__srDraw();
+  };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  const h = location.hash.slice(1);
+  if (ids.includes(h)) show(h);
+})();
+</script>
+
+<script>
+(function () {
+  const LV = { NORDIC: '#DCA564', FJORD: '#C48248', DUSK: '#A5582A', EMBER: '#8A3E1C', OBSIDIAN: '#64260C', VOID: '#3C1204', 'PROCESS+': '#0A0A0A' };
+  const fmt = (v) => v == null || v === '' ? '' : new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 1 }).format(Number(v));
+  const pillCls = (s) => ({ 'Не закуплено': 'p-warn', 'План': 'p-mute', 'Заказано': 'p-ok', 'На складе': 'p-ok', 'Готово': 'p-ok', 'Ниже точки дозаказа': 'p-bad' }[s] || 'p-mute');
+
+  function fillTable(sel, id, cols, extra) {
+    const tb = document.querySelector(sel + ' tbody');
+    const d = dash.data(id);
+    tb.textContent = '';
+    if (d.status !== 'ok') return;
+    const ex = extra ? dash.data(extra.id) : null;
+    d.data.forEach(r => {
+      const tr = document.createElement('tr');
+      const er = ex && ex.status === 'ok' ? ex.data.find(x => x[extra.key] === r[extra.key]) : null;
+      cols.forEach(c => {
+        const td = document.createElement('td');
+        const v = c.calc ? (er ? er[c.f] : '') : r[c.f];
+        if (c.pill) { const s = document.createElement('span'); s.className = 'pill ' + pillCls(v); s.textContent = v; td.appendChild(s); }
+        else if (c.lv) { const s = document.createElement('span'); s.className = 'lv'; const i = document.createElement('i'); i.style.background = LV[v] || 'transparent'; s.append(i, document.createTextNode(v)); td.appendChild(s); }
+        else td.textContent = c.num ? fmt(v) : (v ?? '');
+        if (c.num) td.className = 'num';
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function drawLots() {
+    const box = document.getElementById('lotsC');
+    box.textContent = '';
+    const l = dash.data('lots'), c = dash.data('lotCalc');
+    if (l.status !== 'ok' || c.status !== 'ok' || box.offsetParent === null) return;
+    const rows = l.data.map(r => ({ ...r, kg: (c.data.find(x => x.lot === r.lot) || {}).kg_month || 0, label: r.lot + ' · ' + r.origin + ' ' + r.region }))
+      .sort((a, b) => b.kg - a.kg);
+    const W = box.clientWidth || 600, rowH = 26, m = { t: 4, r: 52, b: 4 };
+    const svg = d3.select(box).append('svg').attr('width', '100%');
+    const probe = svg.append('text').style('font-size', 'var(--cds-font-size-caption)');
+    let lw = 0; rows.forEach(r => { probe.text(r.label); lw = Math.max(lw, probe.node().getComputedTextLength()); }); probe.remove();
+    const narrow = W < 520;
+    m.l = narrow ? 8 : lw + 14;
+    const H = m.t + m.b + rows.length * (narrow ? rowH + 16 : rowH);
+    svg.attr('viewBox', `0 0 ${W} ${H}`);
+    box.style.minHeight = H + 'px';
+    const x = d3.scaleLinear([0, d3.max(rows, r => r.kg)], [m.l, W - m.r]);
+    const tip = d3.select(box).append('div').attr('class', 'sr-tip').style('display', 'none');
+    const g = svg.selectAll('g.b').data(rows).join('g').attr('transform', (r, i) => `translate(0,${m.t + i * (narrow ? rowH + 16 : rowH)})`);
+    g.append('text').attr('x', narrow ? m.l : m.l - 8).attr('y', narrow ? 11 : rowH / 2 + 4).attr('text-anchor', narrow ? 'start' : 'end')
+      .attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(r => r.label);
+    const by = narrow ? 16 : 4;
+    g.append('rect').attr('x', m.l).attr('y', by).attr('height', rowH - 8).attr('width', r => Math.max(2, x(r.kg) - m.l)).attr('rx', 4)
+      .style('fill', r => LV[r.level] || 'var(--sr-accent)').attr('stroke', r => r.level === 'PROCESS+' ? '#5A4430' : null);
+    g.append('text').attr('x', r => x(r.kg) + 6).attr('y', by + (rowH - 8) / 2 + 4).attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r => fmt(r.kg) + ' кг');
+    g.append('rect').attr('width', W).attr('height', narrow ? rowH + 16 : rowH).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        const [px, py] = d3.pointer(ev, box);
+        tip.style('display', null).html('');
+        tip.append('div').attr('class', 'd').text(r.lot + ' · ' + r.origin + ', ' + r.region);
+        tip.append('div').text(r.process + ' · ' + r.level);
+        tip.append('div').text(fmt(r.kg) + ' кг/мес · ' + fmt(r.price_eur_kg) + ' €/кг');
+        const tw = tip.node().offsetWidth;
+        tip.style('left', Math.max(0, Math.min(px + 12, W - tw - 4)) + 'px').style('top', Math.max(0, py - 50) + 'px');
+      })
+      .on('mouseleave', () => tip.style('display', 'none'));
+  }
+
+  function drawPlan() {
+    const box = document.getElementById('planC');
+    box.textContent = '';
+    const d = dash.data('planCalc');
+    if (d.status !== 'ok' || box.offsetParent === null) return;
+    const rows = d.data;
+    const W = box.clientWidth || 600, H = 260, m = { t: 22, r: 8, b: 28, l: 36 };
+    const x = d3.scaleBand(rows.map(r => r.year), [m.l, W - m.r]).padding(0.3);
+    const y = d3.scaleLinear([0, d3.max(rows, r => r.green_t)], [H - m.b, m.t]).nice();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').selectAll('line').data(y.ticks(4)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(y.ticks(4)).join('text').attr('x', m.l - 6).attr('y', v => y(v) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(fmt);
+    const bw = Math.min(48, x.bandwidth()), off = (x.bandwidth() - bw) / 2;
+    const tip = d3.select(box).append('div').attr('class', 'sr-tip').style('display', 'none');
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', r => `translate(${x(r.year)},0)`);
+    g.append('rect').attr('x', off).attr('width', bw).attr('y', r => y(r.green_t)).attr('height', r => y(0) - y(r.green_t)).attr('rx', 4)
+      .style('fill', r => r.basis === 'Бриф' ? '#A5582A' : '#DCA564').style('opacity', r => r.basis === 'Бриф' ? 1 : .55);
+    g.append('text').attr('x', x.bandwidth() / 2).attr('y', r => y(r.green_t) - 6).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').text(r => fmt(r.green_t) + ' т');
+    g.append('text').attr('x', x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(r => r.year);
+    g.append('rect').attr('width', x.bandwidth()).attr('y', m.t).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        const [px, py] = d3.pointer(ev, box);
+        tip.style('display', null).html('');
+        tip.append('div').attr('class', 'd').text(r.year + ' · ' + r.basis);
+        tip.append('div').text('Зелёный: ' + fmt(r.green_t) + ' т (' + fmt(r.month_t) + ' т/мес)');
+        tip.append('div').text('Бюджет: ' + fmt(r.budget_mkc) + ' млн Kč');
+        const tw = tip.node().offsetWidth;
+        tip.style('left', Math.max(0, Math.min(px + 12, W - tw - 4)) + 'px').style('top', Math.max(0, py - 50) + 'px');
+      })
+      .on('mouseleave', () => tip.style('display', 'none'));
+  }
+
+  function drawBrand() {
+    const dots = document.getElementById('dots'), curt = document.getElementById('curt');
+    if (dots.childNodes.length) return;
+    const cols = Object.values(LV), P = [[-58,-30],[-20,18],[18,-38],[52,8],[-40,36],[30,40],[66,-24]], cw = 520 / 7;
+    cols.forEach((hex, i) => {
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', 80 + P[i][0]); c.setAttribute('cy', 75 + P[i][1]); c.setAttribute('r', 13); c.style.fill = hex; c.style.animationDelay = (i * 0.09) + 's';
+      if (hex === '#0A0A0A') { c.style.stroke = '#3A2A1C'; c.style.strokeWidth = '1'; }
+      dots.appendChild(c);
+      const x0 = i * cw, sw1 = Math.sin(i * 2.1) * 40, sw2 = Math.cos(i * 1.3) * 50, w = cw * (0.8 + (i % 3) * 0.15);
+      const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      p.setAttribute('d', `M ${x0} -10 C ${x0 + sw1} 100 ${x0 + sw2} 200 ${x0 + sw1 / 2} 310 L ${x0 + sw1 / 2 + w} 310 C ${x0 + sw2 + w} 200 ${x0 + sw1 + w} 100 ${x0 + w} -10 Z`);
+      p.style.fill = hex; curt.appendChild(p);
+    });
+  }
+
+  function draw() {
+    drawBrand();
+    const hd = dash.data('headline');
+    document.querySelectorAll('[data-source="headline"]').forEach(el => {
+      if (hd.status !== 'ok') { if (hd.status !== 'loading') el.classList.remove('dash-skeleton'); el.textContent = '—'; return; }
+      el.textContent = fmt(hd.data[0][el.dataset.field]); el.classList.remove('dash-skeleton');
+    });
+    const pc = dash.data('priceCheck'), pn = document.getElementById('priceNote');
+    if (pc.status === 'ok') {
+      const r = pc.data[0];
+      pn.textContent = `Средняя цена портфеля ≈ ${fmt(r.avg_kc)} Kč за кг зелёного. Бриф закладывает ≈ ${fmt(r.brief_kc)} Kč (370 Kč на проданный кг минус усушка). ` +
+        (r.gap_kc >= 0 ? `Запас ${fmt(r.gap_kc)} Kč/кг уходит на доставку до Праги, растаможку и потери.` : `Портфель дороже брифа на ${fmt(-r.gap_kc)} Kč/кг: либо дешевле база, либо пересчитать маржу.`);
+    } else pn.textContent = '—';
+    const pk = dash.data('packCalc'), kn = document.getElementById('packNote');
+    if (pk.status === 'ok') {
+      const r = pk.data[0];
+      kn.textContent = `Упаковка и доставка ≈ ${fmt(r.month_kc)} Kč в месяц, это ${fmt(r.per_kg)} Kč на обжаренный кг. В брифе заложено ${fmt(r.brief)} Kč/кг` +
+        (r.per_kg <= r.brief ? ', укладываемся.' : ', выходим за бюджет: нужен тираж крупнее или дешевле коробка.');
+    } else kn.textContent = '—';
+    const pl = dash.data('planCalc'), hdOk = hd.status === 'ok';
+    if (hdOk && pl.status === 'ok') {
+      const h = hd.data[0], y5 = pl.data.find(p => p.year === 'Y5');
+      document.getElementById('take').textContent = `Год 1: ${fmt(h.y1_t)} т зелёного, ≈ ${fmt(h.y1_month_t)} т в месяц. Зерновая часть раунда покупает ${fmt(h.start_t)} т, это ${fmt(h.start_months)} мес. работы, дальше зерно должно оплачиваться продажами. К Y5 нужно ${fmt(y5.green_t)} т в год. Закуплено пока ${h.bought} из ${h.items} позиций.`;
+    }
+    fillTable('#lotsT', 'lots', [{ f: 'lot' }, { f: 'origin' }, { f: 'region' }, { f: 'process' }, { f: 'level', lv: true }, { f: 'role' }, { f: 'share_pct', num: true },
+      { f: 'kg_month', num: true, calc: true }, { f: 'price_eur_kg', num: true }, { f: 'lead_weeks', num: true }, { f: 'reorder_kg', num: true, calc: true }, { f: 'on_hand_kg', num: true }, { f: 'status', pill: true }], { id: 'lotCalc', key: 'lot' });
+    fillTable('#supT', 'supplies', [{ f: 'item' }, { f: 'category' }, { f: 'qty_month', num: true }, { f: 'unit' }, { f: 'unit_cost_kc', num: true }, { f: 'month_kc', num: true, calc: true }, { f: 'lead_weeks', num: true }, { f: 'status', pill: true }, { f: 'note' }], { id: 'supCalc', key: 'item' });
+    fillTable('#eqT', 'equipment', [{ f: 'when' }, { f: 'item' }, { f: 'area' }, { f: 'status', pill: true }, { f: 'note' }]);
+    fillTable('#planT', 'planCalc', [{ f: 'year' }, { f: 'green_t', num: true }, { f: 'month_t', num: true }, { f: 'roasted_t', num: true }, { f: 'budget_mkc', num: true }, { f: 'basis' }]);
+    fillTable('#asmT', 'assumptions', [{ f: 'label' }, { f: 'value', num: true }, { f: 'unit' }, { f: 'note' }]);
+    drawLots(); drawPlan();
+  }
+  window.__srDraw = draw;
+  dash.onData(draw);
+})();
+</script>

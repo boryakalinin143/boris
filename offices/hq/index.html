@@ -1,0 +1,342 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,340;0,9..144,400;1,9..144,400;1,9..144,500&family=Space+Grotesk:wght@400;500;600&display=swap');
+/* suroast deck look: roast-dark ground, cream ink, Fraunces italic headings, Agtron colour curtains */
+.sr {
+  --sr-bg: #17100A; --sr-panel: #1F160D; --sr-panel2: #231812; --sr-ink: #F7EAD6; --sr-muted: #9A8468; --sr-accent: #C48248; --sr-line: #2E2114;
+  --sr-serif: "Fraunces", Georgia, "Times New Roman", serif; --sr-sans: "Space Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --color-panel: var(--sr-panel); --color-fg: var(--sr-ink); --color-fg-muted: var(--sr-muted); --color-border-line: var(--sr-line);
+  --color-bad: #E58A6E; --color-warn: #DCA564; --color-ok: #A9C08A;
+  --cds-chart-grid: var(--sr-line); --cds-chart-axis: #4A3826; --cds-surface-popover: var(--sr-panel2); --cds-border: var(--sr-line); --cds-text-secondary: var(--sr-muted);
+  --font-anthropic-serif: var(--sr-serif);
+  color-scheme: dark; background: var(--sr-bg); color: var(--sr-ink); border-radius: 18px;
+  padding: clamp(18px, 4vw, 48px);
+  font-family: var(--sr-sans); display: grid; gap: var(--cds-gap-xl); max-width: 72rem; margin-inline: auto; position: relative; overflow: hidden; }
+.sr-curt { position: absolute; top: 0; right: 0; width: min(60%, 520px); height: 300px; pointer-events: none; opacity: .35; }
+.sr-curt::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--sr-bg) 0%, rgba(23,16,10,0) 55%), linear-gradient(0deg, var(--sr-bg) 0%, rgba(23,16,10,0) 60%); }
+.sr > *:not(.sr-curt) { position: relative; }
+.sr-eyebrow { font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--sr-accent); font-weight: 500; }
+.sr-head { display: grid; gap: var(--cds-gap-sm); }
+.sr-dots { width: 96px; height: 90px; display: block; overflow: visible; }
+.sr-dots circle { transform-box: fill-box; transform-origin: center; }
+@media (prefers-reduced-motion: no-preference) { .sr-dots circle { animation: sr-pop .6s cubic-bezier(.34,1.56,.64,1) both; } }
+@keyframes sr-pop { from { transform: scale(.2); opacity: 0; } to { transform: none; opacity: 1; } }
+.sr-wm { font-weight: 340; font-style: normal; letter-spacing: .01em; }
+.sr-hq { color: var(--sr-accent); font-style: italic; }
+.sr-title { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(40px, 7vw, 80px) !important; line-height: 1; font-size: var(--cds-font-size-title); margin: 0; text-wrap: balance; }
+.sr-take { color: #E8DCC8; font-family: var(--sr-serif); font-style: italic; font-size: 1.15rem; line-height: 1.5; margin: 0; max-width: 60ch; }
+.sr-tabs { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); border-bottom: 1px solid var(--color-border-line); }
+.sr-tab { font: inherit; font-size: 14px; background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-sm) var(--cds-pad-md); color: var(--color-fg-muted); cursor: pointer; }
+.sr-tab[aria-selected="true"] { color: var(--sr-ink); border-bottom-color: var(--sr-accent); }
+.sr-tab:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+.sr-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-kpi { background: rgba(35,24,18,.82); border-radius: 14px !important; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; }
+.sr-kpi .lbl { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--sr-accent); font-weight: 600; }
+.sr-kpi .big { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(34px, 4.5vw, 52px) !important; line-height: 1; font-size: var(--cds-font-size-title); font-variant-numeric: tabular-nums; }
+.sr-kpi .sub { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sr-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); gap: var(--cds-gap-md); }
+.sr-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+.sr-card h2 { font-family: var(--sr-serif); font-style: italic; font-weight: 400; font-size: clamp(22px, 2.4vw, 28px); margin: 0; }
+.sr-card { border-radius: 14px !important; }
+.sr-card .note { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); margin: 0; }
+.sr-wide { grid-column: 1 / -1; }
+.sr-tw { overflow-x: auto; }
+.sr table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.sr th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: var(--cds-pad-xs) var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); }
+.sr td { padding: var(--cds-pad-sm); border-bottom: 1px solid var(--color-border-line); vertical-align: top; }
+.sr td.num, .sr th.num { text-align: right; white-space: nowrap; }
+.sr .sr-dots { margin-bottom: 4px; }
+.sr .pill { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: var(--cds-font-size-caption); border: 1px solid currentColor; white-space: nowrap; }
+.sr .p-bad { color: var(--color-bad); } .sr .p-warn { color: var(--color-warn); } .sr .p-ok { color: var(--color-ok); } .sr .p-mute { color: var(--color-fg-muted); }
+.sr-chart { position: relative; min-height: 260px; }
+.sr-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); }
+.sr-tip .d { color: var(--cds-text-secondary); }
+.sr-legend { display: flex; gap: var(--cds-gap-md); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.sr-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+.sr-pal { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: var(--cds-gap-sm); }
+.sr-sw { border-radius: var(--cds-radius); overflow: hidden; border: 1px solid var(--color-border-line); }
+.sr-sw .c { height: 64px; }
+.sr-sw .t { padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); display: grid; }
+.sr-sw .t b { font-weight: var(--cds-font-weight-medium); }
+.sr-prose { display: grid; gap: var(--cds-gap-sm); max-width: 65ch; }
+.sr-prose p, .sr-prose ul { margin: 0; }
+.sr-prose ul { padding-left: 1.2em; display: grid; gap: var(--cds-gap-xs); }
+[data-dash-source-state=empty] { color: transparent; }
+[data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+</style>
+
+<div class="sr">
+  <svg class="sr-curt" id="curt" viewBox="0 0 520 300" preserveAspectRatio="none" aria-hidden="true"></svg>
+  <header class="sr-head">
+    <svg class="sr-dots" id="dots" data-source="palette" viewBox="0 0 160 150" aria-label="знак suroast"></svg>
+    <span class="sr-eyebrow">Specialty coffee roasters · Praha</span>
+    <h1 class="sr-title" id="top"><span class="sr-wm">suroast</span> <span class="sr-hq">HQ</span></h1>
+    <p class="sr-take" id="take">Пространство бренда: куда идём, что открыто и где просаживаемся.</p>
+  </header>
+
+  <div class="sr-kpis">
+    <div class="sr-kpi"><span class="lbl">Открытые задачи</span><span class="big dash-skeleton" data-source="taskStats" data-field="open">—</span><span class="sub">из них ждут другой задачи: <span data-source="taskStats" data-field="blocked">—</span></span></div>
+    <div class="sr-kpi"><span class="lbl">Высокие риски</span><span class="big dash-skeleton" data-source="riskStats" data-field="high">—</span><span class="sub">всего слабых мест: <span data-source="riskStats" data-field="total">—</span></span></div>
+    <div class="sr-kpi"><span class="lbl">Раунд, млн Kč</span><span class="big dash-skeleton" data-source="roundTotal" data-field="total">—</span><span class="sub">тикетов: <span data-source="keynums" data-field="value" data-where="group=%D0%A2%D0%B8%D0%BA%D0%B5%D1%82&amp;label=%D0%A2%D0%B8%D0%BA%D0%B5%D1%82%D0%BE%D0%B2">—</span></span></div>
+    <div class="sr-kpi"><span class="lbl">Выручка Y5, млн Kč</span><span class="big dash-skeleton" data-source="finance" data-field="revenue" data-where="year=Y5">—</span><span class="sub">EBITDA Y5: <span data-source="finance" data-field="ebitda" data-where="year=Y5">—</span></span></div>
+  </div>
+
+  <nav class="sr-tabs" role="tablist">
+    <button class="sr-tab" role="tab" data-tab="weak" aria-selected="true">Слабые места и задачи</button>
+    <button class="sr-tab" role="tab" data-tab="road" aria-selected="false">Путь к прибыли</button>
+    <button class="sr-tab" role="tab" data-tab="money" aria-selected="false">Финансы</button>
+    <button class="sr-tab" role="tab" data-tab="brand" aria-selected="false">Бренд</button>
+  </nav>
+
+  <section class="sr-grid" id="weak" data-panel="weak">
+    <div class="sr-card sr-wide">
+      <h2>Где просаживаемся</h2>
+      <p class="note">Моя оценка по брифу, не из самого брифа. Скажи, с чем не согласен, и я поправлю.</p>
+      <div class="sr-tw"><table id="risksT" data-source="risks" data-row-key="id">
+        <thead><tr><th data-field="id">#</th><th data-field="risk">Слабое место</th><th data-field="area">Область</th><th data-field="level">Уровень</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="sr-card sr-wide">
+      <h2>Открытые задачи</h2>
+      <p class="note">Из раздела «что осталось сделать» плюс то, что видно из брифа (домен, раунд, перенос старых материалов).</p>
+      <div class="sr-tw"><table id="tasksT" data-source="tasks" data-row-key="id">
+        <thead><tr><th data-field="id">#</th><th data-field="task">Задача</th><th data-field="area">Область</th><th data-field="status">Статус</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="road" data-panel="road" hidden>
+    <div class="sr-card sr-wide">
+      <h2>Вехи по месяцам после старта</h2>
+      <p class="note">План из финмодели v10. Статус меняю, когда ты пишешь, что веха пройдена.</p>
+      <div class="sr-chart" id="roadC" data-source="milestones" style="min-height:120px"></div>
+      <div class="sr-tw"><table id="msT" data-source="milestones" data-row-key="key">
+        <thead><tr><th data-field="key">Веха</th><th data-field="title">Что должно случиться</th><th data-field="area">Область</th><th data-field="status">Статус</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="money" data-panel="money" hidden>
+    <div class="sr-card sr-wide">
+      <h2>Выручка и EBITDA по годам, млн Kč</h2>
+      <p class="note">Финмодель v10, без НДС. EBITDA в плюсе с седьмого месяца.</p>
+      <div class="sr-legend"><span><i class="lg0"></i>Выручка</span><span><i class="lg1"></i>EBITDA</span></div>
+      <div class="sr-chart" id="finC" data-source="finance"></div>
+    </div>
+    <div class="sr-card">
+      <h2>Целевые объёмы</h2>
+      <p class="note">Типичный месяц года. Пустые клетки в брифе не названы.</p>
+      <div class="sr-tw"><table id="growT" data-source="finance" data-row-key="year">
+        <thead><tr><th data-field="year">Год</th><th class="num" data-field="cafes">Кафе</th><th class="num" data-field="drip_month">Drip/мес</th><th class="num" data-field="green_t">Зелёный, т/год</th></tr></thead><tbody></tbody></table></div>
+    </div>
+    <div class="sr-card">
+      <h2>Ключевые цифры</h2>
+      <p class="note">Тарифы, экономика кило, маржа, раунд и рынок.</p>
+      <div class="sr-tw" style="max-height:28rem;overflow:auto"><table id="numsT" data-source="keynums" data-row-key="group,label">
+        <thead><tr><th data-field="group">Блок</th><th data-field="label">Что</th><th class="num" data-field="value">Значение</th><th data-field="unit">Ед.</th><th data-field="note">Примечание</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="sr-grid" id="brand" data-panel="brand" hidden>
+    <div class="sr-card sr-wide">
+      <h2>Agtron-палитра</h2>
+      <p class="note">Семь уровней обжарки, семь цветов. Это и логотип (семь точек), и упаковка.</p>
+      <div class="sr-pal" id="pal" data-source="palette"></div>
+    </div>
+    <div class="sr-card">
+      <h2>Кто мы</h2>
+      <div class="sr-prose">
+        <p><b>suroast</b> (строчными, одна «r»): спешелти-роастери из Праги, Европа с первого дня.</p>
+        <p><b>sur</b> = <b>S</b>even <b>U</b>nique <b>R</b>oasts: семь уникальных обжарок, семь уровней шкалы. Вместе с <b>roast</b> получается suroast.</p>
+        <p><i>We are turning specialty coffee upside down.</i></p>
+        <p>Уровень обжарки измеряется по Agtron и становится цветом на упаковке. Клиент видит цвет и понимает обжарку.</p>
+        <p>Полка спешелти стала «бежевой»: одинаковые белые пакеты и один стиль на всё. suroast делает обжарку видимой, измеренной и честной.</p>
+      </div>
+    </div>
+    <div class="sr-card">
+      <h2>Концепции</h2>
+      <div class="sr-prose"><ul>
+        <li><b>True to bean.</b> Agtron — пункт назначения, путь у каждого лота свой. Домашнего стиля нет.</li>
+        <li><b>Seven boxes. One bag.</b> Коробка на каждый уровень, пакет внутри один. Меньше SKU и отходов.</li>
+        <li><b>Artist editions.</b> Художник оформляет коробку каждого дропа.</li>
+        <li><b>Каналы:</b> опт для кафе, e-shop, drip-пакеты.</li>
+      </ul></div>
+    </div>
+    <div class="sr-card">
+      <h2>Команда</h2>
+      <div class="sr-prose"><ul>
+        <li><b>Борис Калинин</b>, co-founder, CPO. Чемпион Чехии по обжарке. Профили, лоты, качество, обучение бариста.</li>
+        <li><b>Полина Субботина</b>, co-founder, CFO. Profit-first, операционка от поставок до доставки, команды.</li>
+      </ul></div>
+    </div>
+    <div class="sr-card">
+      <h2>Решения по айдентике</h2>
+      <div class="sr-prose"><ul>
+        <li>Знак: семь точек scatter. Не использовать roast curve, ribbon swoosh, спирали.</li>
+        <li>Отвергнутые имена: Terroir, Locus Roast, In Colour, Agtron, As Is, Roastline. Surroast с двумя R — запасной.</li>
+        <li>Шрифт не выбран: Fraunces, Nabla, Instrument Serif, Bricolage Grotesque. Тело текста: Space Grotesk.</li>
+        <li>Материалы: инвест-презентация на девятнадцать слайдов в четырёх шрифтах и анимация логотипа (ссылки в брифе).</li>
+      </ul></div>
+    </div>
+  </section>
+</div>
+
+<script>
+dash.calc('taskStats', {
+  title: 'Задачи по статусу', description: 'Открытые задачи (всё, кроме «Готово») и сколько из них ждут другой задачи.',
+  inputs: ['tasks'],
+  fn: (tasks) => [{ open: tasks.filter(t => t.status !== 'Готово').length, blocked: tasks.filter(t => String(t.status).startsWith('Ждёт')).length }]
+});
+dash.calc('riskStats', {
+  title: 'Слабые места по уровню', description: 'Сколько слабых мест всего и сколько с уровнем «Высокий».',
+  inputs: ['risks'],
+  fn: (risks) => [{ total: risks.length, high: risks.filter(r => r.level === 'Высокий').length }]
+});
+dash.calc('roundTotal', {
+  title: 'Сумма раунда', description: 'Сумма распределения раунда по статьям, млн Kč.',
+  inputs: ['keynums'],
+  fn: (keynums) => [{ total: Math.round(keynums.filter(r => r.group === 'Раунд').reduce((s, r) => s + Number(r.value), 0) * 10) / 10 }]
+});
+
+(function () {
+  const tabs = [...document.querySelectorAll('.sr-tab')];
+  const show = (id) => {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+    document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== id; });
+    dash.setLink(id);
+    window.__srDraw && window.__srDraw();
+  };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  const h = location.hash.slice(1);
+  if (['weak', 'road', 'money', 'brand'].includes(h)) show(h);
+})();
+</script>
+
+<script>
+(function () {
+  const fmt1 = (v) => v == null || v === '' ? '' : new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 1 }).format(Number(v));
+  const pillCls = (s) => ({ 'Высокий': 'p-bad', 'Средний': 'p-warn', 'Низкий': 'p-mute', 'Открыто': 'p-warn', 'В работе': 'p-ok', 'Готово': 'p-ok', 'План': 'p-mute', 'Пройдено': 'p-ok' }[s] || (String(s).startsWith('Ждёт') ? 'p-bad' : 'p-mute'));
+
+  function fillTable(sel, id, cols) {
+    const tb = document.querySelector(sel + ' tbody');
+    const d = dash.data(id);
+    tb.textContent = '';
+    if (d.status !== 'ok') return;
+    d.data.forEach(r => {
+      const tr = document.createElement('tr');
+      cols.forEach(c => {
+        const td = document.createElement('td');
+        const v = r[c.f];
+        if (c.pill) { const s = document.createElement('span'); s.className = 'pill ' + pillCls(v); s.textContent = v; td.appendChild(s); }
+        else td.textContent = c.num ? fmt1(v) : (v ?? '');
+        if (c.num) td.className = 'num';
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+  }
+
+  function setText(el, v) { el.textContent = v; el.classList.remove('dash-skeleton'); }
+
+  function drawFin() {
+    const box = document.getElementById('finC');
+    box.textContent = '';
+    const d = dash.data('finance');
+    if (d.status !== 'ok' || box.offsetParent === null) return;
+    const rows = d.data.map(r => ({ year: r.year, revenue: Number(r.revenue), ebitda: Number(r.ebitda) }));
+    const W = box.clientWidth || 600, H = 260, m = { t: 16, r: 8, b: 28, l: 36 };
+    const x = d3.scaleBand(rows.map(r => r.year), [m.l, W - m.r]).padding(0.25);
+    const xi = d3.scaleBand(['revenue', 'ebitda'], [0, x.bandwidth()]).padding(0.1);
+    const y = d3.scaleLinear([Math.min(0, d3.min(rows, r => r.ebitda)), d3.max(rows, r => r.revenue)], [H - m.b, m.t]).nice();
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('g').selectAll('line').data(y.ticks(5)).join('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y).attr('y2', y).attr('stroke', 'var(--cds-chart-grid)');
+    svg.append('g').selectAll('text').data(y.ticks(5)).join('text').attr('x', m.l - 6).attr('y', v => y(v) + 4).attr('text-anchor', 'end').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(v => fmt1(v));
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(0)).attr('y2', y(0)).attr('stroke', 'var(--cds-chart-axis)');
+    const tip = d3.select(box).append('div').attr('class', 'sr-tip').style('display', 'none');
+    const g = svg.append('g').selectAll('g').data(rows).join('g').attr('transform', r => `translate(${x(r.year)},0)`);
+    ['revenue', 'ebitda'].forEach((k, i) => {
+      g.append('rect').attr('x', xi(k)).attr('width', Math.min(32, xi.bandwidth()))
+        .attr('y', r => y(Math.max(0, r[k]))).attr('height', r => Math.max(1, Math.abs(y(r[k]) - y(0))))
+        .attr('rx', 4).style('fill', ['#A5582A', '#DCA564'][i]);
+    });
+    g.append('rect').attr('width', x.bandwidth()).attr('y', m.t).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+      .on('mousemove', (ev, r) => {
+        const [px, py] = d3.pointer(ev, box);
+        tip.style('display', null).html('');
+        tip.append('div').attr('class', 'd').text(r.year);
+        tip.append('div').text('Выручка: ' + fmt1(r.revenue));
+        tip.append('div').text('EBITDA: ' + fmt1(r.ebitda));
+        const tw = tip.node().offsetWidth;
+        tip.style('left', Math.min(px + 12, W - tw - 4) + 'px').style('top', Math.max(0, py - 40) + 'px');
+      })
+      .on('mouseleave', () => tip.style('display', 'none'));
+    svg.append('g').selectAll('text').data(rows).join('text').attr('x', r => x(r.year) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(r => r.year);
+    document.querySelector('.lg0').style.background = '#A5582A';
+    document.querySelector('.lg1').style.background = '#DCA564';
+  }
+
+  function drawRoad() {
+    const box = document.getElementById('roadC');
+    box.textContent = '';
+    const d = dash.data('milestones');
+    if (d.status !== 'ok' || box.offsetParent === null) return;
+    const rows = d.data.map(r => ({ ...r, month: Number(r.month) }));
+    const W = box.clientWidth || 600, H = 110, m = { l: 20, r: 24 };
+    const x = d3.scaleLinear([0, d3.max(rows, r => r.month)], [m.l, W - m.r]);
+    const svg = d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`);
+    svg.append('line').attr('x1', x(0)).attr('x2', x.range()[1]).attr('y1', 50).attr('y2', 50).attr('stroke', 'var(--cds-chart-axis)').attr('stroke-width', 2);
+    const g = svg.selectAll('g.m').data(rows).join('g').attr('transform', r => `translate(${x(r.month)},50)`);
+    const pc = ['#DCA564', '#C48248', '#8A3E1C', '#3C1204', '#0A0A0A'];
+    g.append('circle').attr('r', 9).attr('stroke', 'var(--sr-ink)').attr('stroke-width', r => r.status === 'Пройдено' ? 3 : 1).style('fill', (r, i) => pc[i % pc.length]);
+    g.append('text').attr('y', -16).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg)').style('font-size', 'var(--cds-font-size-caption)').style('font-weight', 500).text(r => r.key);
+    g.append('text').attr('y', 30).attr('text-anchor', 'middle').attr('fill', 'var(--color-fg-muted)').style('font-size', 'var(--cds-font-size-caption)').text(r => r.area);
+  }
+
+  function drawPalette() {
+    const d = dash.data('palette');
+    const pal = document.getElementById('pal'), dots = document.getElementById('dots');
+    const curt = document.getElementById('curt');
+    pal.textContent = ''; dots.textContent = ''; curt.textContent = '';
+    if (d.status !== 'ok') return;
+    const n = d.data.length, cw = 520 / n;
+    d.data.forEach((r, i) => {
+      const x0 = i * cw, sw1 = Math.sin(i * 2.1) * 40, sw2 = Math.cos(i * 1.3) * 50, w = cw * (0.8 + (i % 3) * 0.15);
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', `M ${x0} -10 C ${x0 + sw1} 100 ${x0 + sw2} 200 ${x0 + sw1 / 2} 310 L ${x0 + sw1 / 2 + w} 310 C ${x0 + sw2 + w} 200 ${x0 + sw1 + w} 100 ${x0 + w} -10 Z`);
+      path.style.fill = r.hex; curt.appendChild(path);
+    });
+    d.data.forEach(r => {
+      const P = [[-58,-30],[-20,18],[18,-38],[52,8],[-40,36],[30,40],[66,-24]][Number(r.level) - 1];
+      if (P) { const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('cx', 80 + P[0]); c.setAttribute('cy', 75 + P[1]); c.setAttribute('r', 13); c.style.fill = r.hex; c.style.animationDelay = (Number(r.level) * 0.09) + 's'; if (r.hex === '#0A0A0A') { c.style.stroke = '#3A2A1C'; c.style.strokeWidth = '1'; } dots.appendChild(c); }
+      const sw = document.createElement('div'); sw.className = 'sr-sw';
+      const c = document.createElement('div'); c.className = 'c'; c.style.background = r.hex;
+      const t = document.createElement('div'); t.className = 't';
+      const b = document.createElement('b'); b.textContent = r.name;
+      const s = document.createElement('span'); s.textContent = 'Agtron ' + r.agtron + ' · ' + r.hex;
+      t.append(b, s); sw.append(c, t); pal.appendChild(sw);
+    });
+  }
+
+  function draw() {
+    document.querySelectorAll('.sr-kpi .big, .sr-kpi .sub > span').forEach(el => {
+      const id = el.dataset.source; const dd = dash.data(id);
+      if (dd.status !== 'ok') { if (dd.status !== 'loading') el.classList.remove('dash-skeleton'); el.textContent = '—'; return; }
+      let row = dd.data[0];
+      if (el.dataset.where) {
+        const w = new URLSearchParams(el.dataset.where.replace(/&amp;/g, '&'));
+        row = dd.data.find(r => [...w].every(([k, v]) => String(r[k]) === v));
+      }
+      setText(el, row ? fmt1(row[el.dataset.field]) : '—');
+    });
+    const ts = dash.data('taskStats'), rs = dash.data('riskStats'), ms = dash.data('milestones');
+    if (ts.status === 'ok' && rs.status === 'ok' && ms.status === 'ok') {
+      const next = ms.data.find(r => r.status !== 'Пройдено');
+      document.getElementById('take').textContent = `Открыто задач: ${ts.data[0].open}, высоких рисков: ${rs.data[0].high}. Главный узел сейчас — выбор шрифта и сбор раунда. Следующая веха: ${next ? next.key + ', ' + next.title.toLowerCase() : 'все пройдены'}.`;
+    }
+    fillTable('#risksT', 'risks', [{ f: 'id' }, { f: 'risk' }, { f: 'area' }, { f: 'level', pill: true }]);
+    fillTable('#tasksT', 'tasks', [{ f: 'id' }, { f: 'task' }, { f: 'area' }, { f: 'status', pill: true }]);
+    fillTable('#msT', 'milestones', [{ f: 'key' }, { f: 'title' }, { f: 'area' }, { f: 'status', pill: true }]);
+    fillTable('#growT', 'finance', [{ f: 'year' }, { f: 'cafes', num: true }, { f: 'drip_month', num: true }, { f: 'green_t', num: true }]);
+    fillTable('#numsT', 'keynums', [{ f: 'group' }, { f: 'label' }, { f: 'value', num: true }, { f: 'unit' }, { f: 'note' }]);
+    drawPalette(); drawFin(); drawRoad();
+  }
+  window.__srDraw = draw;
+  dash.onData(draw);
+})();
+</script>

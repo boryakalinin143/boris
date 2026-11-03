@@ -35,6 +35,7 @@ coffee-library/
   origins/                     происхождения (md + csv)
   varieties/                   сорта, группы сортов по Хоосу (md + csv)
   roast-defects/               дефекты обжарки, протокол QC, Agtron 65–115
+  market/                      климат, цены на зелёный кофе, бизнес-контекст
   science/                     обзор научной литературы
 coffee-db/
   README.md                    описание полей базы лотов

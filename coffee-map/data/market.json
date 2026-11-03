@@ -1,49 +1,148 @@
 {
  "updated": "2026-11-03",
  "prices": [
-  {"id": "kc", "name": "Арабика, ICE «C» (Нью-Йорк)", "unit": "¢/фунт", "value": 295.0, "change_pct": 2.7, "date": "2026-11-03",
+  {
+   "id": "kc",
+   "name": "Арабика, ICE «C» (Нью-Йорк)",
+   "unit": "¢/фунт",
+   "value": 295.0,
+   "change_pct": 2.7,
+   "date": "2026-11-03",
    "note": "Рост на опасениях по ближайшему предложению: сертифицированные запасы ICE низкие. Контракт Dec-26 закрылся 30.10 на 287,20; первое уведомление 19.11.",
-   "source": "Business Recorder / Barchart", "url": "https://www.brecorder.com/news/40447130/arabica-coffee-futures-rally"},
-  {"id": "rc", "name": "Робуста, ICE Europe (Лондон)", "unit": "$/т", "value": 3865, "change_pct": null, "date": "2026-11-03",
+   "source": "Business Recorder / Barchart",
+   "url": "https://www.brecorder.com/news/40447130/arabica-coffee-futures-rally"
+  },
+  {
+   "id": "rc",
+   "name": "Робуста, ICE Europe (Лондон)",
+   "unit": "$/т",
+   "value": 3865,
+   "change_pct": null,
+   "date": "2026-11-03",
    "note": "Ноябрьский контракт RCX6, снимок котировки без отметки времени. Диапазон за 52 недели 3149–4986 $/т.",
-   "source": "Investing.com", "url": "https://in.investing.com/commodities/london-coffee"}
+   "source": "Investing.com",
+   "url": "https://in.investing.com/commodities/london-coffee"
+  }
  ],
  "history_kc": [
-  {"date": "2026-01-16", "value": 331.1, "note": "7300 $/т"},
-  {"date": "2026-06-16", "value": 277.1, "note": "6110 $/т"},
-  {"date": "2026-10-30", "value": 287.2, "note": "закрытие Dec-26"},
-  {"date": "2026-11-03", "value": 295.0, "note": "внутри дня"}
+  {
+   "date": "2026-01-16",
+   "value": 331.1,
+   "note": "7300 $/т"
+  },
+  {
+   "date": "2026-06-16",
+   "value": 277.1,
+   "note": "6110 $/т"
+  },
+  {
+   "date": "2026-10-30",
+   "value": 287.2,
+   "note": "закрытие Dec-26"
+  },
+  {
+   "date": "2026-11-03",
+   "value": 295.0,
+   "note": "внутри дня"
+  }
  ],
  "facts": [
-  {"label": "Сертифицированные запасы арабики ICE", "value": "225 068 мешков", "date": "2026-10-29", "note": "рядом с минимумом за 27 лет (середина сентября)"},
-  {"label": "Мировое производство 2026/27 (USDA)", "value": "189,7 млн мешков", "date": "2026-06", "note": "рекорд, +6 % к прошлому сезону"},
-  {"label": "Бразилия 2026 (Conab)", "value": "67,6 млн мешков", "date": "2026-09-24", "note": "оценка повышена с 66,7; USDA даёт 71,9"},
-  {"label": "Вступление EUDR в силу", "value": "30.12.2026", "date": "2026-11-03", "note": "для малого бизнеса 30.06.2027"}
+  {
+   "label": "Сертифицированные запасы арабики ICE",
+   "value": "225 068 мешков",
+   "date": "2026-10-29",
+   "note": "рядом с минимумом за 27 лет (середина сентября)"
+  },
+  {
+   "label": "Мировое производство 2026/27 (USDA)",
+   "value": "189,7 млн мешков",
+   "date": "2026-06",
+   "note": "рекорд, +6 % к прошлому сезону"
+  },
+  {
+   "label": "Бразилия 2026 (Conab)",
+   "value": "67,6 млн мешков",
+   "date": "2026-09-24",
+   "note": "оценка повышена с 66,7; USDA даёт 71,9"
+  },
+  {
+   "label": "Вступление EUDR в силу",
+   "value": "30.12.2026",
+   "date": "2026-11-03",
+   "note": "для малого бизнеса 30.06.2027"
+  }
  ],
  "news": [
-  {"date": "2026-11-03", "region": "Рынок", "title": "Арабика выросла на 2,7 % до 2,95 $/фунт",
+  {
+   "date": "2026-11-03",
+   "region": "Рынок",
+   "title": "Арабика выросла на 2,7 % до 2,95 $/фунт",
    "text": "Дилеры нервничают из-за дефицита сертифицированного кофе перед экспирацией декабрьского контракта.",
-   "url": "https://www.brecorder.com/news/40447130/arabica-coffee-futures-rally", "source": "Business Recorder"},
-  {"date": "2026-10-29", "region": "Рынок", "title": "Запасы ICE около 225 тыс. мешков, у 27-летнего минимума",
+   "url": "https://www.brecorder.com/news/40447130/arabica-coffee-futures-rally",
+   "source": "Business Recorder"
+  },
+  {
+   "date": "2026-10-29",
+   "region": "Рынок",
+   "title": "Запасы ICE около 225 тыс. мешков, у 27-летнего минимума",
    "text": "На грейдинге ждут ещё десятки тысяч мешков бразильского кофе, поэтому запасы могут подрасти.",
-   "url": "https://tradingeconomics.com/commodity/coffee", "source": "Trading Economics"},
-  {"date": "2026-10-25", "region": "Бразилия", "title": "Дожди в Минас-Жерайс: 82 % нормы за неделю",
+   "url": "https://tradingeconomics.com/commodity/coffee",
+   "source": "Trading Economics"
+  },
+  {
+   "date": "2026-10-25",
+   "region": "Бразилия",
+   "title": "Дожди в Минас-Жерайс: 82 % нормы за неделю",
    "text": "Идёт цветение под урожай 2027. Цветение неровное, El Niño остаётся риском для дождей.",
-   "url": "https://finance.yahoo.com/markets/commodities/articles/coffee-prices-continue-fall-concern-165529317.html", "source": "Barchart / Yahoo Finance"},
-  {"date": "2026-09-24", "region": "Бразилия", "title": "Conab повысила оценку урожая 2026 до 67,6 млн мешков",
+   "url": "https://finance.yahoo.com/markets/commodities/articles/coffee-prices-continue-fall-concern-165529317.html",
+   "source": "Barchart / Yahoo Finance"
+  },
+  {
+   "date": "2026-09-24",
+   "region": "Бразилия",
+   "title": "Conab повысила оценку урожая 2026 до 67,6 млн мешков",
    "text": "Было 66,7 млн. USDA ещё выше: 71,9 млн, +14 % к прошлому году.",
-   "url": "https://www.fas.usda.gov/data/gain-report/2026/06/Coffee%20Annual_Brasilia_Brazil_BR2026-0025.pdf", "source": "Conab / USDA"},
-  {"date": "2026-06-20", "region": "Мир", "title": "USDA: рекордный мировой урожай 2026/27, 189,7 млн мешков",
+   "url": "https://www.fas.usda.gov/data/gain-report/2026/06/Coffee%20Annual_Brasilia_Brazil_BR2026-0025.pdf",
+   "source": "Conab / USDA"
+  },
+  {
+   "date": "2026-06-20",
+   "region": "Мир",
+   "title": "USDA: рекордный мировой урожай 2026/27, 189,7 млн мешков",
    "text": "Рост за счёт Бразилии и Вьетнама (32,5 млн). Колумбия 13,4 млн.",
-   "url": "https://www.comunicaffe.com/usda-world-coffee-production-6-exports-9-and-global-consumption-3-6-set-to-reach-record-levels-in-2026-27/", "source": "Comunicaffe / USDA"},
-  {"date": "2026-06-12", "region": "Эфиопия", "title": "Эфиопия станет 4-м производителем мира: 12,1 млн мешков",
+   "url": "https://www.comunicaffe.com/usda-world-coffee-production-6-exports-9-and-global-consumption-3-6-set-to-reach-record-levels-in-2026-27/",
+   "source": "Comunicaffe / USDA"
+  },
+  {
+   "date": "2026-06-12",
+   "region": "Эфиопия",
+   "title": "Эфиопия станет 4-м производителем мира: 12,1 млн мешков",
    "text": "Обгоняет Индонезию (11,4 млн). Экспорт 2026/27 около 7,1 млн мешков.",
-   "url": "https://dailycoffeenews.com/2026/06/12/ethiopia-coffee-report-production-up-government-promoting-modernization/", "source": "Daily Coffee News"},
-  {"date": "2026-05-21", "region": "Кения", "title": "Экспорт Кении вырастет на 12 % до 940 тыс. мешков",
+   "url": "https://dailycoffeenews.com/2026/06/12/ethiopia-coffee-report-production-up-government-promoting-modernization/",
+   "source": "Daily Coffee News"
+  },
+  {
+   "date": "2026-05-21",
+   "region": "Кения",
+   "title": "Экспорт Кении вырастет на 12 % до 940 тыс. мешков",
    "text": "Новые посадки входят в плодоношение. С марта 2026 действует новый Coffee Act, регулятор снова Coffee Board of Kenya.",
-   "url": "https://www.ecofinagency.com/news-agriculture/2105-55798-kenya-set-for-12-rise-in-coffee-exports-in-2026/27", "source": "Ecofin"},
-  {"date": "2026-10-20", "region": "Европа", "title": "EUDR вступает в силу 30 декабря 2026",
+   "url": "https://www.ecofinagency.com/news-agriculture/2105-55798-kenya-set-for-12-rise-in-coffee-exports-in-2026/27",
+   "source": "Ecofin"
+  },
+  {
+   "date": "2026-10-20",
+   "region": "Европа",
+   "title": "EUDR вступает в силу 30 декабря 2026",
    "text": "Импортёрам в ЕС нужна геолокация участков и подтверждение отсутствия вырубки. Малому бизнесу до 30.06.2027.",
-   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-14-20-october-2026", "source": "Woodpeckers Coffee"}
- ]
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-14-20-october-2026",
+   "source": "Woodpeckers Coffee"
+  }
+ ],
+ "fx": {
+  "eurusd": 1.15,
+  "date": "2026-08-05",
+  "note": "последний найденный курс EUR/USD (≈1,15); ежедневная задача обновляет его",
+  "source": "TradersUnion",
+  "url": "https://tradersunion.com/currencies/price/eur-usd/"
+ }
 }

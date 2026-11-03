@@ -4,6 +4,8 @@
 Запуск: python3 coffee-map/tools/build_origins.py <путь к coffee-library>
 """
 import csv, json, sys, pathlib
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from extra_data import PROC, RISKS, CLIMATE, OUTLOOK, MORE_REGIONS, REGION_ISSUES, MORE_TRADERS, FORECAST, GREEN
 
 LIB = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/mnt/project-files/coffee-library")
 OUT = pathlib.Path(__file__).resolve().parent.parent / "data" / "origins.json"
@@ -221,9 +223,17 @@ def main():
             roast=r["Заметки по обжарке"], main=main_m, fly=x.get("fly", []), fly_note=x.get("fly_note", ""),
             arrival=arrival, prod=x.get("prod"), prod_src=x.get("prod_src", ""), price=x["price"],
             price_label=PRICE_LABEL[x["price"]], species=x["species"], varieties=vars_,
+            proc=PROC[name], risks=[dict(cat=a, text=b) for a, b in RISKS.get(name, [])],
+            climate=CLIMATE.get(name, (0, "Нет оценки в источниках, считаем нейтральным"))[0],
+            climate_note=CLIMATE.get(name, (0, "Нет оценки в источниках, считаем нейтральным"))[1],
+            outlook=OUTLOOK.get(name, ([0, 0, 0], ""))[0], outlook_note=OUTLOOK.get(name, ([0, 0, 0], "Без особых факторов, следует за биржей"))[1] or "Без особых факторов, следует за биржей",
+            green=GREEN[name],
         ))
+        assert sum(PROC[name].values()) == 100, name
     names = {c["name"] for c in countries}
-    regions = [dict(country=c, name=n, lat=la, lon=lo, alt=a, note=t) for c, n, la, lo, a, t in REGIONS]
+    regions = [dict(country=c, name=n, lat=la, lon=lo, alt=a, note=t, issue=REGION_ISSUES.get(n, "")) for c, n, la, lo, a, t in REGIONS + MORE_REGIONS]
+    assert set(REGION_ISSUES) <= {g["name"] for g in regions}, set(REGION_ISSUES) - {g["name"] for g in regions}
+    TRADERS.extend(MORE_TRADERS)
     for t in TRADERS:
         missing = [o for o in t["origins"] if o not in names]
         assert not missing, (t["name"], missing)
@@ -232,9 +242,9 @@ def main():
     data = dict(
         built="2026-11-03",
         sources=["coffee-library/origins/origins.csv", "coffee-library/varieties/varieties.csv",
-                 "USDA FAS Coffee: World Markets and Trade, июнь 2026", "Conab, 24.09.2026",
+                 "USDA FAS Coffee: World Markets and Trade, июнь 2026", "Conab, 24.09.2026", "Rabobank 2026 (климат)", "Bunn et al. 2015", "Всемирный банк, BMI, Reuters (прогнозы цен)",
                  "сайты импортёров (список трейдеров, проверить перед закупкой)"],
-        countries=countries, regions=regions, traders=TRADERS,
+        countries=countries, regions=regions, traders=TRADERS, forecast=FORECAST,
     )
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     print(len(countries), "стран,", len(regions), "регионов,", len(TRADERS), "трейдеров ->", OUT)

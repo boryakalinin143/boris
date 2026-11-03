@@ -324,7 +324,7 @@ const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const num=(v,dp=0)=>Number(v).toLocaleString("ru-RU",{minimumFractionDigits:dp,maximumFractionDigits:dp});
 
-const [O,M,W]=await Promise.all(["data/origins.json","data/market.json","data/world.json"].map(u=>fetch(u).then(r=>r.json())));
+const [O,M,W,RT]=await Promise.all(["data/origins.json","data/market.json","data/world.json","data/relief/index.json"].map(u=>fetch(u).then(r=>r.json()).catch(()=>null)));
 const C=O.countries, F=O.forecast, byIso=new Map(C.filter(c=>c.iso).map(c=>[c.iso,c])), byName=new Map(C.map(c=>[c.name,c]));
 const tradersOf=name=>O.traders.filter(t=>t.origins.includes(name));
 const FX=(M.fx&&M.fx.eurusd)||1.15;
@@ -371,6 +371,11 @@ const g=svg.append("g");
 g.append("path").attr("class","sphere").attr("d",path({type:"Sphere"}));
 g.append("path").attr("class","grat").attr("d",path(d3.geoGraticule10()));
 const feats=topojson.feature(W,W.objects.countries).features;
+// в 10m-контурах у мелких островных стран кольца бывают «вывернуты» и закрывают весь глобус: разворачиваем
+{ const fix=c=>d3.geoArea({type:"Polygon",coordinates:c})>2*Math.PI?c.map(r=>r.slice().reverse()):c;
+  for(const f of feats){ const g=f.geometry; if(!g) continue;
+    if(g.type==="Polygon") g.coordinates=fix(g.coordinates);
+    else if(g.type==="MultiPolygon") g.coordinates=g.coordinates.map(fix); } }
 const countries=g.append("g").selectAll("path").data(feats).join("path")
   .attr("d",path).attr("class",d=>"country"+(byIso.has(d.id)?" coffee":""))
   .on("pointerenter",(e,d)=>{const c=byIso.get(d.id); if(c){showDossier(c); tip(e,countryTip(c));}})
@@ -392,6 +397,22 @@ function countryTip(c){
 }
 const reliefImg=g.append("image").attr("class","relief").attr("href","data/relief.png")
   .attr("x",184).attr("y",88).attr("width",701).attr("height",266).attr("preserveAspectRatio","none");
+const tileG=g.append("g");
+const tileCache=new Map(); let reliefOn=true;
+function updTiles(t){
+  const k=t.k, F=!RT||!reliefOn?0:k>=4.5?20:k>=1.8?10:0;
+  reliefImg.attr("display",reliefOn&&F===0?null:"none");
+  tileG.selectAll("image").attr("display",function(){return +this.dataset.f===F?null:"none"});
+  if(!F) return;
+  const vx0=-t.x/k, vy0=-t.y/k, vx1=(Wd-t.x)/k, vy1=(Hd-t.y)/k, sz=RT.tile/F;
+  for(const [i,j] of RT.levels[F]){
+    const x=184+i*sz, y=88+j*sz, key=F+"/"+i+"_"+j;
+    if(x>vx1||x+sz<vx0||y>vy1||y+sz<vy0||tileCache.has(key)) continue;
+    tileCache.set(key,1);
+    tileG.append("image").attr("class","relief").attr("data-f",F).attr("href",`data/relief/${key}.jpg`)
+      .attr("x",x).attr("y",y).attr("width",sz+.02).attr("height",sz+.02).attr("preserveAspectRatio","none");
+  }
+}
 const arcs=g.append("g");
 const regionG=g.append("g");
 const regions=regionG.selectAll("circle").data(O.regions).join("circle").attr("class",d=>"region"+(d.issue?" warn":""))
@@ -483,7 +504,7 @@ function legend(){
 }
 let curK=1;
 const zoom=d3.zoom().scaleExtent([1,40]).translateExtent([[0,0],[Wd,Hd]]).on("zoom",e=>{
-  g.attr("transform",e.transform); const k=e.transform.k; curK=k;
+  g.attr("transform",e.transform); const k=e.transform.k; curK=k; updTiles(e.transform);
   regions.attr("r",3.2/Math.pow(k,.9)); traders.attr("d",d3.symbol(d3.symbolDiamond,70/Math.pow(k,1.7)));
   arcs.selectAll("circle").attr("r",3/k);
   lots.attr("d",d=>d3.symbol(d.roasted?d3.symbolStar:d3.symbolCircle,(d.roasted?120:46)/Math.pow(k,1.4))());
@@ -695,7 +716,7 @@ d3.selectAll("#layers button").on("click",function(){setLayer(this.dataset.layer
 document.getElementById("tg-regions").onchange=e=>{regionG.attr("display",e.target.checked?null:"none"); labels.attr("display",e.target.checked&&curK>=4?null:"none")};
 document.getElementById("tg-lots").onchange=e=>{lotG.attr("display",e.target.checked?null:"none"); legend()};
 document.getElementById("tg-alt").onchange=()=>paint(false);
-document.getElementById("tg-relief").onchange=e=>reliefImg.attr("display",e.target.checked?null:"none");
+document.getElementById("tg-relief").onchange=e=>{reliefOn=e.target.checked; if(!reliefOn) tileG.selectAll("image").attr("display","none"); updTiles(d3.zoomTransform(svg.node()));};
 document.getElementById("tg-traders").onchange=e=>{traderG.attr("display",e.target.checked?null:"none"); arcs.selectAll("*").remove(); legend()};
 
 /* ---------- рынок ---------- */

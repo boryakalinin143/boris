@@ -6,24 +6,24 @@
 <style>
 /* Layout: карта-стол во всю ширину с досье страны справа, под ней прогноз цен, календарь урожаев и рыночная лента. */
 :root{
-  --bg:#eceee8; --surface:#f7f8f4; --ink:#1b231f; --muted:#5b685f; --line:#d1d7cf;
-  --land:#dbe0d8; --land-coffee:#c3cdc1; --harvest:#b4302a; --fly:#e08b80; --arrive:#2d7a58;
-  --trader:#8a5a12; --p1:#ead9b5; --p2:#d3a35f; --p3:#a5672a; --p4:#673717;
-  --r1:#ecd6cc; --r2:#d88a6c; --r3:#a2341f;
+  --bg:#f3ebe1; --surface:#fcf7f1; --ink:#2b2019; --muted:#7b6757; --line:#e6d8c8;
+  --land:#e9dfd2; --land-coffee:#d9c7b1; --harvest:#c7472d; --fly:#e9a184; --arrive:#7a9447;
+  --trader:#9b6a1e; --p1:#f0dcb8; --p2:#ddb071; --p3:#b67a3c; --p4:#7a4622;
+  --r1:#f1d9c9; --r2:#e09372; --r3:#b33f25; --lot:#2b2019;
   --display:"Unbounded","Arial Black",system-ui,sans-serif;
   --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#111714; --surface:#19211d; --ink:#e6ebe6; --muted:#97a49c; --line:#2b3530;
-  --land:#212a25; --land-coffee:#33403a; --harvest:#e5584b; --fly:#9c5249; --arrive:#4db385;
-  --trader:#dcb24e; --p1:#4a3b25; --p2:#7d5a2c; --p3:#b27a36; --p4:#e3ad62;
-  --r1:#4a2e26; --r2:#8f4632; --r3:#e2654a; color-scheme:dark}}
+  --bg:#1b1511; --surface:#241c17; --ink:#f2e7da; --muted:#b39f8b; --line:#3b2f26;
+  --land:#2d241d; --land-coffee:#47392d; --harvest:#ea6d4f; --fly:#a85e48; --arrive:#a3bd68;
+  --trader:#e3b65c; --p1:#4d3c27; --p2:#80592e; --p3:#bb803d; --p4:#ebb36b;
+  --r1:#4f3127; --r2:#954a33; --r3:#ec6d50; --lot:#f2e7da; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#111714; --surface:#19211d; --ink:#e6ebe6; --muted:#97a49c; --line:#2b3530;
-  --land:#212a25; --land-coffee:#33403a; --harvest:#e5584b; --fly:#9c5249; --arrive:#4db385;
-  --trader:#dcb24e; --p1:#4a3b25; --p2:#7d5a2c; --p3:#b27a36; --p4:#e3ad62;
-  --r1:#4a2e26; --r2:#8f4632; --r3:#e2654a; color-scheme:dark}
+  --bg:#1b1511; --surface:#241c17; --ink:#f2e7da; --muted:#b39f8b; --line:#3b2f26;
+  --land:#2d241d; --land-coffee:#47392d; --harvest:#ea6d4f; --fly:#a85e48; --arrive:#a3bd68;
+  --trader:#e3b65c; --p1:#4d3c27; --p2:#80592e; --p3:#bb803d; --p4:#ebb36b;
+  --r1:#4f3127; --r2:#954a33; --r3:#ec6d50; --lot:#f2e7da; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);
@@ -173,6 +173,26 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
 .foot{font-size:12px;color:var(--muted);max-width:90ch}
 .sec{display:grid;gap:12px}
 .sec-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px}
+.lot{stroke:var(--surface);vector-effect:non-scaling-stroke;cursor:pointer}
+.lot.gone{fill-opacity:.25}
+.spike{vector-effect:non-scaling-stroke;stroke:var(--surface);stroke-width:.6;pointer-events:none}
+.mprog{height:3px;background:var(--line);border-radius:2px;overflow:hidden;width:min(100%,420px)}
+.mprog i{display:block;height:100%;width:0;background:var(--harvest)}
+.agchips button{min-width:70px}
+.agchips button i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+.lotlist{display:grid;gap:6px;font-size:13px;max-height:340px;overflow:auto;padding-right:4px}
+.lotrow{display:grid;grid-template-columns:14px minmax(0,1fr) auto;gap:8px;align-items:start;padding:6px 0;border-bottom:1px solid var(--line)}
+.lotrow:last-child{border-bottom:0}
+.lotrow i{width:12px;height:12px;border-radius:50%;margin-top:3px}
+.lotrow small{display:block;color:var(--muted);font-size:12px}
+.tag{font:500 10px var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.tag.roast{border-color:var(--harvest);color:var(--harvest)}
+.altsvg{width:100%;height:auto;display:block}
+.altsvg text{font:10px var(--mono);fill:var(--muted)}
+.buy{display:grid;gap:4px;font-size:13px}
+.buy div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:4px 0;border-bottom:1px solid var(--line)}
+.buy div:last-child{border-bottom:0}
+@media (prefers-reduced-motion:reduce){.mprog{display:none}}
 </style>
 
 <div class="wrap">
@@ -180,7 +200,7 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
     <div>
       <div class="eyebrow">suroast · атлас происхождений</div>
       <h1>Карта кофе мира</h1>
-      <p>Сезоны сбора и прихода свежего урожая в Европу, регионы, сорта и вкусы, цены зелёного в евро за кило, проблемы каждой страны, обработки, импортёры и прогноз цен на три года. Наведите на страну, точку региона или ромб импортёра.</p>
+      <p>Сезоны сбора и прихода свежего урожая в Европу, регионы, сорта и вкусы, цены зелёного в евро за кило, ваши лоты и подходящие цвета suroast, высоты, проблемы, обработки, импортёры и прогноз цен на три года. Наведите на страну, регион, лот или ромб импортёра.</p>
     </div>
     <div class="stamp" id="stamp">Загружаю данные…</div>
   </header>
@@ -194,19 +214,29 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
         <button type="button" data-layer="risk" aria-pressed="false">Проблемы</button>
         <button type="button" data-layer="forecast" aria-pressed="false">Прогноз</button>
         <button type="button" data-layer="volume" aria-pressed="false">Объём</button>
+        <button type="button" data-layer="lots" aria-pressed="false">Мои лоты</button>
+        <button type="button" data-layer="agtron" aria-pressed="false">Цвет Agtron</button>
+        <button type="button" data-layer="alt" aria-pressed="false">Высота</button>
       </div>
       <label class="toggle"><input type="checkbox" id="tg-regions" checked> Регионы</label>
       <label class="toggle"><input type="checkbox" id="tg-traders" checked> Импортёры</label>
+      <label class="toggle"><input type="checkbox" id="tg-lots" checked> Мои лоты</label>
+      <label class="toggle"><input type="checkbox" id="tg-alt"> Горы</label>
     </div>
     <div class="row" id="sub-season">
       <div class="months">
         <button type="button" class="play" id="play" aria-label="Пауза">❚❚</button>
         <div class="mstrip" id="mstrip" aria-label="Месяц"></div>
       </div>
+      <div class="mprog" aria-hidden="true"><i id="mprog"></i></div>
     </div>
     <div class="row" id="sub-process" hidden>
       <span class="sub-label">Показать долю:</span>
       <div class="seg" id="procsel"></div>
+    </div>
+    <div class="row" id="sub-agtron" hidden>
+      <span class="sub-label">Цвет suroast:</span>
+      <div class="seg agchips" id="agsel"></div>
     </div>
     <div class="row" id="sub-forecast" hidden>
       <span class="sub-label">Горизонт:</span>
@@ -283,7 +313,15 @@ const kcEur=c=>c/100*LB/FX;          // ¢/фунт → €/кг
 const rcEur=t=>t/1000/FX;            // $/т → €/кг
 const rng=(a,dp=1)=>a?`${num(a[0],a[0]%1?dp:0)}–${num(a[1],a[1]%1?dp:0)}`:"—";
 
-let month=new Date().getMonth()+1, layer="season", selected=null, playing=!reduce, timer=null, proc="natural", hor=1;
+let month=new Date().getMonth()+1, layer="season", selected=null, playing=!reduce, timer=null, proc="natural", hor=1, ag=95;
+const LOTS=O.lots||[];
+const AG={65:["VOID","#3a2316"],75:["OBSIDIAN","#56341f"],85:["EMBER","#77492a"],95:["DUSK","#986139"],105:["FJORD","#b67d4c"],115:["NORDIC","#d1a06c"]};
+const AGS=[65,75,85,95,105,115];
+const lotsOf=name=>LOTS.filter(l=>l.country===name);
+const altNums=s=>(String(s).match(/\d{3,4}/g)||[]).map(Number);
+const altMax=s=>d3.max(altNums(s))||0, altMin=s=>d3.min(altNums(s))||0;
+const TERR=d3.scaleLinear().domain([0,800,1400,1900,2400]).range(["#a7b878","#c6b56f","#b9874f","#8a5b3a","#efe6dc"]).interpolate(d3.interpolateLab).clamp(true);
+const DUR=reduce?0:1100, EASE=d3.easeCubicInOut, STEP=2600;
 const PROC={natural:["Натуральная","#c0582f"],washed:["Мытая","#3b7ea1"],honey:["Хани и pulped natural","#d9a43a"],wethulled:["Мокрая очистка","#6f7a3a"],exp:["Экспериментальные","#8b4fa0"]};
 const phaseOf=(c,m)=>c.main.includes(m)?"h":c.fly.includes(m)?"f":c.arrival.includes(m)?"a":"";
 const PH={h:"Сбор",f:"Второй сбор",a:"Свежий урожай в Европе","":"Межсезонье"};
@@ -297,6 +335,9 @@ function fillOf(c){
   if(layer==="price"){const m=specMid(c); return m<10.5?css("--p1"):m<13?css("--p2"):m<20?css("--p3"):css("--p4");}
   if(layer==="process"){const v=c.proc[proc]||0; return v===0?css("--land-coffee"):v<10?css("--p1"):v<35?css("--p2"):v<65?css("--p3"):css("--p4");}
   if(layer==="risk"){const s=riskScore(c); return s<2.5?css("--r1"):s<4.5?css("--r2"):css("--r3");}
+  if(layer==="lots"){const n=lotsOf(c.name).length; return n===0?css("--land-coffee"):n<2?css("--p1"):n<5?css("--p2"):n<9?css("--p3"):css("--p4");}
+  if(layer==="agtron"){const col=AG[ag][1]; return c.agtron_best===ag?col:c.agtron_good.includes(ag)?d3.interpolateLab(css("--land-coffee"),col)(.42):css("--land-coffee");}
+  if(layer==="alt") return TERR(altMax(c.altitude)*.85);
   if(layer==="forecast"){const o=c.outlook[Math.max(1,hor)-1]; return o<0?css("--arrive"):o===0?css("--land-coffee"):o===1?css("--r2"):css("--r3");}
   if(!c.prod) return css("--land-coffee");
   const t=Math.sqrt(c.prod/prodMax); return t>.66?css("--p4"):t>.4?css("--p3"):t>.2?css("--p2"):css("--p1");
@@ -322,6 +363,9 @@ function countryTip(c){
   else if(layer==="price") s+=`Specialty ${rng(c.green.spec)} €/кг`;
   else if(layer==="process") s+=`${PROC[proc][0]}: ${c.proc[proc]||0} %`;
   else if(layer==="risk") s+=c.risks.map(r=>esc(r.cat)).join(", ")||"нет данных";
+  else if(layer==="lots"){const L=lotsOf(c.name); s+=L.length?`${L.length} лотов в базе · жарили ${L.filter(l=>l.roasted).length}`:"нет наших лотов";}
+  else if(layer==="agtron") s+=c.agtron_best===ag?`Лучший кандидат на ${ag} ${AG[ag][0]}`:c.agtron_good.includes(ag)?`Подходит на ${ag}`:`Лучше на ${c.agtron_best} ${AG[c.agtron_best][0]}`;
+  else if(layer==="alt") s+=`${esc(c.altitude)} м`;
   else if(layer==="forecast") s+=`${F.horizons[Math.max(1,hor)]}: ${olText(c.outlook[Math.max(1,hor)-1])}`;
   else s+=c.prod?`${num(c.prod,1)} млн мешков`:"нет данных";
   return s;
@@ -341,6 +385,27 @@ const traders=traderG.selectAll("path").data(O.traders).join("path").attr("class
   .on("pointerenter",(e,d)=>{drawArcs(d); tip(e,traderTip(d))})
   .on("pointermove",e=>moveTip(e)).on("pointerleave",()=>{hideTip(); arcs.selectAll("*").remove()})
   .on("click",(e,d)=>{e.stopPropagation(); drawArcs(d); tip(e,traderTip(d))});
+const spikeG=g.insert("g",()=>regionG.node()).attr("display","none");
+const spikeData=O.regions.map(r=>({...r,max:altMax(r.alt),min:altMin(r.alt),p:proj([r.lon,r.lat])})).sort((a,b)=>a.p[1]-b.p[1]);
+function drawSpikes(k){
+  const sc=1/k, w=4.5*sc;
+  const sel=spikeG.selectAll("g.sp").data(spikeData,d=>d.name).join(en=>{const e=en.append("g").attr("class","sp");
+    e.append("path").attr("class","spike outer"); e.append("path").attr("class","spike inner"); e.append("text").attr("class","rlabel alt"); return e;});
+  sel.attr("transform",d=>`translate(${d.p})`);
+  sel.select(".outer").attr("d",d=>{const h=d.max/2500*30*sc; return `M${-w},0L0,${-h}L${w},0Z`}).style("fill",d=>TERR(d.max));
+  sel.select(".inner").attr("d",d=>{const h=d.min/2500*30*sc, ww=w*d.min/Math.max(d.max,1); return `M${-ww},0L0,${-h}L${ww},0Z`}).style("fill",d=>TERR(d.min)).attr("opacity",.9);
+  sel.select("text").attr("display",k>=5?null:"none").attr("font-size",10/k).attr("stroke-width",3/k).attr("text-anchor","middle")
+    .attr("y",d=>-(d.max/2500*30*sc)-3/k).text(d=>`${num(d.max)} м`);
+}
+const lotG=g.append("g");
+const lotSym=d=>d3.symbol(d.roasted?d3.symbolStar:d3.symbolCircle,(d.roasted?120:46));
+const lots=lotG.selectAll("path").data(LOTS).join("path").attr("class",d=>"lot"+(d.status==="Закончился"?" gone":""))
+  .attr("transform",d=>`translate(${proj([d.lon,d.lat])})`).attr("d",d=>lotSym(d)())
+  .style("fill",d=>AG[d.best]?AG[d.best][1]:"var(--lot)").attr("stroke-width",d=>d.roasted?1.4:1)
+  .on("pointerenter",(e,d)=>{showDossier(byName.get(d.country)); tip(e,lotTip(d))})
+  .on("pointermove",e=>moveTip(e)).on("pointerleave",()=>{hideTip(); showDossier(selected)})
+  .on("click",(e,d)=>{e.stopPropagation(); select(byName.get(d.country)); tip(e,lotTip(d))});
+const lotTip=d=>`<b>${esc(d.name)}</b><br>${esc(d.region)} · ${d.alt[0]}${d.alt[1]!==d.alt[0]?"–"+d.alt[1]:""} м<br>${esc(d.variety)} · ${esc(d.process)}${d.process_detail?" ("+esc(d.process_detail)+")":""}<br>${esc(d.status)} · урожай ${d.harvest} · ${esc(d.importer)}<br>Лучший цвет: <b>${d.best} ${AG[d.best]?AG[d.best][0]:""}</b>${d.also?` (также ${esc(d.also)})`:""}${d.roasted?`<br>Жарили: ${esc(d.roasted)}`:""}${d.warn?`<br>⚠ ${esc(d.warn)}`:""}`;
 const traderTip=d=>`<b>${esc(d.name)}</b> · ${esc(d.hq)}<br>${esc(d.kind)}<br>${esc(d.note)}<br><span style="opacity:.75">Страны: ${esc(d.origins.join(", "))}</span>`;
 const centroid=new Map(feats.filter(f=>byIso.has(f.id)).map(f=>[byIso.get(f.id).name,d3.geoCentroid(f)]));
 Object.entries({"США (Гавайи)":[-155.6,19.6],"Индонезия":[110.4,-7.4],"Китай (Юньнань)":[101,24],"Бразилия":[-45.5,-20],"Вьетнам":[108,12.7],"ДР Конго":[28.9,-2.5],"Индия":[76,13]}).forEach(([k,v])=>centroid.set(k,v));
@@ -356,8 +421,14 @@ function drawArcs(t){
 }
 const olText=o=>o<0?"скорее дешевле":o===0?"около нынешнего":o===1?"скорее дороже":"заметно дороже";
 function paint(animate=true){
-  (animate&&!reduce?countries.transition().duration(600):countries).style("fill",d=>{const c=byIso.get(d.id); return c?fillOf(c):css("--land")});
-  regions.style("fill",d=>fillOf(byName.get(d.country))).attr("stroke-width",d=>d.issue?1.2:.8);
+  const fillC=d=>{const c=byIso.get(d.id); return c?fillOf(c):css("--land")};
+  if(animate&&!reduce){
+    countries.transition("fill").duration(DUR).ease(EASE).styleTween("fill",function(d){return d3.interpolateLab(getComputedStyle(this).fill,fillC(d))});
+    regions.transition("fill").duration(DUR).ease(EASE).styleTween("fill",function(d){return d3.interpolateLab(getComputedStyle(this).fill,fillOf(byName.get(d.country)))});
+  } else { countries.interrupt("fill").style("fill",fillC); regions.interrupt("fill").style("fill",d=>fillOf(byName.get(d.country))); }
+  regions.attr("stroke-width",d=>d.issue?1.2:.8);
+  lots.attr("opacity",d=>layer==="agtron"?(d.best===ag?1:.25):1);
+  const showSp=layer==="alt"||document.getElementById("tg-alt").checked; spikeG.attr("display",showSp?null:"none"); if(showSp) drawSpikes(curK);
   countries.classed("sel",d=>selected&&byIso.get(d.id)===selected);
   d3.selectAll("#mstrip button").attr("aria-current",(d,i)=>String(i+1===month));
   const BM={season:`${MONFULL[month-1]}<small>${C.filter(c=>c.main.includes(month)).length} стран в основном сборе</small>`,
@@ -365,7 +436,10 @@ function paint(animate=true){
     process:`${PROC[proc][0]}<small>доля в экспорте страны, оценка</small>`,
     risk:`Проблемы<small>вредители, болезни, климат, станции, логистика</small>`,
     forecast:`${F.horizons[Math.max(1,hor)]}<small>куда пойдёт цена лотов страны</small>`,
-    volume:`Объём<small>2026/27, млн мешков</small>`};
+    volume:`Объём<small>2026/27, млн мешков</small>`,
+    lots:`Мои лоты<small>${LOTS.length} лотов · жарили ${LOTS.filter(l=>l.roasted).length} · ★ = жарили</small>`,
+    agtron:`${ag} ${AG[ag][0]}<small>какие страны лучше всего ложатся на этот цвет</small>`,
+    alt:`Высота<small>горы — высоты регионов, тёмная часть — нижняя граница</small>`};
   d3.select("#bigmonth").html(BM[layer]);
   legend(); calendarMonth(); showDossier(selected);
 }
@@ -376,8 +450,12 @@ function legend(){
     process:sw(css("--land-coffee"),"0 %")+sw(css("--p1"),"до 10 %")+sw(css("--p2"),"10–35 %")+sw(css("--p3"),"35–65 %")+sw(css("--p4"),"от 65 %"),
     risk:sw(css("--r1"),"мало проблем")+sw(css("--r2"),"заметные")+sw(css("--r3"),"много или климат против")+`<span>● с обводкой — регион с проблемой</span>`,
     forecast:sw(css("--arrive"),"дешевле")+sw(css("--land-coffee"),"как сейчас")+sw(css("--r2"),"дороже")+sw(css("--r3"),"заметно дороже"),
-    volume:sw(css("--p1"),"меньше")+sw(css("--p4"),"больше")+sw(css("--land-coffee"),"нет данных")};
+    volume:sw(css("--p1"),"меньше")+sw(css("--p4"),"больше")+sw(css("--land-coffee"),"нет данных"),
+    lots:sw(css("--p1"),"1 лот")+sw(css("--p2"),"2–4")+sw(css("--p3"),"5–8")+sw(css("--p4"),"9+")+`<span>точка — лот, цвет = лучший Agtron, ★ — жарили, бледная — закончился</span>`,
+    agtron:sw(AG[ag][1],"лучший выбор")+sw(d3.interpolateLab(css("--land-coffee"),AG[ag][1])(.42),"тоже подходит")+sw(css("--land-coffee"),"лучше другой цвет"),
+    alt:sw(TERR(600),"600 м")+sw(TERR(1200),"1200")+sw(TERR(1700),"1700")+sw(TERR(2100),"2100")+sw(TERR(2500),"2500+")};
   let h=L[layer];
+  if(document.getElementById("tg-lots").checked&&layer!=="lots") h+=`<span>● ★ мои лоты</span>`;
   if(document.getElementById("tg-traders").checked) h+=`<span><i style="background:${css("--trader")};transform:rotate(45deg) scale(.8)"></i>Импортёр</span>`;
   d3.select("#legend").html(h);
 }
@@ -386,13 +464,15 @@ const zoom=d3.zoom().scaleExtent([1,40]).translateExtent([[0,0],[Wd,Hd]]).on("zo
   g.attr("transform",e.transform); const k=e.transform.k; curK=k;
   regions.attr("r",3.4/Math.pow(k,.75)); traders.attr("d",d3.symbol(d3.symbolDiamond,70/k));
   arcs.selectAll("circle").attr("r",3/k);
+  lots.attr("d",d=>d3.symbol(d.roasted?d3.symbolStar:d3.symbolCircle,(d.roasted?120:46)/Math.pow(k,1.4))());
+  if(spikeG.attr("display")!=="none") drawSpikes(k);
   labels.attr("display",k>=2.6&&document.getElementById("tg-regions").checked?null:"none")
     .attr("font-size",11/k).attr("stroke-width",3/k).attr("dx",5/k).attr("dy",3.5/k);
 });
 svg.call(zoom).on("dblclick.zoom",null);
-d3.select("#zin").on("click",()=>svg.transition().duration(350).call(zoom.scaleBy,1.8));
-d3.select("#zout").on("click",()=>svg.transition().duration(350).call(zoom.scaleBy,1/1.8));
-d3.select("#zreset").on("click",()=>svg.transition().duration(450).call(zoom.transform,d3.zoomIdentity));
+d3.select("#zin").on("click",()=>svg.transition().duration(reduce?0:650).ease(EASE).call(zoom.scaleBy,1.8));
+d3.select("#zout").on("click",()=>svg.transition().duration(reduce?0:650).ease(EASE).call(zoom.scaleBy,1/1.8));
+d3.select("#zreset").on("click",()=>svg.transition().duration(reduce?0:900).ease(EASE).call(zoom.transform,d3.zoomIdentity));
 d3.select("#zbig").on("click",()=>{document.getElementById("stage").classList.toggle("big")});
 d3.select("#zfull").on("click",()=>{const el=document.getElementById("mapbox");
   try{ if(document.fullscreenElement) document.exitFullscreen(); else el.requestFullscreen().catch(()=>document.getElementById("stage").classList.add("big")); }
@@ -403,7 +483,7 @@ function zoomTo(c){
   const regs=O.regions.filter(r=>r.country===c.name).map(r=>proj([r.lon,r.lat]));
   if(regs.length>1 && (c.name==="Китай (Юньнань)"||c.name==="Индия"||c.name==="США (Гавайи)")) b=[[d3.min(regs,p=>p[0])-20,d3.min(regs,p=>p[1])-20],[d3.max(regs,p=>p[0])+20,d3.max(regs,p=>p[1])+20]];
   const [[x0,y0],[x1,y1]]=b, k=Math.min(14,.7/Math.max((x1-x0)/Wd,(y1-y0)/Hd));
-  svg.transition().duration(reduce?0:700).call(zoom.transform,d3.zoomIdentity.translate(Wd/2,Hd/2).scale(Math.max(1.5,k)).translate(-(x0+x1)/2,-(y0+y1)/2));
+  svg.transition().duration(reduce?0:1200).ease(EASE).call(zoom.transform,d3.zoomIdentity.translate(Wd/2,Hd/2).scale(Math.max(1.5,k)).translate(-(x0+x1)/2,-(y0+y1)/2));
 }
 
 /* ---------- подсказка ---------- */
@@ -412,7 +492,7 @@ function tip(e,html){tipEl.innerHTML=html; tipEl.style.opacity=1; moveTip(e)}
 function moveTip(e){const w=tipEl.offsetWidth,h=tipEl.offsetHeight; let x=e.clientX+14,y=e.clientY+14;
   if(x+w>innerWidth-8) x=e.clientX-w-14; if(y+h>innerHeight-8) y=e.clientY-h-14; tipEl.style.left=Math.max(8,x)+"px"; tipEl.style.top=Math.max(8,y)+"px"}
 function hideTip(){tipEl.style.opacity=0}
-svg.on("click.bg",e=>{if(!e.target.classList.contains("trader")) arcs.selectAll("*").remove(); if(e.target.classList.contains("sphere")) hideTip();});
+svg.on("click.bg",e=>{if(!e.target.classList.contains("trader")&&!e.target.classList.contains("lot")) arcs.selectAll("*").remove(); if(e.target.classList.contains("sphere")) hideTip();});
 
 /* ---------- досье ---------- */
 function yearStrip(c){return `<div class="yr">${MON.map((m,i)=>{const p=phaseOf(c,i+1);return `<span class="${p}${i+1===month?" now":""}" title="${MONFULL[i]}: ${PH[p]}">${m[0]}</span>`}).join("")}</div>`}
@@ -431,6 +511,50 @@ function futureSpec(c,h){
   const f=1+pass*(mid/base.now-1)+0.05*c.outlook[h-1];
   return [s[0]*f,s[1]*f];
 }
+function buyNow(){
+  const next=month%12+1;
+  const list=C.filter(c=>c.arrival.includes(month)||c.arrival.includes(next)).sort((a,b)=>specMid(a)-specMid(b));
+  if(!list.length) return "";
+  return `<div class="block"><div class="eyebrow">Что покупать сейчас: свежий урожай в Европе в ${MON[month-1]}–${MON[next-1]}</div>
+    <div class="buy">${list.map(c=>`<div><span>${esc(c.name)}</span><span class="num">${rng(c.green.spec)} €</span><span class="tag" style="background:${AG[c.agtron_best][1]};color:#fff;border-color:transparent">${c.agtron_best} ${AG[c.agtron_best][0]}</span></div>`).join("")}</div>
+    <p class="muted" style="margin:0;font-size:12px">Specialty €/кг со склада в ЕС и цвет suroast, на который страна ложится лучше всего.</p></div>`;
+}
+function lotAgeMonths(l){if(!l.arrived) return null; const [y,m]=l.arrived.split("-").map(Number), n=new Date(); return (n.getFullYear()-y)*12+(n.getMonth()+1-m);}
+function myLotsSummary(){
+  if(!LOTS.length) return "";
+  const by=d3.rollup(LOTS,v=>v.length,d=>d.status), roasted=LOTS.filter(l=>l.roasted), old=LOTS.filter(l=>l.status!=="Закончился"&&lotAgeMonths(l)>12);
+  const perAg=AGS.map(a=>[a,LOTS.filter(l=>l.best===a&&l.status!=="Закончился").length]);
+  return `<div class="block"><div class="eyebrow">Мои лоты (Coffee Miners)</div>
+    <dl class="kv"><dt>Всего</dt><dd>${LOTS.length}: ${[...by].map(([k,v])=>`${esc(k.toLowerCase())} ${v}`).join(", ")}</dd>
+    <dt>Жарили</dt><dd>${roasted.map(l=>esc(l.name)).join(", ")||"пока нет"}</dd>
+    <dt>По цветам</dt><dd><div class="chips">${perAg.map(([a,n])=>`<span class="chip" style="border-color:${AG[a][1]}">${a} ${AG[a][0]}: <b>${n}</b></span>`).join("")}</div></dd>
+    <dt>Старые</dt><dd>${old.length?`${old.length} лотов приехали больше года назад: ${old.slice(0,6).map(l=>esc(l.name.replace(/^\w+ /,""))).join(", ")}${old.length>6?"…":""}. Проверьте влажность и жарьте на тон темнее.`:"нет"}</dd></dl></div>`;
+}
+function altProfile(c){
+  const regs=O.regions.filter(r=>r.country===c.name).map(r=>({name:r.name,min:altMin(r.alt),max:altMax(r.alt)})).sort((a,b)=>b.max-a.max);
+  const L=lotsOf(c.name); if(!regs.length) return "";
+  const w=360,h=170,m={l:34,r:6,t:8,b:8}, top=Math.max(2600,d3.max(regs,r=>r.max)+100);
+  const y=d3.scaleLinear().domain([0,top]).range([h-m.b,m.t]), x=d3.scaleBand().domain(regs.map(r=>r.name)).range([m.l,w-m.r]).padding(.25);
+  const mount=d3.area().curve(d3.curveCatmullRom).x(r=>x(r.name)+x.bandwidth()/2).y0(h-m.b).y1(r=>y(r.max))(regs);
+  let o=`<svg class="altsvg" viewBox="0 0 ${w} ${h}" role="img" aria-label="Высоты регионов">`;
+  [500,1000,1500,2000,2500].filter(v=>v<top).forEach(v=>o+=`<line x1="${m.l}" x2="${w-m.r}" y1="${y(v)}" y2="${y(v)}" stroke="${css("--line")}"/><text x="${m.l-4}" y="${y(v)+3}" text-anchor="end">${v}</text>`);
+  o+=`<path d="${mount}" fill="${TERR(1900)}" opacity=".18"/>`;
+  regs.forEach(r=>{o+=`<rect x="${x(r.name)}" y="${y(r.max)}" width="${x.bandwidth()}" height="${Math.max(2,y(r.min)-y(r.max))}" rx="2" fill="${TERR((r.min+r.max)/2)}"><title>${esc(r.name)}: ${r.min}–${r.max} м</title></rect>`});
+  L.forEach(l=>{const mid=(l.alt[0]+l.alt[1])/2; o+=`<circle cx="${m.l+6}" cy="${y(mid)}" r="3.5" fill="${AG[l.best]?AG[l.best][1]:css("--ink")}" stroke="${css("--surface")}"><title>${esc(l.name)}: ${l.alt[0]}–${l.alt[1]} м</title></circle>`});
+  o+=`</svg>`;
+  return `<div class="block"><div class="eyebrow">Высоты регионов, м${L.length?" · точки слева — ваши лоты":""}</div>${o}
+    <div class="muted" style="font-size:12px">${regs.slice(0,6).map(r=>`${esc(r.name)} ${r.min}–${r.max}`).join(" · ")}</div></div>`;
+}
+function lotsBlock(c){
+  const L=lotsOf(c.name); if(!L.length) return "";
+  return `<div class="block"><div class="eyebrow">Мои лоты отсюда (${L.length})</div><div class="lotlist">${L.map(l=>`<div class="lotrow"><i style="background:${AG[l.best]?AG[l.best][1]:css("--ink")}"></i>
+    <div><b>${esc(l.name)}</b><small>${esc(l.region)} · ${l.alt[0]}${l.alt[1]!==l.alt[0]?"–"+l.alt[1]:""} м · ${esc(l.process)} · урожай ${l.harvest}</small><small>${esc(l.why)}</small>${l.roasted?`<small style="color:var(--harvest)">Жарили: ${esc(l.roasted)}</small>`:""}</div>
+    <div style="display:grid;gap:4px;justify-items:end"><span class="tag">${esc(l.status)}</span><span class="tag" style="background:${AG[l.best][1]};color:#fff;border-color:transparent">${l.best}</span>${l.roasted?`<span class="tag roast">жарили</span>`:""}</div></div>`).join("")}</div></div>`;
+}
+function agBlock(c){
+  return `<div class="block"><div class="eyebrow">Цвет suroast</div><div class="chips">${AGS.map(a=>{const best=c.agtron_best===a, good=c.agtron_good.includes(a);
+    return `<span class="chip" style="${best?`background:${AG[a][1]};color:#fff;border-color:transparent`:good?`border-color:${AG[a][1]}`:"opacity:.45"}">${a} ${AG[a][0]}${best?" · лучший":""}</span>`}).join("")}</div></div>`;
+}
 function showDossier(c){
   const el=document.getElementById("dossier");
   if(!c){
@@ -440,7 +564,8 @@ function showDossier(c){
       <dt>Свежее в Европе</dt><dd>${esc(fresh.join(", ")||"нет")}</dd>
       <dt>Биржа сейчас</dt><dd class="num">арабика ${num(kcEur(F.kc.now),2)} €/кг · робуста ${num(rcEur(F.rc.now),2)} €/кг</dd>
       <dt>В базе</dt><dd>${C.length} стран, ${O.regions.length} регионов, ${O.traders.length} импортёров и экспортёров</dd></dl>
-      <p class="muted" style="margin:0;font-size:13px">Наведите на страну, регион или ромб импортёра. Клик закрепляет досье и приближает страну, при приближении видны названия регионов.</p></div>`;
+      <p class="muted" style="margin:0;font-size:13px">Наведите на страну, регион, лот или ромб импортёра. Клик закрепляет досье и приближает страну, при приближении видны названия регионов и высоты.</p></div>
+      ${buyNow()}${myLotsSummary()}`;
     return;
   }
   const p=phaseOf(c,month), tr=tradersOf(c.name), regs=O.regions.filter(r=>r.country===c.name);
@@ -461,6 +586,7 @@ function showDossier(c){
       <div class="eyebrow" style="margin-top:6px">Specialty через 1, 2, 3 года (базовый сценарий)</div>
       <div class="ol">${[1,2,3].map(h=>`<div><span class="muted">${F.horizons[h].split(" (")[0]}</span><strong>${rng(futureSpec(c,h))} €</strong><span style="color:${c.outlook[h-1]>0?"var(--r3)":c.outlook[h-1]<0?"var(--arrive)":"var(--muted)"}">${olText(c.outlook[h-1])}</span></div>`).join("")}</div>
       <p class="muted" style="margin:0;font-size:12px">${esc(c.outlook_note)}. Климат к 2050: ${esc(c.climate_note)}.</p></div>
+    ${agBlock(c)}${lotsBlock(c)}${altProfile(c)}
     <div class="block"><div class="eyebrow">Обработки, доля экспорта (оценка)</div>${procMix(c)}<div style="font-size:13px">${esc(c.process)}</div></div>
     <div class="block"><div class="eyebrow">Проблемы</div><ul class="risks">${c.risks.map(r=>`<li><b>${esc(r.cat)}</b><span>${esc(r.text)}</span></li>`).join("")}
       ${regs.filter(r=>r.issue).map(r=>`<li><b>регион</b><span>${esc(r.name)}: ${esc(r.issue)}</span></li>`).join("")}</ul></div>
@@ -528,17 +654,25 @@ document.getElementById("fcnote").textContent=F.note+` Пересчёт в ев�
 d3.select("#mstrip").selectAll("button").data(MON).join("button").attr("type","button").text(d=>d)
   .on("click",(e,d)=>{month=MON.indexOf(d)+1; setPlay(false); paint()});
 const playBtn=document.getElementById("play");
+const prog=document.getElementById("mprog");
+function runProg(){if(reduce) return; prog.style.transition="none"; prog.style.width="0"; void prog.offsetWidth; prog.style.transition=`width ${STEP}ms linear`; prog.style.width="100%";}
 function setPlay(v){playing=v; playBtn.textContent=v?"❚❚":"▶"; playBtn.setAttribute("aria-label",v?"Пауза":"Проиграть год");
-  clearInterval(timer); if(v) timer=setInterval(()=>{month=month%12+1; paint()},1500)}
+  clearInterval(timer); prog.style.transition="none"; prog.style.width="0";
+  if(v){runProg(); timer=setInterval(()=>{month=month%12+1; paint(); runProg()},STEP)}}
 playBtn.onclick=()=>setPlay(!playing);
 d3.select("#procsel").selectAll("button").data(Object.keys(PROC)).join("button").attr("type","button").text(k=>PROC[k][0])
   .on("click",(e,k)=>{proc=k; d3.selectAll("#procsel button").attr("aria-pressed",d=>String(d===proc)); paint()});
 d3.selectAll("#procsel button").attr("aria-pressed",d=>String(d===proc));
+d3.select("#agsel").selectAll("button").data(AGS).join("button").attr("type","button").html(a=>`<i style="background:${AG[a][1]}"></i>${a} ${AG[a][0]}`)
+  .on("click",(e,a)=>{ag=a; d3.selectAll("#agsel button").attr("aria-pressed",d=>String(d===ag)); paint()});
+d3.selectAll("#agsel button").attr("aria-pressed",d=>String(d===ag));
 function setLayer(l){layer=l; d3.selectAll("#layers button").attr("aria-pressed",function(){return String(this.dataset.layer===l)});
-  document.getElementById("sub-season").hidden=l!=="season"; document.getElementById("sub-process").hidden=l!=="process"; document.getElementById("sub-forecast").hidden=l!=="forecast";
+  document.getElementById("sub-season").hidden=l!=="season"; document.getElementById("sub-process").hidden=l!=="process"; document.getElementById("sub-forecast").hidden=l!=="forecast"; document.getElementById("sub-agtron").hidden=l!=="agtron";
   if(l!=="season") setPlay(false); if(l==="forecast"&&hor===0){hor=1; renderForecast();} paint()}
 d3.selectAll("#layers button").on("click",function(){setLayer(this.dataset.layer)});
 document.getElementById("tg-regions").onchange=e=>{regionG.attr("display",e.target.checked?null:"none"); labels.attr("display",e.target.checked&&curK>=2.6?null:"none")};
+document.getElementById("tg-lots").onchange=e=>{lotG.attr("display",e.target.checked?null:"none"); legend()};
+document.getElementById("tg-alt").onchange=()=>paint(false);
 document.getElementById("tg-traders").onchange=e=>{traderG.attr("display",e.target.checked?null:"none"); arcs.selectAll("*").remove(); legend()};
 
 /* ---------- рынок ---------- */

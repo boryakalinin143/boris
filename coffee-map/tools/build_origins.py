@@ -5,7 +5,7 @@
 """
 import csv, json, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from extra_data import PROC, RISKS, CLIMATE, OUTLOOK, MORE_REGIONS, REGION_ISSUES, MORE_TRADERS, FORECAST, GREEN
+from extra_data import PROC, RISKS, CLIMATE, OUTLOOK, MORE_REGIONS, REGION_ISSUES, MORE_TRADERS, FORECAST, GREEN, AGTRON, LOT_COORDS, ROASTED
 
 LIB = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/mnt/project-files/coffee-library")
 OUT = pathlib.Path(__file__).resolve().parent.parent / "data" / "origins.json"
@@ -227,7 +227,7 @@ def main():
             climate=CLIMATE.get(name, (0, "Нет оценки в источниках, считаем нейтральным"))[0],
             climate_note=CLIMATE.get(name, (0, "Нет оценки в источниках, считаем нейтральным"))[1],
             outlook=OUTLOOK.get(name, ([0, 0, 0], ""))[0], outlook_note=OUTLOOK.get(name, ([0, 0, 0], "Без особых факторов, следует за биржей"))[1] or "Без особых факторов, следует за биржей",
-            green=GREEN[name],
+            green=GREEN[name], agtron_best=AGTRON[name][0], agtron_good=AGTRON[name][1],
         ))
         assert sum(PROC[name].values()) == 100, name
     names = {c["name"] for c in countries}
@@ -239,12 +239,31 @@ def main():
         assert not missing, (t["name"], missing)
     for g in regions:
         assert g["country"] in names, g
+    lots = []
+    try:
+        import openpyxl
+        wb = openpyxl.load_workbook(LIB.parent / "coffee-miners/coffee_miners_lots.xlsx", data_only=True, read_only=True)
+        summ = {r[0]: r for r in list(wb["Сводка"].iter_rows(values_only=True))[1:] if r[0]}
+        for r in list(wb["Лоты (импорт)"].iter_rows(values_only=True))[1:]:
+            if not r[0]:
+                continue
+            sm = summ.get(r[0])
+            lat, lon = LOT_COORDS[r[0]]
+            assert r[3] in names, r[3]
+            lots.append(dict(id=r[0], name=r[1], status=r[2], country=r[3], region=r[4], farm=r[5], producer=r[6],
+                variety=r[7], process=r[8], process_detail=r[9] or "", harvest=r[10],
+                arrived=r[11].strftime("%Y-%m") if r[11] else None, alt=[r[12], r[13]], importer=r[14],
+                best=sm[9] if sm else None, also=str(sm[10]) if sm and sm[10] else "", why=sm[11] if sm else "",
+                hardness=sm[8] if sm else "", warn=sm[13] if sm and sm[13] else "",
+                roasted=ROASTED.get(r[0], ""), lat=lat, lon=lon))
+    except FileNotFoundError:
+        print("нет coffee_miners_lots.xlsx, лоты пропущены")
     data = dict(
         built="2026-11-03",
-        sources=["coffee-library/origins/origins.csv", "coffee-library/varieties/varieties.csv",
+        sources=["coffee-library/origins/origins.csv", "coffee-library/varieties/varieties.csv", "coffee-miners/coffee_miners_lots.xlsx (лоты)", "coffee-library/lineup/omni-lineup-65-115.md (цвета)",
                  "USDA FAS Coffee: World Markets and Trade, июнь 2026", "Conab, 24.09.2026", "Rabobank 2026 (климат)", "Bunn et al. 2015", "Всемирный банк, BMI, Reuters (прогнозы цен)",
                  "сайты импортёров (список трейдеров, проверить перед закупкой)"],
-        countries=countries, regions=regions, traders=TRADERS, forecast=FORECAST,
+        countries=countries, regions=regions, traders=TRADERS, forecast=FORECAST, lots=lots,
     )
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     print(len(countries), "стран,", len(regions), "регионов,", len(TRADERS), "трейдеров ->", OUT)

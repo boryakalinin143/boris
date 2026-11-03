@@ -3,6 +3,8 @@
  "sources": [
   "coffee-library/origins/origins.csv",
   "coffee-library/varieties/varieties.csv",
+  "coffee-miners/coffee_miners_lots.xlsx (лоты)",
+  "coffee-library/lineup/omni-lineup-65-115.md (цвета)",
   "USDA FAS Coffee: World Markets and Trade, июнь 2026",
   "Conab, 24.09.2026",
   "Rabobank 2026 (климат)",
@@ -104,7 +106,12 @@
      14,
      25
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95,
+    115
+   ]
   },
   {
    "name": "Кения",
@@ -218,7 +225,12 @@
      18,
      30
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95,
+    115
+   ]
   },
   {
    "name": "Руанда",
@@ -315,7 +327,12 @@
      13,
      18
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95,
+    115
+   ]
   },
   {
    "name": "Бурунди",
@@ -411,7 +428,11 @@
      13,
      18
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95
+   ]
   },
   {
    "name": "Уганда",
@@ -522,7 +543,13 @@
      11,
      15
     ]
-   }
+   },
+   "agtron_best": 75,
+   "agtron_good": [
+    65,
+    85,
+    95
+   ]
   },
   {
    "name": "Танзания",
@@ -606,7 +633,12 @@
      12.5,
      17
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "ДР Конго",
@@ -680,7 +712,12 @@
      12.5,
      16
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "Малави",
@@ -756,7 +793,12 @@
      12,
      18
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "Замбия",
@@ -826,7 +868,12 @@
      11,
      14
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Зимбабве",
@@ -900,7 +947,12 @@
      12,
      15
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Йемен",
@@ -987,7 +1039,12 @@
      45,
      90
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Индонезия",
@@ -1110,7 +1167,12 @@
      12,
      18
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Папуа — Новая Гвинея",
@@ -1195,7 +1257,12 @@
      11.5,
      16
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Индия",
@@ -1289,7 +1356,11 @@
      8.5,
      11
     ]
-   }
+   },
+   "agtron_best": 65,
+   "agtron_good": [
+    75
+   ]
   },
   {
    "name": "Китай (Юньнань)",
@@ -1366,7 +1437,11 @@
      11,
      16
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75
+   ]
   },
   {
    "name": "Таиланд",
@@ -1442,7 +1517,12 @@
      12,
      18
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Мьянма",
@@ -1519,7 +1599,12 @@
      11,
      15
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Вьетнам",
@@ -1606,7 +1691,11 @@
      8,
      11
     ]
-   }
+   },
+   "agtron_best": 65,
+   "agtron_good": [
+    75
+   ]
   },
   {
    "name": "Тайвань",
@@ -1675,7 +1764,12 @@
      35,
      80
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95,
+    115
+   ]
   },
   {
    "name": "Колумбия",
@@ -1827,7 +1921,13 @@
      13,
      25
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95,
+    115
+   ]
   },
   {
    "name": "Бразилия",
@@ -1964,7 +2064,12 @@
      3.6,
      4.4
     ]
-   }
+   },
+   "agtron_best": 65,
+   "agtron_good": [
+    75,
+    85
+   ]
   },
   {
    "name": "Перу",
@@ -2065,7 +2170,12 @@
      12,
      20
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "Боливия",
@@ -2157,7 +2267,12 @@
      15,
      30
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "Эквадор",
@@ -2250,7 +2365,12 @@
      16,
      40
     ]
-   }
+   },
+   "agtron_best": 105,
+   "agtron_good": [
+    95,
+    115
+   ]
   },
   {
    "name": "Гватемала",
@@ -2395,7 +2515,12 @@
      13,
      20
     ]
-   }
+   },
+   "agtron_best": 75,
+   "agtron_good": [
+    85,
+    95
+   ]
   },
   {
    "name": "Гондурас",
@@ -2537,7 +2662,12 @@
      12,
      20
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Сальвадор",
@@ -2682,7 +2812,12 @@
      13,
      22
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Никарагуа",
@@ -2819,7 +2954,12 @@
      12,
      18
     ]
-   }
+   },
+   "agtron_best": 75,
+   "agtron_good": [
+    65,
+    85
+   ]
   },
   {
    "name": "Коста-Рика",
@@ -2952,7 +3092,12 @@
      14,
      25
     ]
-   }
+   },
+   "agtron_best": 95,
+   "agtron_good": [
+    85,
+    105
+   ]
   },
   {
    "name": "Панама",
@@ -3081,7 +3226,12 @@
      25,
      150
     ]
-   }
+   },
+   "agtron_best": 115,
+   "agtron_good": [
+    95,
+    105
+   ]
   },
   {
    "name": "Мексика",
@@ -3170,7 +3320,12 @@
      12,
      18
     ]
-   }
+   },
+   "agtron_best": 75,
+   "agtron_good": [
+    65,
+    85
+   ]
   },
   {
    "name": "Ямайка",
@@ -3255,7 +3410,11 @@
      60,
      90
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75
+   ]
   },
   {
    "name": "США (Гавайи)",
@@ -3340,7 +3499,12 @@
      60,
      120
     ]
-   }
+   },
+   "agtron_best": 85,
+   "agtron_good": [
+    75,
+    95
+   ]
   },
   {
    "name": "Доминиканская Республика",
@@ -3421,7 +3585,12 @@
      13,
      18
     ]
-   }
+   },
+   "agtron_best": 75,
+   "agtron_good": [
+    65,
+    85
+   ]
   }
  ],
  "regions": [
@@ -5361,5 +5530,1141 @@
    "base": "Профицит постепенно сбивает цену, но El Niño и низкие запасы не дают упасть к уровням до 2021.",
    "bull": "El Niño или засуха бьют по цветению Бразилии 2027 и по Вьетнаму, повторяется сценарий 2024–2025."
   }
- }
+ },
+ "lots": [
+  {
+   "id": "BRA-2026-001",
+   "name": "Brazil Monteiro Lobato (Office Blend)",
+   "status": "В наличии",
+   "country": "Бразилия",
+   "region": "Rio Pardo",
+   "farm": "Fazenda Pinheiro",
+   "producer": "various small producers",
+   "variety": "Bourbon, Mundo Novo, Catuaí",
+   "process": "Натуральная",
+   "process_detail": "механизированный сбор",
+   "harvest": 2025,
+   "arrived": "2026-03",
+   "alt": [
+    900,
+    1000
+   ],
+   "importer": "Coffee Miners",
+   "best": 65,
+   "also": "75",
+   "why": "Мягкое низкогорное зерно с механизированным сбором: максимум на 65, где шоколад, табак и нуга. Светлее 75 зерну нечего показать.",
+   "hardness": "Мягкое",
+   "warn": "",
+   "roasted": "Ikawa 50 г: конец 231 °C → Agtron 64 (калибровка)",
+   "lat": -21.55,
+   "lon": -46.85
+  },
+  {
+   "id": "ETH-2026-001",
+   "name": "Ethiopia Kebena",
+   "status": "В наличии",
+   "country": "Эфиопия",
+   "region": "Jimma zone, Oromia",
+   "farm": "Kebena Estate",
+   "producer": "Haider Abamecha",
+   "variety": "JARC 74110, Heirloom",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2026,
+   "arrived": "2026-06",
+   "alt": [
+    1865,
+    2090
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95, 115",
+   "why": "Плотная мытая JARC 1900–2100 м: на 105 ягоды, липовый цвет и дикий мёд. На 115 ещё прозрачнее, на 95 больше мёда и тела.",
+   "hardness": "Очень твёрдое",
+   "warn": "В таблице стоит в колонке Dark Roast: темнее 85 зерно теряет ягоды и мёд.",
+   "roasted": "Ikawa: 233 °C → 33, 214 °C → 80, версия 3 → 60; цель 65 омни",
+   "lat": 7.8,
+   "lon": 36.62
+  },
+  {
+   "id": "BRA-2025-001",
+   "name": "Brazil Tamandua",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "Matas de Minas, Minas Gerais",
+   "farm": "Coocafé Cooperative",
+   "producer": "various small producers",
+   "variety": "Catuaí, Catucaí",
+   "process": "Натуральная",
+   "process_detail": "механизированный сбор",
+   "harvest": 2024,
+   "arrived": "2025-02",
+   "alt": [
+    700,
+    1000
+   ],
+   "importer": "Coffee Miners",
+   "best": 65,
+   "also": "75",
+   "why": "Мягкое старое зерно: ореховое масло и кленовый сироп раскрываются на 65.",
+   "hardness": "Мягкое",
+   "warn": "Урожай 2024, предложение было до лета 2025: проверь, остался ли лот.",
+   "roasted": "",
+   "lat": -20.4,
+   "lon": -42.1
+  },
+  {
+   "id": "ETH-2025-001",
+   "name": "Ethiopia Bensa",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Bensa, Sidama",
+   "farm": "Daye Bensa Station",
+   "producer": "various smallholders",
+   "variety": "Heirloom",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-05",
+   "alt": [
+    1900,
+    2200
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85, 105",
+   "why": "Плотная натуральная Сидама: на 95 ягоды и цветы с джемовой сладостью. На 85 какао и джем.",
+   "hardness": "Очень твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 6.58,
+   "lon": 38.72
+  },
+  {
+   "id": "COL-2025-001",
+   "name": "Colombia Reforest Project",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "North Tolima & West Caldas",
+   "farm": "Various",
+   "producer": "Various smallholders",
+   "variety": "Caturra, Colombia, Castillo",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-03",
+   "alt": [
+    1400,
+    1760
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Мытая 1400–1760 м средней плотности: на 95 красное яблоко, смородина и цедра. На 85 карамель.",
+   "hardness": "Твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 5.2,
+   "lon": -75.1
+  },
+  {
+   "id": "ETH-2025-002",
+   "name": "Ethiopia Mohammed Aba Nura",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Jimma, Oromia",
+   "farm": "—",
+   "producer": "Mohammed Aba Nura",
+   "variety": "Gibrinna 74110",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-09",
+   "alt": [
+    2000,
+    2100
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Очень плотная натуральная 74110 на 2000+ м с цветами и нектарином: на 105 цветы и чистота. На 95 больше карамели и шёлка.",
+   "hardness": "Очень твёрдое",
+   "warn": "Урожай в таблице март 2024 при поставке в сентябре 2025: похоже на неисправленную строку, уточни урожай.",
+   "roasted": "",
+   "lat": 7.92,
+   "lon": 36.72
+  },
+  {
+   "id": "BRA-2025-002",
+   "name": "Brazil Patrícia G. Mendonça",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "São Paulo (Mantiqueira)",
+   "farm": "Sítio Três Barras de Mantiqueira",
+   "producer": "Patrícia Guerra Mendonça",
+   "variety": "Obatã",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-03",
+   "alt": [
+    1200,
+    1200
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "75",
+   "why": "Obatã 1200 м, натуральная: на 85 марципан, груша и молочный шоколад. На 75 dulce de leche и миндальный крем.",
+   "hardness": "Мягкое",
+   "warn": "Урожай 2024: проверь остаток.",
+   "roasted": "",
+   "lat": -22.6,
+   "lon": -45.6
+  },
+  {
+   "id": "COL-2025-002",
+   "name": "Colombia Huver Castillo",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "Nariño",
+   "farm": "El Paseo",
+   "producer": "Huver Castillo",
+   "variety": "Caturra",
+   "process": "Анаэробная мытая",
+   "process_detail": "semi-washed, 60 ч анаэробной ферментации",
+   "harvest": 2024,
+   "arrived": "2025-03",
+   "alt": [
+    1800,
+    1800
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Плотная Caturra 1800 м с ферментацией: на 95 слива, красное вино и пряности. На 85 тёмный шоколад и глинтвейн.",
+   "hardness": "Твёрдое",
+   "warn": "Предложение было до июля 2025.",
+   "roasted": "",
+   "lat": 1.3,
+   "lon": -77.35
+  },
+  {
+   "id": "IDN-2025-001",
+   "name": "Indonesia Frinsa Borbor",
+   "status": "Образец",
+   "country": "Индонезия",
+   "region": "Weninggalih, West Java",
+   "farm": "Frinsa Estate",
+   "producer": "Wildan Mustofa",
+   "variety": "Borbor",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-12",
+   "alt": [
+    1400,
+    1400
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "95",
+   "why": "Средняя плотность, пряно-шоколадный профиль: на 85 карамель, мирабель и пахлава. На 95 травы и вишня.",
+   "hardness": "Среднее",
+   "warn": "",
+   "roasted": "",
+   "lat": -7.1,
+   "lon": 107.4
+  },
+  {
+   "id": "BDI-2026-001",
+   "name": "Burundi Heza",
+   "status": "Образец",
+   "country": "Бурунди",
+   "region": "Kayanza",
+   "farm": "Heza Station",
+   "producer": "various smallholders",
+   "variety": "Red Bourbon, Mibirizi",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2026-04",
+   "alt": [
+    1700,
+    2100
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Плотный Bourbon 1700–2100 м: на 105 цитрус, сосна и чай. На 95 тёмная вишня, нуга и сиропность.",
+   "hardness": "Очень твёрдое",
+   "warn": "Бурунди: при каппинге проверь «картофельный» дефект.",
+   "roasted": "",
+   "lat": -2.88,
+   "lon": 29.58
+  },
+  {
+   "id": "SLV-2026-001",
+   "name": "El Salvador Finca Guanacaste",
+   "status": "В наличии",
+   "country": "Сальвадор",
+   "region": "Cerro Santa Lucía, Santa Ana",
+   "farm": "Finca Guanacaste",
+   "producer": "Rodolfo Ruffatti Batlle",
+   "variety": "Hybrid, Red Bourbon",
+   "process": "Натуральная",
+   "process_detail": "72 ч ферментации",
+   "harvest": 2026,
+   "arrived": "2026-07",
+   "alt": [
+    1000,
+    1000
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "75, 95",
+   "why": "Натуральная с ферментацией на 1000 м: на 85 инжир, сливовый джем и ликёрность. На 75 dulce de leche, на 95 больше ягодной кислотности.",
+   "hardness": "Мягкое",
+   "warn": "Это текущее предложение (сентябрь–ноябрь).",
+   "roasted": "",
+   "lat": 13.98,
+   "lon": -89.6
+  },
+  {
+   "id": "COL-2026-001",
+   "name": "Colombia Condor (декаф)",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "Tolima",
+   "farm": "El Vergel",
+   "producer": "Elias and Shady Bayter",
+   "variety": "Caturra",
+   "process": "Натуральная",
+   "process_detail": "декаф сахарным тростником (EA)",
+   "harvest": null,
+   "arrived": null,
+   "alt": [
+    1500,
+    1500
+   ],
+   "importer": "Coffee Miners",
+   "best": 75,
+   "also": "65",
+   "why": "Декаф: пористое зерно темнеет быстро и на светлых цветах бумажное. На 75 апельсин и шоколадная паста, на 65 какао.",
+   "hardness": "Среднее",
+   "warn": "Декаф выглядит темнее, чем он есть: Agtron мерь только молотым, как договорились.",
+   "roasted": "",
+   "lat": 4.0,
+   "lon": -75.2
+  },
+  {
+   "id": "PER-2025-001",
+   "name": "Peru Don Carlos Vega",
+   "status": "Образец",
+   "country": "Перу",
+   "region": "Cutervo, Cajamarca",
+   "farm": "La Guayaba",
+   "producer": "Don Carlos Vega",
+   "variety": "Caturra (Y/R), Typica, Pache",
+   "process": "Мытая",
+   "process_detail": "2 дня отлёжки в ягоде, 70 ч ферментации",
+   "harvest": 2024,
+   "arrived": "2025-02",
+   "alt": [
+    1700,
+    1700
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Мытая 1700 м с длинной ферментацией: на 105 гибискус, помело и розовый грейпфрут. На 95 ежевика и дыня.",
+   "hardness": "Твёрдое",
+   "warn": "Повторный тест 18.2.2026 при урожае 2024: проверь, не новый ли урожай.",
+   "roasted": "",
+   "lat": -6.38,
+   "lon": -78.82
+  },
+  {
+   "id": "RWA-2026-001",
+   "name": "Rwanda Rugamba",
+   "status": "Образец",
+   "country": "Руанда",
+   "region": "Rutsiro, Western Province",
+   "farm": "Rugamba Station",
+   "producer": "various smallholders",
+   "variety": "Red Bourbon",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2026-04",
+   "alt": [
+    1520,
+    1520
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Bourbon 1520 м: на 105 роза, шиповник и засахаренный лимон. На 95 клюква и мёд.",
+   "hardness": "Твёрдое",
+   "warn": "Руанда: при каппинге проверь «картофельный» дефект.",
+   "roasted": "",
+   "lat": -1.95,
+   "lon": 29.35
+  },
+  {
+   "id": "ETH-2026-002",
+   "name": "Ethiopia Kello Siko #3",
+   "status": "В наличии",
+   "country": "Эфиопия",
+   "region": "Siko, Uraga, Guji",
+   "farm": "Siko Station",
+   "producer": "~500 smallholders",
+   "variety": "Heirloom",
+   "process": "Мытая",
+   "process_detail": "мокрая ферментация 24–72 ч",
+   "harvest": 2026,
+   "arrived": "2026-06",
+   "alt": [
+    2100,
+    2250
+   ],
+   "importer": "Coffee Miners",
+   "best": 115,
+   "also": "105",
+   "why": "Очень плотная мытая Гуджи 2100–2250 м на 88 баллов: на 115 одуванчик, абрикос и василёк, максимум терруара. На 105 больше мёда.",
+   "hardness": "Очень твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 6.05,
+   "lon": 38.65
+  },
+  {
+   "id": "ETH-2026-003",
+   "name": "Ethiopia Shoondhisa",
+   "status": "В наличии",
+   "country": "Эфиопия",
+   "region": "Guji, Oromia",
+   "farm": "Sookoo Station",
+   "producer": "Ture Waji + smallholders",
+   "variety": "Heirloom",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2026,
+   "arrived": "2026-08",
+   "alt": [
+    2000,
+    2200
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Плотная цветочная натуральная Гуджи: на 105 магнолия, фиалка и персик. На 95 клубника и мангостин.",
+   "hardness": "Очень твёрдое",
+   "warn": "Высота не указана, взял 2000–2200 м как у станции Suke/Sookoo. Это текущий лот (октябрь–январь).",
+   "roasted": "",
+   "lat": 5.92,
+   "lon": 39.02
+  },
+  {
+   "id": "HND-2024-001",
+   "name": "Honduras Darwin Flores",
+   "status": "Образец",
+   "country": "Гондурас",
+   "region": "Pozo Negro, Masaguara, Intibucá",
+   "farm": "El Roble",
+   "producer": "Darwin Flores",
+   "variety": "Catuaí",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2024-08",
+   "alt": [
+    1700,
+    1700
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Catuaí 1700 м, урожай 2024: на 95 яблоко, белое вино и ромашка. Светлее старое зерно звучит бумажно.",
+   "hardness": "Твёрдое",
+   "warn": "Урожай 2024: зерно старое, проверь остаток и влажность.",
+   "roasted": "",
+   "lat": 14.35,
+   "lon": -88.15
+  },
+  {
+   "id": "ETH-2025-003",
+   "name": "Ethiopia Kello Wete Konga #1",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Yirgacheffe",
+   "farm": "Wete Konga Station",
+   "producer": "various smallholders",
+   "variety": "Heirloom",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-08",
+   "alt": [
+    2050,
+    2200
+   ],
+   "importer": "Coffee Miners",
+   "best": 115,
+   "also": "105",
+   "why": "Очень плотная мытая Иргачеффе: на 115 белые цветы, малина и ревень. На 105 появляется слива и карамель.",
+   "hardness": "Очень твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 6.15,
+   "lon": 38.22
+  },
+  {
+   "id": "RWA-2026-002",
+   "name": "Rwanda Gitesi",
+   "status": "Образец",
+   "country": "Руанда",
+   "region": "Karongi, Western Province",
+   "farm": "Gitesi Station",
+   "producer": "various smallholders",
+   "variety": "Red Bourbon",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2026-01",
+   "alt": [
+    1750,
+    2000
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "115, 95",
+   "why": "Плотный Bourbon 1750–2000 м: на 105 фруктовый чай, шиповник и цукаты лимона. На 95 инжир и молочный шоколад.",
+   "hardness": "Твёрдое",
+   "warn": "Руанда: проверь «картофельный» дефект.",
+   "roasted": "",
+   "lat": -2.07,
+   "lon": 29.4
+  },
+  {
+   "id": "BDI-2026-002",
+   "name": "Burundi Bukeye",
+   "status": "Образец",
+   "country": "Бурунди",
+   "region": "Kayanza",
+   "farm": "—",
+   "producer": "various smallholders",
+   "variety": "Red Bourbon, Mibirizi",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2026-03",
+   "alt": [
+    1700,
+    2100
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Плотный Bourbon: на 105 помело, роза и лимонный курд. На 95 savory уходит в мёд.",
+   "hardness": "Очень твёрдое",
+   "warn": "Урожай не указан, оценил как середину 2025.",
+   "roasted": "",
+   "lat": -2.96,
+   "lon": 29.68
+  },
+  {
+   "id": "KEN-2026-001",
+   "name": "Kenya Gititu AB #007",
+   "status": "В наличии",
+   "country": "Кения",
+   "region": "Nyeri, Central Kenya",
+   "farm": "Gititu Station",
+   "producer": "various smallholders",
+   "variety": "SL28, SL34, Ruiru 11, Batian",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2026,
+   "arrived": "2026-07",
+   "alt": [
+    1400,
+    1600
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "115",
+   "why": "Кения SL на 88 баллов: на 105 ревень, смородина и лаймовый лимонад. На 115 ещё ярче и чайнее.",
+   "hardness": "Твёрдое",
+   "warn": "Текущий лот (август–октябрь).",
+   "roasted": "",
+   "lat": -0.42,
+   "lon": 36.95
+  },
+  {
+   "id": "PER-2024-001",
+   "name": "Peru Coronados & Santa Cruz",
+   "status": "Образец",
+   "country": "Перу",
+   "region": "Cutervo & Jaén, Cajamarca",
+   "farm": "—",
+   "producer": "Coronados & Santa Cruz family",
+   "variety": "Caturra (R/Y), Bourbon, Typica",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2023,
+   "arrived": "2024-02",
+   "alt": [
+    1800,
+    2000
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "95",
+   "why": "Высокогорная, но урожай 2023 и зерно высохло: на 85 слива, панела и какао.",
+   "hardness": "Твёрдое",
+   "warn": "Урожай 2023: очень старое зерно.",
+   "roasted": "",
+   "lat": -5.95,
+   "lon": -78.85
+  },
+  {
+   "id": "ETH-2024-001",
+   "name": "Ethiopia Biftu Gudina #7 organic",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Agaro, Jimma",
+   "farm": "Biftu Gudina Station",
+   "producer": "572+ smallholders",
+   "variety": "Heirloom",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2024-12",
+   "alt": [
+    1914,
+    1914
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Плотная мытая Эфиопия: на 105 жимолость, помело и бархатцы. На 95 персик и карамель, это вариант для старого зерна.",
+   "hardness": "Твёрдое",
+   "warn": "Урожай 2024: проверь остаток.",
+   "roasted": "",
+   "lat": 7.85,
+   "lon": 36.55
+  },
+  {
+   "id": "KEN-2025-001",
+   "name": "Kenya Kamacharia Wahundura AA #129",
+   "status": "Образец",
+   "country": "Кения",
+   "region": "Murang'a, Kiiraini",
+   "farm": "Wahundura Station",
+   "producer": "~1100 smallholders",
+   "variety": "SL28, SL34, Ruiru 11, Batian",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-06",
+   "alt": [
+    1600,
+    1800
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "115",
+   "why": "Кения AA на 88 баллов: на 105 ежевика, ревень и розовый перец. На 115 лайм и нектарин.",
+   "hardness": "Твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": -0.75,
+   "lon": 37.1
+  },
+  {
+   "id": "COL-2025-003",
+   "name": "Colombia Franco Alexis Garzón (Geisha)",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "Planadas, Tolima",
+   "farm": "Las Rosas",
+   "producer": "Franco Alexis Garzón",
+   "variety": "Geisha",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-09",
+   "alt": [
+    1800,
+    2000
+   ],
+   "importer": "Coffee Miners",
+   "best": 115,
+   "also": "105",
+   "why": "Мытая Гейша: на 115 белые цветы, флёрдоранж и белый виноград. На 105 хурма и карамель.",
+   "hardness": "Твёрдое",
+   "warn": "Высота не указана, взял 1800–2000 м (типично для Планадаса).",
+   "roasted": "",
+   "lat": 3.2,
+   "lon": -75.65
+  },
+  {
+   "id": "COL-2025-004",
+   "name": "Colombia Rocket Flower",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "Nariño",
+   "farm": "El Paseo",
+   "producer": "Huver Castillo",
+   "variety": "Caturra",
+   "process": "Ферментация с добавками",
+   "process_detail": "мытая, ферментация с mosto (сок ягод)",
+   "harvest": 2025,
+   "arrived": "2025-12",
+   "alt": [
+    1800,
+    1800
+   ],
+   "importer": "Coffee Miners",
+   "best": 115,
+   "also": "105",
+   "why": "Плотная Caturra 1800 м с mosto: на 115 жасмин, лемонграсс и сенча. На 105 белый персик.",
+   "hardness": "Твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 1.18,
+   "lon": -77.18
+  },
+  {
+   "id": "COL-2026-002",
+   "name": "Colombia Guava Banana",
+   "status": "В наличии",
+   "country": "Колумбия",
+   "region": "Fresno, Tolima",
+   "farm": "El Vergel Estate",
+   "producer": "Elias and Shady Bayter",
+   "variety": "Caturra (R/Y)",
+   "process": "Анаэробная натуральная",
+   "process_detail": "анаэробная натуральная 48–60 ч",
+   "harvest": 2025,
+   "arrived": "2026-06",
+   "alt": [
+    1350,
+    1350
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Анаэробная натуральная 1350 м: на 95 гуава, тамаринд и малина. На 85 какао и банан.",
+   "hardness": "Среднее",
+   "warn": "",
+   "roasted": "",
+   "lat": 5.15,
+   "lon": -75.04
+  },
+  {
+   "id": "CRI-2026-001",
+   "name": "Costa Rica Jacob Montero",
+   "status": "В наличии",
+   "country": "Коста-Рика",
+   "region": "San Marcos, Los Santos, Tarrazú",
+   "farm": "Finca Don Elí",
+   "producer": "Carlos and Jacob Montero",
+   "variety": "Catuaí, Heirloom",
+   "process": "Хани",
+   "process_detail": "Honey Reposado",
+   "harvest": 2026,
+   "arrived": "2026-09",
+   "alt": [
+    1800,
+    1800
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Хани 1800 м: на 95 панела, одуванчик и золотой киви. На 85 тоффи и какао.",
+   "hardness": "Твёрдое",
+   "warn": "Свежий лот (предложение ноябрь–январь): хорошая цель для первой пробы.",
+   "roasted": "",
+   "lat": 9.66,
+   "lon": -84.03
+  },
+  {
+   "id": "BRA-2024-001",
+   "name": "Brazil Claudineia Neves",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "Matas de Minas, Minas Gerais",
+   "farm": "Fazenda Neves Ramos",
+   "producer": "Claudineia Neves & Anilson F. Ramos",
+   "variety": "Catucaí 785",
+   "process": "Анаэробная натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2024-06",
+   "alt": [
+    850,
+    850
+   ],
+   "importer": "Coffee Miners",
+   "best": 75,
+   "also": "65, 85",
+   "why": "Мягкое анаэробное зерно 850 м, урожай 2023/24: на 75 папайя, шоколад и карамель.",
+   "hardness": "Мягкое",
+   "warn": "Урожай 2023/24: очень старое зерно.",
+   "roasted": "",
+   "lat": -20.25,
+   "lon": -42.25
+  },
+  {
+   "id": "BRA-2025-003",
+   "name": "Brazil Pieter Keijsers (peaberry)",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "Sul de Minas, Minas Gerais",
+   "farm": "Sítio Maracatu",
+   "producer": "Pieter Keijsers",
+   "variety": "Catiguá MG2 Peaberry",
+   "process": "Анаэробная натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-03",
+   "alt": [
+    1000,
+    1000
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "95",
+   "why": "Пиберри 1000 м: на 85 апельсин, тутти-фрутти и какао. На 95 цитрус ярче.",
+   "hardness": "Мягкое",
+   "warn": "Пиберри катается в Ikawa иначе: держи вентилятор чуть выше. Урожай 2024: проверь остаток.",
+   "roasted": "",
+   "lat": -21.7,
+   "lon": -45.3
+  },
+  {
+   "id": "ETH-2025-004",
+   "name": "Ethiopia Bookkisa",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Guji zone, Oromia",
+   "farm": "Bookkisa Washing Station",
+   "producer": "various smallholders",
+   "variety": "Ethiopian Heirloom",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-06",
+   "alt": [
+    2173,
+    2173
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Очень плотная натуральная 2173 м: на 105 роза и косточковые. На 95 тёмная вишня и джем.",
+   "hardness": "Очень твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 5.8,
+   "lon": 38.88
+  },
+  {
+   "id": "COL-2025-005",
+   "name": "Colombia Luis Anibal Calderón (Wild Caturrón, 2025)",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "San Agustín, Huila",
+   "farm": "Villa Betulia",
+   "producer": "Luis Anibal Calderón",
+   "variety": "Wild Caturrón",
+   "process": "Анаэробная натуральная",
+   "process_detail": "",
+   "harvest": 2025,
+   "arrived": "2025-12",
+   "alt": [
+    1600,
+    1600
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Анаэробная натуральная 1600 м: на 95 лонган и жёлтая дыня. На 85 пралине и ваниль.",
+   "hardness": "Твёрдое",
+   "warn": "",
+   "roasted": "",
+   "lat": 1.88,
+   "lon": -76.27
+  },
+  {
+   "id": "ETH-2024-002",
+   "name": "Ethiopia Diima Danche #8 organic",
+   "status": "Образец",
+   "country": "Эфиопия",
+   "region": "Gedeo, Yirgacheffe",
+   "farm": "Danche Station",
+   "producer": "~550 smallholders",
+   "variety": "Heirloom",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2024-09",
+   "alt": [
+    2000,
+    2300
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "95",
+   "why": "Очень плотная натуральная 2000–2300 м: на 105 магнолия, роза и ананас. На 95 тушёная клубника и милкшейк.",
+   "hardness": "Очень твёрдое",
+   "warn": "Урожай 2024: проверь остаток.",
+   "roasted": "",
+   "lat": 6.0,
+   "lon": 38.3
+  },
+  {
+   "id": "IDN-2025-002",
+   "name": "Indonesia Frinsa Manis #5",
+   "status": "Образец",
+   "country": "Индонезия",
+   "region": "Weninggalih, West Java",
+   "farm": "Frinsa Estate",
+   "producer": "Wildan & Atieq Mustofa",
+   "variety": "Ateng Super, P88, Borbor, Andungsari, Sigarar Utang, S795",
+   "process": "Анаэробная натуральная",
+   "process_detail": "натуральная с лактобактериями, 2–3 дня анаэробно",
+   "harvest": 2024,
+   "arrived": "2025-02",
+   "alt": [
+    1400,
+    1400
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "95",
+   "why": "Сильная ферментация, мягкое зерно: на 85 вишнёвая кола, чернослив и джем. На 95 ягоды и травы.",
+   "hardness": "Мягкое",
+   "warn": "Предложение было весной 2025.",
+   "roasted": "",
+   "lat": -7.15,
+   "lon": 107.5
+  },
+  {
+   "id": "BRA-2025-004",
+   "name": "Brazil Fazenda Sequoía",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "Chapada de Minas, Minas Gerais",
+   "farm": "Fazenda Sequoía",
+   "producer": "Lima Family",
+   "variety": "Red Catuaí",
+   "process": "Натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-07",
+   "alt": [
+    1150,
+    1150
+   ],
+   "importer": "Coffee Miners",
+   "best": 75,
+   "also": "65",
+   "why": "Мягкая натуральная 1150 м: на 75 молочный шоколад и жёлтая слива.",
+   "hardness": "Мягкое",
+   "warn": "",
+   "roasted": "",
+   "lat": -17.55,
+   "lon": -42.55
+  },
+  {
+   "id": "IDN-2026-001",
+   "name": "Indonesia Frinsa Manis (2025, 96 ч)",
+   "status": "Образец",
+   "country": "Индонезия",
+   "region": "West Java (Sindangkerta, Pangalengan, Garut)",
+   "farm": "Frinsa Estate",
+   "producer": "Wildan Mustofa",
+   "variety": "Ateng Super, P88, Borbor, Andungsari, Sigarar Utang, S795",
+   "process": "Натуральная",
+   "process_detail": "длинная ферментация 96 ч",
+   "harvest": 2025,
+   "arrived": "2026-01",
+   "alt": [
+    1400,
+    1400
+   ],
+   "importer": "Coffee Miners",
+   "best": 85,
+   "also": "95",
+   "why": "96 ч ферментации: на 85 смородиновый джем и малиновый шоколад. На 95 клюква и розовая вода.",
+   "hardness": "Среднее",
+   "warn": "",
+   "roasted": "",
+   "lat": -7.18,
+   "lon": 107.57
+  },
+  {
+   "id": "ETH-2024-003",
+   "name": "Ethiopia Sookoo (carbonic maceration)",
+   "status": "Закончился",
+   "country": "Эфиопия",
+   "region": "Shakiso, Guji",
+   "farm": "Suke Station",
+   "producer": "Ture Waji",
+   "variety": "Gibrinna 74110, Serto 74112",
+   "process": "Карбоническая мацерация",
+   "process_detail": "анаэробная натуральная + карбоническая мацерация",
+   "harvest": 2024,
+   "arrived": "2024-09",
+   "alt": [
+    2000,
+    2200
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "105",
+   "why": "Карбоническая мацерация на плотном зерне: на 95 сливовое вино, сирень и красный виноград.",
+   "hardness": "Очень твёрдое",
+   "warn": "В таблице «Done»: лот закончился, оставил для справки.",
+   "roasted": "",
+   "lat": 5.75,
+   "lon": 38.92
+  },
+  {
+   "id": "COL-2024-001",
+   "name": "Colombia Luis Anibal Calderón (Caturrón, 2024)",
+   "status": "Закончился",
+   "country": "Колумбия",
+   "region": "Huila",
+   "farm": "Villa Betulia",
+   "producer": "Luis Anibal Calderón",
+   "variety": "Caturrón",
+   "process": "Анаэробная натуральная",
+   "process_detail": "36 ч аэробно + 110 ч анаэробно, натуральная",
+   "harvest": 2024,
+   "arrived": "2024-11",
+   "alt": [
+    1600,
+    1600
+   ],
+   "importer": "Coffee Miners",
+   "best": 95,
+   "also": "85",
+   "why": "Долгая анаэробная ферментация: на 95 черимойя и ежевика. На 85 амаретто и молочный шоколад.",
+   "hardness": "Твёрдое",
+   "warn": "В таблице «Done»: лот закончился.",
+   "roasted": "",
+   "lat": 2.0,
+   "lon": -75.9
+  },
+  {
+   "id": "KEN-2025-002",
+   "name": "Kenya Ndimi Inoi AA #034",
+   "status": "Образец",
+   "country": "Кения",
+   "region": "Kirinyaga",
+   "farm": "Ndimi Inoi Factory",
+   "producer": "~540 smallholders",
+   "variety": "SL34, SL28, Ruiru 11, Batian",
+   "process": "Мытая",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-01",
+   "alt": [
+    1650,
+    1800
+   ],
+   "importer": "Coffee Miners",
+   "best": 105,
+   "also": "115",
+   "why": "Кения AA: на 105 смородина, гибискус и красный виноград. На 115 ещё сочнее.",
+   "hardness": "Твёрдое",
+   "warn": "Предложение было весной 2025.",
+   "roasted": "",
+   "lat": -0.5,
+   "lon": 37.3
+  },
+  {
+   "id": "BRA-2025-005",
+   "name": "Brazil Anilson & Claudineia (Catucaí Vermelho)",
+   "status": "Образец",
+   "country": "Бразилия",
+   "region": "Matas de Minas, Minas Gerais",
+   "farm": "Fazenda Neves Ramos",
+   "producer": "Claudineia Neves & Anilson F. Ramos",
+   "variety": "Catucaí Vermelho",
+   "process": "Анаэробная натуральная",
+   "process_detail": "",
+   "harvest": 2024,
+   "arrived": "2025-03",
+   "alt": [
+    850,
+    850
+   ],
+   "importer": "Coffee Miners",
+   "best": 75,
+   "also": "85",
+   "why": "Мягкое анаэробное зерно 850 м: на 75 ром, тамаринд и шоколад. На 85 крыжовник и ананас.",
+   "hardness": "Мягкое",
+   "warn": "",
+   "roasted": "",
+   "lat": -20.35,
+   "lon": -42.2
+  },
+  {
+   "id": "COL-2025-006",
+   "name": "Colombia Jairo Arcila (Bourbon Aruzi)",
+   "status": "Образец",
+   "country": "Колумбия",
+   "region": "Armenia, Quindío",
+   "farm": "Santa Mónica",
+   "producer": "Jairo Arcila",
+   "variety": "Bourbon Aruzi",
+   "process": "Анаэробная мытая",
+   "process_detail": "мытая, 30 ч анаэробной ферментации",
+   "harvest": 2025,
+   "arrived": "2025-07",
+   "alt": [
+    1450,
+    1500
+   ],
+   "importer": "Coffee Miners",
+   "best": 115,
+   "also": "105",
+   "why": "Чистый чайный профиль: на 115 бергамот, белый чай и лемонграсс. На 105 белый персик и карамель.",
+   "hardness": "Среднее",
+   "warn": "",
+   "roasted": "",
+   "lat": 4.53,
+   "lon": -75.68
+  },
+  {
+   "id": "VNM-2026-001",
+   "name": "Vietnam 96B (Excelsa & Liberica)",
+   "status": "Образец",
+   "country": "Вьетнам",
+   "region": "Quảng Trị",
+   "farm": "96B Coffee Company",
+   "producer": "various smallholders",
+   "variety": "Excelsa, Liberica",
+   "process": "Анаэробная натуральная",
+   "process_detail": "120 ч сухой анаэробной ферментации + 30 дней медленной сушки",
+   "harvest": 2025,
+   "arrived": "2026-04",
+   "alt": [
+    600,
+    600
+   ],
+   "importer": "Coffee Miners",
+   "best": 75,
+   "also": "85",
+   "why": "Крупная рыхлая либерика: на 75 джекфрут, какао-бобы и миндальный крем. Светлее звучит сыро и деревянно.",
+   "hardness": "Мягкое",
+   "warn": "Другой вид: Ikawa-профиль длиннее, центр зерна проверяй на изломе.",
+   "roasted": "",
+   "lat": 16.75,
+   "lon": 107.0
+  }
+ ]
 }

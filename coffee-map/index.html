@@ -6,24 +6,24 @@
 <style>
 /* Layout: карта-стол во всю ширину с досье страны справа, под ней прогноз цен, календарь урожаев и рыночная лента. */
 :root{
-  --bg:#f3ebe1; --surface:#fcf7f1; --ink:#2b2019; --muted:#7b6757; --line:#e6d8c8;
-  --land:#e9dfd2; --land-coffee:#d9c7b1; --harvest:#c7472d; --fly:#e9a184; --arrive:#7a9447;
-  --trader:#9b6a1e; --p1:#f0dcb8; --p2:#ddb071; --p3:#b67a3c; --p4:#7a4622;
-  --r1:#f1d9c9; --r2:#e09372; --r3:#b33f25; --lot:#2b2019;
+  --bg:#e3edf5; --surface:#f7fafc; --ink:#1a120a; --muted:#5f6b75; --line:#cfdbe5;
+  --ocean:#d2e2ee; --land:#eef2f4; --land-coffee:#e8d6c1; --harvest:#a5582a; --fly:#dca564; --arrive:#2f7f9e;
+  --trader:#24507a; --p1:#dca564; --p2:#c48248; --p3:#8a3e1c; --p4:#3c1204;
+  --r1:#f0d9cc; --r2:#d9825b; --r3:#a5402a; --lot:#1a120a; --accent:#c48248;
   --display:"Unbounded","Arial Black",system-ui,sans-serif;
   --body:"Golos Text",system-ui,-apple-system,"Segoe UI",sans-serif;
   --mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#1b1511; --surface:#241c17; --ink:#f2e7da; --muted:#b39f8b; --line:#3b2f26;
-  --land:#2d241d; --land-coffee:#47392d; --harvest:#ea6d4f; --fly:#a85e48; --arrive:#a3bd68;
-  --trader:#e3b65c; --p1:#4d3c27; --p2:#80592e; --p3:#bb803d; --p4:#ebb36b;
-  --r1:#4f3127; --r2:#954a33; --r3:#ec6d50; --lot:#f2e7da; color-scheme:dark}}
+  --bg:#0f1a24; --surface:#16232f; --ink:#f7ead6; --muted:#9fb0bf; --line:#263646;
+  --ocean:#122130; --land:#1d2b38; --land-coffee:#4a3828; --harvest:#d07a45; --fly:#e3b273; --arrive:#4fa7c6;
+  --trader:#8fb8de; --p1:#4a3a28; --p2:#8a5a30; --p3:#c48248; --p4:#ecc28a;
+  --r1:#4a2c24; --r2:#9a4a30; --r3:#e2714f; --lot:#f7ead6; --accent:#dca564; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#1b1511; --surface:#241c17; --ink:#f2e7da; --muted:#b39f8b; --line:#3b2f26;
-  --land:#2d241d; --land-coffee:#47392d; --harvest:#ea6d4f; --fly:#a85e48; --arrive:#a3bd68;
-  --trader:#e3b65c; --p1:#4d3c27; --p2:#80592e; --p3:#bb803d; --p4:#ebb36b;
-  --r1:#4f3127; --r2:#954a33; --r3:#ec6d50; --lot:#f2e7da; color-scheme:dark}
+  --bg:#0f1a24; --surface:#16232f; --ink:#f7ead6; --muted:#9fb0bf; --line:#263646;
+  --ocean:#122130; --land:#1d2b38; --land-coffee:#4a3828; --harvest:#d07a45; --fly:#e3b273; --arrive:#4fa7c6;
+  --trader:#8fb8de; --p1:#4a3a28; --p2:#8a5a30; --p3:#c48248; --p4:#ecc28a;
+  --r1:#4a2c24; --r2:#9a4a30; --r3:#e2714f; --lot:#f7ead6; --accent:#dca564; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body);
@@ -70,7 +70,8 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
 .country{stroke:var(--surface);stroke-width:.5;vector-effect:non-scaling-stroke}
 .country.coffee{cursor:pointer}
 .country.coffee:hover,.country.sel{stroke:var(--ink);stroke-width:1.4}
-.sphere{fill:var(--bg)}
+.sphere{fill:var(--ocean)}
+.relief{pointer-events:none;mix-blend-mode:overlay;opacity:.95}
 .grat{fill:none;stroke:var(--line);stroke-width:.5;vector-effect:non-scaling-stroke}
 .region{stroke:var(--surface);vector-effect:non-scaling-stroke;cursor:pointer}
 .region.warn{stroke:var(--ink)}
@@ -193,6 +194,19 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
 .buy div{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;padding:4px 0;border-bottom:1px solid var(--line)}
 .buy div:last-child{border-bottom:0}
 @media (prefers-reduced-motion:reduce){.mprog{display:none}}
+.lu{min-width:760px;display:grid;gap:0}
+.lu-head,.lu-row{display:grid;grid-template-columns:190px minmax(0,1fr);border-bottom:1px solid var(--line)}
+.lu-head .m{display:grid;grid-template-columns:repeat(12,1fr)}
+.lu-head .m span{font:500 11px var(--mono);color:var(--muted);text-transform:uppercase;text-align:center;padding:8px 0}
+.lu-head .m span.now{color:var(--ink);background:color-mix(in srgb,var(--accent) 22%,transparent)}
+.lu-name{padding:10px 12px;display:grid;gap:2px;align-content:start}
+.lu-name b{font:700 13px var(--display);display:flex;align-items:center;gap:8px}
+.lu-name b i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.lu-name small{color:var(--muted);font-size:11px}
+.lu-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:4px 0;padding:8px 0;position:relative;background:linear-gradient(90deg,transparent var(--nowL),color-mix(in srgb,var(--accent) 14%,transparent) var(--nowL),color-mix(in srgb,var(--accent) 14%,transparent) var(--nowR),transparent var(--nowR))}
+.lu-bar{margin:0 2px;border-radius:6px;padding:5px 8px;color:#fff;font-size:12px;line-height:1.25;cursor:pointer;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lu-bar:hover{filter:brightness(1.12)}
+.lu-stock{grid-column:1/-1;font-size:12px;color:var(--muted);padding:2px 8px 0}
 </style>
 
 <div class="wrap">
@@ -221,7 +235,8 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
       <label class="toggle"><input type="checkbox" id="tg-regions" checked> Регионы</label>
       <label class="toggle"><input type="checkbox" id="tg-traders" checked> Импортёры</label>
       <label class="toggle"><input type="checkbox" id="tg-lots" checked> Мои лоты</label>
-      <label class="toggle"><input type="checkbox" id="tg-alt"> Горы</label>
+      <label class="toggle"><input type="checkbox" id="tg-relief" checked> Рельеф</label>
+      <label class="toggle"><input type="checkbox" id="tg-alt"> Пики высот</label>
     </div>
     <div class="row" id="sub-season">
       <div class="months">
@@ -273,6 +288,11 @@ button:focus-visible,input:focus-visible,.cal-row:focus-visible{outline:2px soli
   </section>
 
   <section class="sec">
+    <div class="sec-head"><h2>Линейка suroast по месяцам</h2><span class="muted" style="font-size:13px">Какой лот держать на каждом цвете, чтобы весь год был свежий урожай</span></div>
+    <div class="cal"><div class="lu" id="lineup"></div></div>
+  </section>
+
+  <section class="sec">
     <div class="sec-head"><h2>Календарь урожаев</h2><span class="muted" style="font-size:13px">Клик по строке открывает досье страны</span></div>
     <div class="cal"><table id="cal"></table></div>
   </section>
@@ -315,7 +335,7 @@ const rng=(a,dp=1)=>a?`${num(a[0],a[0]%1?dp:0)}–${num(a[1],a[1]%1?dp:0)}`:"—
 
 let month=new Date().getMonth()+1, layer="season", selected=null, playing=!reduce, timer=null, proc="natural", hor=1, ag=95;
 const LOTS=O.lots||[];
-const AG={65:["VOID","#3a2316"],75:["OBSIDIAN","#56341f"],85:["EMBER","#77492a"],95:["DUSK","#986139"],105:["FJORD","#b67d4c"],115:["NORDIC","#d1a06c"]};
+const AG={65:["VOID","#3c1204"],75:["OBSIDIAN","#64260c"],85:["EMBER","#8a3e1c"],95:["DUSK","#a5582a"],105:["FJORD","#c48248"],115:["NORDIC","#dca564"],0:["PROCESS+","#0a0a0a"]};
 const AGS=[65,75,85,95,105,115];
 const lotsOf=name=>LOTS.filter(l=>l.country===name);
 const altNums=s=>(String(s).match(/\d{3,4}/g)||[]).map(Number);
@@ -370,6 +390,8 @@ function countryTip(c){
   else s+=c.prod?`${num(c.prod,1)} млн мешков`:"нет данных";
   return s;
 }
+const reliefImg=g.append("image").attr("class","relief").attr("href","data/relief.png")
+  .attr("x",184).attr("y",88).attr("width",701).attr("height",266).attr("preserveAspectRatio","none");
 const arcs=g.append("g");
 const regionG=g.append("g");
 const regions=regionG.selectAll("circle").data(O.regions).join("circle").attr("class",d=>"region"+(d.issue?" warn":""))
@@ -462,11 +484,11 @@ function legend(){
 let curK=1;
 const zoom=d3.zoom().scaleExtent([1,40]).translateExtent([[0,0],[Wd,Hd]]).on("zoom",e=>{
   g.attr("transform",e.transform); const k=e.transform.k; curK=k;
-  regions.attr("r",3.4/Math.pow(k,.75)); traders.attr("d",d3.symbol(d3.symbolDiamond,70/k));
+  regions.attr("r",3.2/Math.pow(k,.9)); traders.attr("d",d3.symbol(d3.symbolDiamond,70/Math.pow(k,1.7)));
   arcs.selectAll("circle").attr("r",3/k);
   lots.attr("d",d=>d3.symbol(d.roasted?d3.symbolStar:d3.symbolCircle,(d.roasted?120:46)/Math.pow(k,1.4))());
   if(spikeG.attr("display")!=="none") drawSpikes(k);
-  labels.attr("display",k>=2.6&&document.getElementById("tg-regions").checked?null:"none")
+  labels.attr("display",k>=4&&document.getElementById("tg-regions").checked?null:"none")
     .attr("font-size",11/k).attr("stroke-width",3/k).attr("dx",5/k).attr("dy",3.5/k);
 });
 svg.call(zoom).on("dblclick.zoom",null);
@@ -670,9 +692,10 @@ function setLayer(l){layer=l; d3.selectAll("#layers button").attr("aria-pressed"
   document.getElementById("sub-season").hidden=l!=="season"; document.getElementById("sub-process").hidden=l!=="process"; document.getElementById("sub-forecast").hidden=l!=="forecast"; document.getElementById("sub-agtron").hidden=l!=="agtron";
   if(l!=="season") setPlay(false); if(l==="forecast"&&hor===0){hor=1; renderForecast();} paint()}
 d3.selectAll("#layers button").on("click",function(){setLayer(this.dataset.layer)});
-document.getElementById("tg-regions").onchange=e=>{regionG.attr("display",e.target.checked?null:"none"); labels.attr("display",e.target.checked&&curK>=2.6?null:"none")};
+document.getElementById("tg-regions").onchange=e=>{regionG.attr("display",e.target.checked?null:"none"); labels.attr("display",e.target.checked&&curK>=4?null:"none")};
 document.getElementById("tg-lots").onchange=e=>{lotG.attr("display",e.target.checked?null:"none"); legend()};
 document.getElementById("tg-alt").onchange=()=>paint(false);
+document.getElementById("tg-relief").onchange=e=>reliefImg.attr("display",e.target.checked?null:"none");
 document.getElementById("tg-traders").onchange=e=>{traderG.attr("display",e.target.checked?null:"none"); arcs.selectAll("*").remove(); legend()};
 
 /* ---------- рынок ---------- */
@@ -703,9 +726,30 @@ document.getElementById("stamp").innerHTML=`Данные о регионах: ${
 document.getElementById("mstamp").textContent="обновлено "+fmtD(M.updated);
 document.getElementById("foot").innerHTML=`Месяцы сбора и высоты ориентировочные: внутри страны регион и ферма значат больше страны. «Свежий урожай в Европе» считается как 3–6 месяцев после конца основного сбора. Цены зелёного в €/кг — наша оценка цены со склада в ЕС без НДС при нынешней бирже, реальные прайсы импортёров сверяйте. Доли обработок, проблемы и прогнозы — оценка по открытым источникам, а не статистика. Списки стран у импортёров собраны по открытым данным, проверяйте на сайтах компаний. Источники: ${O.sources.map(esc).join("; ")}.`;
 
+function buildLineup(){
+  const P=O.lineup||[]; if(!P.length) return;
+  const nowL=((month-1)/12*100).toFixed(3)+"%", nowR=(month/12*100).toFixed(3)+"%";
+  const runs=ms=>{const set=new Set(ms), out=[]; let st=null; for(let m=1;m<=13;m++){ if(m<=12&&set.has(m)){ if(st===null) st=m; } else if(st!==null){ out.push([st,m-st]); st=null; } } return out;};
+  const isExp=l=>/анаэроб|карбон|добавк|ферментац/i.test(l.process);
+  let h=`<div class="lu-head"><span></span><div class="m">${MON.map((m,i)=>`<span class="${i+1===month?"now":""}">${m}</span>`).join("")}</div></div>`;
+  for(const pos of P){
+    const col=AG[pos.ag][1];
+    const stock=LOTS.filter(l=>l.status==="В наличии"&&(pos.ag?l.best===pos.ag:isExp(l)));
+    const cand=LOTS.filter(l=>l.status!=="Закончился"&&(pos.ag?l.best===pos.ag:isExp(l)));
+    h+=`<div class="lu-row"><div class="lu-name"><b><i style="background:${col}"></i>${pos.ag?pos.ag+" ":""}${pos.name}</b><small>${esc(pos.role)}</small></div>
+      <div class="lu-grid" style="--nowL:${nowL};--nowR:${nowR}">`;
+    pos.spans.forEach((sp,ri)=>runs(sp.m).forEach(([st,len])=>{
+      h+=`<div class="lu-bar" data-country="${esc(sp.country)}" style="grid-column:${st}/span ${len};grid-row:${ri+1};background:${ri?d3.interpolateLab(col,"#ffffff")(.25):col};${pos.ag===115&&!ri?"color:#1a120a":""}" title="${esc(sp.origin)} · ${esc(sp.contract)}">${esc(sp.origin)}</div>`;
+    }));
+    h+=`<div class="lu-stock">Сейчас в наличии у Coffee Miners: ${stock.length?stock.map(l=>esc(l.name)).join(", "):"нет"}${cand.length>stock.length?` · образцы: ${cand.filter(l=>l.status!=="В наличии").slice(0,4).map(l=>esc(l.name)).join(", ")}${cand.length-stock.length>4?"…":""}`:""}</div></div></div>`;
+  }
+  document.getElementById("lineup").innerHTML=h;
+  d3.selectAll(".lu-bar").on("click",function(){const c=byName.get(this.dataset.country); if(c){selected=null; select(c); document.getElementById("stage").scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});}});
+}
+buildLineup();
 buildCalendar(); renderForecast(); spark(); paint(false);
 if(playing) setPlay(true);
-const repaint=()=>{paint(false); renderForecast(); spark()};
+const repaint=()=>{paint(false); renderForecast(); spark(); buildLineup()};
 matchMedia("(prefers-color-scheme: dark)").addEventListener("change",repaint);
 new MutationObserver(repaint).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
 })().catch(err=>{document.getElementById("stamp").textContent="Не удалось загрузить данные карты: "+err.message});

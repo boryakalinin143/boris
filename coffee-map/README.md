@@ -10,6 +10,7 @@
 - `data/market.json` — цены ICE (арабика «C», робуста Лондон), курс EUR/USD для пересчёта в €/кг, история точек `history_kc`, факты и новости. Обновляется ежедневно.
 - `tools/extra_data.py` — ручные дополнения: доли обработок, проблемы, климат, прогноз по странам, цены зелёного €/кг, доп. регионы и импортёры, сценарии цен на 1–3 года.
 - Лоты: `build_origins.py` читает `coffee-miners/coffee_miners_lots.xlsx` (листы «Лоты (импорт)» и «Сводка»); координаты лотов и отметки «жарили» — в `extra_data.py` (LOT_COORDS, ROASTED), цвета стран — AGTRON. Новый лот: добавить координаты и пересобрать.
+- `data/relief.png` — теневой рельеф Natural Earth SR_50M, перепроецирован в Natural Earth I и обрезан по странам-производителям (`tools/relief_fit.mjs` + `tools/relief_reproj.py`).
 - `data/world.json` — границы стран (world-atlas 2.0.2, 50m).
 
 ## Ежедневное обновление market.json

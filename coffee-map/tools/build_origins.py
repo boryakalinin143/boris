@@ -5,7 +5,7 @@
 """
 import csv, json, sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from extra_data import PROC, RISKS, CLIMATE, OUTLOOK, MORE_REGIONS, REGION_ISSUES, MORE_TRADERS, FORECAST, GREEN, AGTRON, LOT_COORDS, ROASTED
+from extra_data import PROC, RISKS, CLIMATE, OUTLOOK, MORE_REGIONS, REGION_ISSUES, MORE_TRADERS, FORECAST, GREEN, AGTRON, LOT_COORDS, ROASTED, LINEUP
 
 LIB = pathlib.Path(sys.argv[1] if len(sys.argv) > 1 else "/mnt/project-files/coffee-library")
 OUT = pathlib.Path(__file__).resolve().parent.parent / "data" / "origins.json"
@@ -258,12 +258,15 @@ def main():
                 roasted=ROASTED.get(r[0], ""), lat=lat, lon=lon))
     except FileNotFoundError:
         print("нет coffee_miners_lots.xlsx, лоты пропущены")
+    for pos in LINEUP:
+        for sp in pos["spans"]:
+            assert sp["country"] in names, sp
     data = dict(
         built="2026-11-03",
-        sources=["coffee-library/origins/origins.csv", "coffee-library/varieties/varieties.csv", "coffee-miners/coffee_miners_lots.xlsx (лоты)", "coffee-library/lineup/omni-lineup-65-115.md (цвета)",
+        sources=["coffee-library/origins/origins.csv", "coffee-library/varieties/varieties.csv", "coffee-miners/coffee_miners_lots.xlsx (лоты)", "coffee-library/lineup/omni-lineup-65-115.md (цвета)", "coffee-library/lineup/suroast-sverka-2026-11-03.md (линейка suroast)",
                  "USDA FAS Coffee: World Markets and Trade, июнь 2026", "Conab, 24.09.2026", "Rabobank 2026 (климат)", "Bunn et al. 2015", "Всемирный банк, BMI, Reuters (прогнозы цен)",
                  "сайты импортёров (список трейдеров, проверить перед закупкой)"],
-        countries=countries, regions=regions, traders=TRADERS, forecast=FORECAST, lots=lots,
+        countries=countries, regions=regions, traders=TRADERS, forecast=FORECAST, lots=lots, lineup=LINEUP,
     )
     OUT.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     print(len(countries), "стран,", len(regions), "регионов,", len(TRADERS), "трейдеров ->", OUT)

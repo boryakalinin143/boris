@@ -23,3 +23,6 @@
 
 ## Линейка
 - Раскладка происхождений по 65–115 и вывод о тёмной Эфиопии/Кении: [[omni-lineup]]. Компания Бориса — suroast (Прага), 7 цветов вместе с PROCESS+: [[suroast-company]].
+
+## Выгрузка в GitHub
+- Ежедневная копия базы в github.com/boryakalinin143/boris (roasting-knowledge/): [[github-export]].

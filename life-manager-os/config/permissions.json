@@ -4,7 +4,7 @@
   "finance-os":        { "level": "ANALYZE", "allow_actions": [], "deny_actions": ["transfer_money", "make_payment", "change_limits", "open_account", "close_account"], "confirm_actions": ["*"] },
   "travel-os":         { "level": "PROPOSE", "allow_actions": [], "deny_actions": [], "confirm_actions": ["buy_ticket", "book_hotel", "cancel_booking", "*"] },
   "personal-chef-os":  { "level": "PROPOSE", "allow_actions": [], "deny_actions": ["place_order"], "confirm_actions": ["*"] },
-  "productivity-os":   { "level": "EXECUTE", "allow_actions": ["create_task", "create_event", "update_task", "delete_task", "delete_event"], "deny_actions": [], "confirm_actions": ["delete_task", "delete_event"] },
+  "productivity-os":   { "level": "EXECUTE", "allow_actions": ["create_task", "create_event", "complete_task", "delete_task", "delete_event"], "deny_actions": [], "confirm_actions": ["delete_task", "delete_event"] },
   "fitness-coach-os":  { "level": "READ",    "allow_actions": [], "deny_actions": [], "confirm_actions": ["*"] },
   "coffee-lab-os":     { "level": "READ",    "allow_actions": [], "deny_actions": [], "confirm_actions": ["*"] },
   "knowledge-os":      { "level": "READ",    "allow_actions": [], "deny_actions": [], "confirm_actions": ["*"] },

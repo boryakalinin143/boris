@@ -1,0 +1,13 @@
+{
+  "name": "productivity-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Productivity OS — специалист LOS/1 поверх Google Calendar и Google Tasks",
+  "type": "module",
+  "engines": { "node": ">=22.9" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "connect-google": "node --env-file-if-exists=.env scripts/connect-google.js",
+    "test": "node --test test/*.test.js"
+  }
+}

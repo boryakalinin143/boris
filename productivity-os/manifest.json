@@ -1,0 +1,29 @@
+{
+  "system_id": "productivity-os",
+  "name": "Productivity OS",
+  "version": "0.1.0",
+  "description": "Менеджер времени: календарь (Google Calendar) и задачи (Google Tasks)",
+  "domain": "productivity",
+  "protocol_version": "LOS/1",
+  "capabilities": [
+    { "id": "create_event", "title": "Создать событие в календаре", "level": "EXECUTE", "critical": false,
+      "params_schema": { "type": "object", "required": ["title", "start", "end"], "properties": { "title": { "type": "string" }, "start": { "type": "string", "format": "date-time" }, "end": { "type": "string", "format": "date-time" }, "description": { "type": "string" } } } },
+    { "id": "create_task", "title": "Создать задачу", "level": "EXECUTE", "critical": false,
+      "params_schema": { "type": "object", "required": ["title"], "properties": { "title": { "type": "string" }, "due": { "type": "string", "format": "date" }, "notes": { "type": "string" } } } },
+    { "id": "complete_task", "title": "Отметить задачу выполненной", "level": "EXECUTE", "critical": false,
+      "params_schema": { "type": "object", "required": ["task_id"], "properties": { "task_id": { "type": "string" } } } },
+    { "id": "delete_event", "title": "Удалить событие из календаря", "level": "EXECUTE", "critical": true,
+      "params_schema": { "type": "object", "required": ["event_id"], "properties": { "event_id": { "type": "string" } } } },
+    { "id": "delete_task", "title": "Удалить задачу", "level": "EXECUTE", "critical": true,
+      "params_schema": { "type": "object", "required": ["task_id"], "properties": { "task_id": { "type": "string" } } } }
+  ],
+  "data_offered": [
+    { "key": "events", "description": "События календаря на ближайшие 14 дней", "sensitivity": "personal" },
+    { "key": "tasks", "description": "Задачи из Google Tasks", "sensitivity": "personal" },
+    { "key": "analytics", "description": "Счётчики недели: события, часы встреч, выполненные задачи", "sensitivity": "normal" }
+  ],
+  "permissions_supported": ["READ", "ANALYZE", "PROPOSE", "EXECUTE"],
+  "connection_status": "disconnected",
+  "last_updated": null,
+  "sync_state": "never"
+}

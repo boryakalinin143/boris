@@ -37,7 +37,6 @@ hypotheses/H01_night_shift_brandbook.md   гипотеза H01: бренд-бу�
 hypotheses/night-shift/        копии двух версий: v1 бренд-бук, v2 инвесторская презентация (24 слайда)
 references/festival-packaging/ 12 фото упаковки с кофейного фестиваля (Dark Arts / NOT, ilse, april, kolo, 2:AM, Paloma, Sprout, Foundation, MTPAK)
 sources/lyubov_original_brief.md   исходный бриф из файла «Любовь», с которого всё началось
-research/laptop_coffee_findings.md  кофейные материалы с ноутбука: стандарты заваривания, цены на зелёное зерно, шаблон линейки, QC-отчёт
 research/financing_debt_equity_hybrid.md  разбор «долг, доля или гибрид» для раунда 6 млн Kč (копия документа https://claude.ai/artifact/6tzhovLu9yMNebpTP7R5go)
 ```
 

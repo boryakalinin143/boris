@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1626">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Travel OS</title>
+<style>
+:root{
+  --navy:#0b1626; --navy2:#11213a; --graphite:#181d25; --line:#26324a;
+  --sand:#e9dcc3; --white:#f7f4ee; --ice:#8ecae6; --copper:#c8865a; --gold:#e0b85c;
+  --muted:#93a0b5; --ok:#7fc8a9; --warn:#e0b85c; --bad:#e07a6a;
+  --bg:var(--navy); --card:var(--navy2); --text:var(--white);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-text-size-adjust:100%}
+.serif{font-family:"Iowan Old Style","Palatino Linotype",Georgia,serif}
+a{color:var(--ice)}
+header{position:sticky;top:0;z-index:20;background:rgba(11,22,38,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 16px 0;padding-top:max(10px,env(safe-area-inset-top))}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.brand b{letter-spacing:.16em;font-size:11px;white-space:nowrap;color:var(--sand)}
+.brand b span{color:var(--copper)}
+.clocks{font-size:11px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.net{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10px;margin-left:6px;border:1px solid var(--line)}
+.net.off{color:var(--warn);border-color:var(--warn)}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin:8px -16px 0;padding:0 12px}
+nav::-webkit-scrollbar{display:none}
+nav button{flex:none;background:none;border:0;color:var(--muted);font:inherit;font-size:13px;padding:8px 10px 10px;border-bottom:2px solid transparent;cursor:pointer}
+nav button.on{color:var(--white);border-color:var(--copper)}
+main{max-width:760px;margin:0 auto;padding:16px 16px 80px}
+section{display:none}section.on{display:block}
+h2{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sand);margin:26px 0 10px;font-weight:600}
+h2:first-child{margin-top:4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:10px}
+.muted{color:var(--muted)}.small{font-size:12px}
+.row{display:flex;gap:10px;align-items:center}.between{justify-content:space-between}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.pill.gold{color:var(--gold);border-color:var(--gold)}.pill.ok{color:var(--ok);border-color:var(--ok)}.pill.bad{color:var(--bad);border-color:var(--bad)}.pill.ice{color:var(--ice);border-color:var(--ice)}
+.btn{display:inline-flex;align-items:center;gap:6px;background:var(--copper);color:#1a1006;border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.ghost{background:none;color:var(--sand);border:1px solid var(--line)}
+.btn.sm{padding:6px 10px;font-size:13px}
+/* hero */
+.hero{position:relative;border-radius:18px;overflow:hidden;padding:20px 18px;min-height:230px;border:1px solid var(--line);
+  background:radial-gradient(120% 90% at 85% 10%,rgba(224,184,92,.35),transparent 55%),linear-gradient(160deg,#1d3557 0%,#0f2238 55%,#0b1626 100%)}
+.hero svg.sky{position:absolute;right:0;bottom:0;width:100%;height:120px;opacity:.55}
+.hero .kicker{font-size:11px;letter-spacing:.22em;color:var(--gold)}
+.hero h1{font-size:40px;margin:6px 0 0;line-height:1;font-weight:500}
+.hero .sub{color:var(--sand);margin-top:6px}
+.hero .facts{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:22px}
+.hero .facts>div{background:rgba(11,22,38,.55);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px}
+.hero .facts small{display:block;color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.big{font-size:28px;font-weight:600;font-variant-numeric:tabular-nums}
+/* live */
+.live{border-color:var(--copper);background:linear-gradient(180deg,rgba(200,134,90,.14),transparent),var(--card)}
+.status{font-size:12px;letter-spacing:.2em;color:var(--copper);font-weight:700}
+.steps{display:flex;gap:3px;margin:10px 0 4px}.steps i{flex:1;height:4px;border-radius:2px;background:var(--line)}.steps i.on{background:var(--copper)}
+/* ticket */
+.ticket{display:flex;background:var(--sand);color:#1b2433;border-radius:14px;margin-bottom:12px;overflow:hidden;position:relative}
+.ticket .main{flex:1;padding:14px;min-width:0}
+.ticket .stub{width:92px;border-left:2px dashed rgba(27,36,51,.3);padding:14px 10px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-align:center;background:#e2d3b5}
+.ticket .stub b{font-size:20px}
+.ticket .iata{display:flex;align-items:center;gap:10px;font-size:26px;font-weight:700;letter-spacing:.04em}
+.ticket .iata .arrow{flex:1;height:1px;background:rgba(27,36,51,.35);position:relative;min-width:20px}
+.ticket .lbl{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b6250}
+.ticket .kv{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:8px;margin-top:10px}
+.ticket .kv div{min-width:0;overflow-wrap:anywhere}
+.ticket.past{opacity:.55}
+.ticket .btn{background:#1b2433;color:var(--sand)}
+.ticket .btn.ghost{color:#1b2433;border-color:rgba(27,36,51,.3);background:none}
+.ticket .warn{color:#8a3b2a;font-size:12px;margin-top:8px}
+/* timeline */
+.day{margin-bottom:6px}
+.dayh{display:flex;justify-content:space-between;align-items:baseline;margin:20px 0 8px}
+.dayh b{font-size:12px;letter-spacing:.18em;color:var(--gold)}
+.ev{display:grid;grid-template-columns:52px 1fr auto;gap:10px;padding:10px 0;border-top:1px solid var(--line);align-items:start}
+.ev .t{font-variant-numeric:tabular-nums;color:var(--sand);font-weight:600}
+.ev .t small{display:block;color:var(--muted);font-weight:400;font-size:10px}
+.ev.done .title{text-decoration:line-through;color:var(--muted)}
+.ev .title{font-weight:600}
+.ev input{width:20px;height:20px;accent-color:var(--copper)}
+.ev.next{background:linear-gradient(90deg,rgba(200,134,90,.12),transparent);border-radius:8px}
+/* calendar */
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:13px}
+.cal .h{color:var(--muted);font-size:10px;padding:4px 0}
+.cal .d{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.02);position:relative}
+.cal .d.trip1{background:rgba(142,202,230,.16)}.cal .d.trip2{background:rgba(224,184,92,.2)}
+.cal .d.today{outline:2px solid var(--copper)}
+.cal .d i{position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%;background:var(--copper)}
+table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:7px 4px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--muted);font-weight:500;font-size:11px}
+.list li{margin:6px 0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:50;display:none;flex-direction:column}
+.modal.on{display:flex}
+.modal .bar{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;padding-top:max(12px,env(safe-area-inset-top));gap:8px}
+.modal .body{flex:1;overflow:auto;display:flex;align-items:flex-start;justify-content:center;padding:0 8px 20px}
+.modal img{max-width:100%;height:auto;background:#fff;border-radius:6px}
+.modal iframe{width:100%;height:100%;border:0;background:#fff;border-radius:6px}
+input[type=text],input[type=number],input[type=date],select,textarea{background:var(--graphite);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:9px;font:inherit;width:100%}
+.form{display:grid;gap:8px}
+.alert{border-left:3px solid var(--warn);padding:10px 12px;background:rgba(224,184,92,.08);border-radius:0 10px 10px 0;margin-bottom:8px}
+.alert.bad{border-color:var(--bad);background:rgba(224,122,106,.08)}
+.alert.ok{border-color:var(--ok);background:rgba(127,200,169,.07)}
+.stat{text-align:center}.stat .big{color:var(--sand)}
+.place{padding:10px 0;border-top:1px solid var(--line)}
+.place:first-child{border-top:0}
+svg text{font-family:inherit}
+@media (min-width:640px){.hero h1{font-size:52px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><b><span>TRAVEL</span> OS</b><div class="clocks" id="clocks"></div></div>
+  <nav id="nav"></nav>
+</header>
+<main>
+
+<section id="home">
+  <div class="card live" id="live"></div>
+  <div class="hero" id="hero"></div>
+  <h2>Важно</h2>
+  <div id="alerts"></div>
+  <h2>Ближайшее</h2>
+  <div id="upcoming"></div>
+  <h2>Погода в Барселоне</h2>
+  <div class="card" id="weather"></div>
+  <h2>История</h2>
+  <div class="grid2" id="stats"></div>
+</section>
+
+<section id="tickets">
+  <h2>My tickets</h2>
+  <p class="muted small">Оригиналы хранятся внутри этого файла без изменений: открываются без интернета. QR и посадочные не перерисовываются, показывается исходный документ.</p>
+  <div id="ticketList"></div>
+  <h2>Добавить документ</h2>
+  <div class="card form" id="addDoc">
+    <p class="small muted" style="margin:0">Например, бронь жилья в Барселоне. Файл сохранится только на этом устройстве (в браузере), в общий файл он не попадёт.</p>
+    <input type="text" id="adTitle" placeholder="Название (напр. Отель, Барселона)">
+    <input type="text" id="adRef" placeholder="Номер брони (необязательно)">
+    <input type="text" id="adNote" placeholder="Адрес / заселение / заметка">
+    <input type="file" id="adFile" accept="application/pdf,image/*">
+    <button class="btn" id="adSave">Сохранить на устройстве</button>
+  </div>
+  <div id="localDocs"></div>
+</section>
+
+<section id="plan">
+  <h2>Барселона · таймлайн</h2>
+  <p class="muted small">Время местное (Прага и Барселона сейчас в одном поясе, UTC+1). Отмечай галочками, что сделано: отметки сохраняются на устройстве.</p>
+  <div id="timeline"></div>
+  <h2>Европа 25.10 – 2.11 · завершено</h2>
+  <div id="europe"></div>
+</section>
+
+<section id="calendar">
+  <h2>Календарь поездок</h2>
+  <div class="card"><div class="row between"><b id="calTitle" class="serif"></b><div><button class="btn ghost sm" id="calPrev">‹</button> <button class="btn ghost sm" id="calNext">›</button></div></div><div class="cal" id="cal" style="margin-top:10px"></div>
+  <div class="row small muted" style="margin-top:10px;gap:14px"><span><span class="pill ice">■</span> Европа</span><span><span class="pill gold">■</span> Барселона</span></div></div>
+  <div id="calList"></div>
+  <h2>Напоминания</h2>
+  <div class="alert"><b>Пуш-уведомлений у Travel OS пока нет.</b> Рабочий способ прямо сейчас: импортировать календарь ниже в календарь телефона. Тогда напоминания пришлёт сам телефон.</div>
+  <div class="card">
+    <table id="remTable"></table>
+    <div class="row" style="margin-top:12px;flex-wrap:wrap;gap:8px"><a class="btn" id="icsNew" download="TravelOS_Барселона.ics">Скачать .ics с напоминаниями</a></div>
+  </div>
+</section>
+
+<section id="guide">
+  <h2>Барселона · гид</h2>
+  <div id="guideList"></div>
+  <h2>Практика</h2>
+  <div class="card"><ul class="list" style="margin:0;padding-left:18px">
+    <li><b>Из аэропорта:</b> не Aerobús (~€7,50), а городской автобус <b>46</b> до Pl. Espanya. Оплачивается T-casual (10 поездок, ~€13).</li>
+    <li><b>Еда:</b> «menu del día» в будни на обед €13–16. Пинчос на Carrer de Blai по €1–2. Супермаркеты Mercadona, Bonpreu.</li>
+    <li><b>Чт 5.11:</b> музей Пикассо бесплатно вечером по четвергам (с 17:00, слот бронируется онлайн).</li>
+    <li><b>Вс 8.11:</b> Laberint d'Horta бесплатно (по средам и воскресеньям).</li>
+    <li><b>Багаж обратно:</b> только личная вещь 40×30×20 см, крупные сувениры и бутылки не влезут.</li>
+  </ul><p class="small muted">Источник: твои файлы guide/Необычные_места.md и budget/Бюджет_15000.md. Часы работы проверяй накануне.</p></div>
+</section>
+
+<section id="budget">
+  <h2>Бюджет Барселоны</h2>
+  <div class="grid2" id="budStats"></div>
+  <div class="card form" style="margin-top:10px">
+    <div class="row"><input type="number" id="exAmt" placeholder="€" step="0.01" style="max-width:110px"><select id="exCat"><option>Еда</option><option>Транспорт</option><option>Развлечения</option><option>Жильё</option><option>Покупки</option><option>Другое</option></select></div>
+    <input type="text" id="exNote" placeholder="Что (необязательно)">
+    <button class="btn" id="exAdd">Добавить расход</button>
+  </div>
+  <div id="exList"></div>
+  <p class="small muted">План из budget/Бюджет_15000.md: еда ~€20/день и T-casual, итого ~€125 на 5–9.11. Расходы хранятся на этом устройстве.</p>
+</section>
+
+<section id="atlas">
+  <h2>Атлас</h2>
+  <div class="card" style="padding:8px"><svg id="map" viewBox="0 0 400 300" style="width:100%;height:auto"></svg></div>
+  <div class="grid2" id="atlasStats"></div>
+  <h2>Страны</h2>
+  <div class="card" id="countries"></div>
+  <p class="small muted">Статистика считается только по поездкам с билетами в папке. Города Европы взяты из плана маршрута.</p>
+</section>
+
+<section id="sos">
+  <h2>Экстренная помощь · Испания</h2>
+  <div class="card"><div class="row between"><div><div class="big" style="color:var(--bad)">112</div><div class="small muted">Единый экстренный номер ЕС: полиция, скорая, пожарные. Работает бесплатно с любого телефона.</div></div><a class="btn" href="tel:112">Позвонить</a></div></div>
+  <div class="card"><b>Потерял паспорт или документы</b><ol class="small" style="padding-left:18px;margin:8px 0 0">
+    <li>Заяви в полицию (в Каталонии это Mossos d'Esquadra), возьми справку о заявлении (denuncia).</li>
+    <li>Свяжись с консульством своей страны в Барселоне или с посольством в Мадриде. Контакты бери только на официальном сайте МИД.</li>
+    <li>Сообщи Vueling, если до вылета 9.11 мало времени.</li></ol></div>
+  <div class="card"><b>Рейс отменили или задержали</b><ol class="small" style="padding-left:18px;margin:8px 0 0">
+    <li>Проверь статус и письма от Vueling, сохрани скриншоты.</li>
+    <li>По правилам ЕС (Регламент 261/2004) при отмене есть право выбрать перебронирование или возврат, а при долгом ожидании еду и при необходимости ночлег. Денежная компенсация зависит от причины и срока уведомления.</li>
+    <li>Не покупай новый билет сам, пока не поговорил с перевозчиком, иначе возврат сложнее.</li></ol>
+    <div class="row" style="gap:8px;margin-top:10px;flex-wrap:wrap"><a class="btn ghost sm" href="https://www.vueling.com" target="_blank" rel="noopener">vueling.com</a><a class="btn ghost sm" href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm" target="_blank" rel="noopener">Права пассажиров ЕС</a></div></div>
+  <div class="card"><b>Багаж</b><p class="small" style="margin:6px 0 0">Сдаваемого багажа у тебя нет, только личная вещь. Не оставляй её без присмотра у гейта и на фестивале.</p></div>
+  <div class="alert">Страховка в папке не найдена. Если она есть, добавь её во вкладке «Билеты».</div>
+</section>
+
+<section id="audit">
+  <h2>Аудит документов · 4.11.2026</h2>
+  <div id="auditList"></div>
+</section>
+
+</main>
+<div class="modal" id="modal"><div class="bar"><b id="mTitle" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></b><div class="row" style="gap:6px"><a class="btn sm" id="mOpen" target="_blank">Открыть</a><a class="btn ghost sm" id="mDl">Скачать</a><button class="btn ghost sm" id="mClose">✕</button></div></div><div class="body" id="mBody"></div></div>
+
+<script>
+const DATA = __DATA__;
+const DOCS = __DOCS__;
+const ICS_NEW = __ICS__;
+const BREF = (DATA.trips.find(t=>t.id==="barcelona-2026")?.segments[0]?.ref)||"—";
+const TZ = {prg:"Europe/Prague", bcn:"Europe/Madrid"};
+const $ = s=>document.querySelector(s);
+const store = {get(k,d){try{const v=localStorage.getItem("tos:"+k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem("tos:"+k,JSON.stringify(v))}catch(e){}}};
+const NOW = ()=>{const q=new URLSearchParams(location.search).get("now");return q?new Date(q):new Date()};
+const fmt=(iso,tz,o)=>new Intl.DateTimeFormat("ru-RU",Object.assign({timeZone:tz||TZ.bcn},o)).format(new Date(iso));
+const hm=(iso,tz)=>fmt(iso,tz,{hour:"2-digit",minute:"2-digit"});
+const dm=(iso,tz)=>fmt(iso,tz,{day:"numeric",month:"short"});
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const maps=q=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(q);
+function until(ms){if(ms<0)return "прошло";const m=Math.round(ms/60000),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mm=m%60;return d?`${d} д ${h} ч`:h?`${h} ч ${mm} мин`:`${mm} мин`}
+
+/* ---------- Barcelona timeline (events) ---------- */
+const EV=[
+ {d:"2026-11-05",t:"2026-11-05T06:15:00Z",tz:TZ.prg,title:"Выезд в аэропорт Праги",place:"Letiště Praha, Terminal 2",note:"Автобус 59/100/119, билет PID ~50 CZK. Время примерное, поправь под свою дорогу.",approx:true,st:"ON THE WAY"},
+ {d:"2026-11-05",t:"2026-11-05T08:05:00Z",tz:TZ.prg,title:"Начало посадки · стойки закрываются",place:"PRG Terminal 2",note:"По посадочному: быть у выхода за 40 мин. Гейт смотри на табло, в документе его нет.",doc:"5_2026-11-05_Praha-Barcelona_Vueling_VY1195.pdf",st:"BOARDING"},
+ {d:"2026-11-05",t:"2026-11-05T08:25:00Z",tz:TZ.prg,title:"Посадка закрывается",place:"PRG Terminal 2",note:"Группа 3, место 23E.",st:"BOARDING",key:true},
+ {d:"2026-11-05",t:"2026-11-05T08:45:00Z",tz:TZ.prg,title:"✈ Вылет VY1195 Прага → Барселона",place:"Letiště Praha (PRG)",note:"Бронь "+BREF+". Только личная вещь.",doc:"5_2026-11-05_Praha-Barcelona_Vueling_VY1195.pdf",st:"DEPARTED",key:true},
+ {d:"2026-11-05",t:"2026-11-05T11:15:00Z",tz:TZ.bcn,title:"Прилёт в Барселону",place:"Aeropuerto Barcelona-El Prat",note:"По расписанию. Фактическое время не отслеживается.",st:"ARRIVED"},
+ {d:"2026-11-05",t:"2026-11-05T11:45:00Z",tz:TZ.bcn,title:"Трансфер: автобус 46 → Pl. Espanya",place:"Plaça d'Espanya, Barcelona",note:"Купи T-casual в автомате. Время примерное.",approx:true,st:"ARRIVED"},
+ {d:"2026-11-05",t:null,tz:TZ.bcn,title:"Заселение · нет данных",place:null,note:"Брони жилья нет в файлах. Добавь её во вкладке «Билеты».",st:"HOTEL CHECK-IN",missing:true},
+ {d:"2026-11-05",t:"2026-11-05T16:00:00Z",tz:TZ.bcn,title:"Опция: музей Пикассо бесплатно",place:"Museu Picasso, Barcelona",note:"По четвергам вечером, слот бронируется онлайн. Днём обещают дождь.",opt:true,st:"EXPLORING"},
+ {d:"2026-11-05",t:"2026-11-05T19:00:00Z",tz:TZ.bcn,title:"Онлайн-регистрация на VY1198",place:null,note:"Обратный посадочный ещё не получен. Сохрани его в tickets/.",st:"EXPLORING",key:true},
+ {d:"2026-11-06",t:"2026-11-06T16:30:00Z",tz:TZ.bcn,title:"🎶 MIRA Festival · двери открываются",place:"Fira Montjuïc, Av. de la Reina Maria Cristina, 08004 Barcelona",note:"Билет в приложении DICE (1 × Abono, €130.16). Ночью около 9–10°, возьми худи.",st:"EXPLORING",key:true},
+ {d:"2026-11-07",t:null,tz:TZ.bcn,title:"Свободный день",place:null,note:"Идея: Hospital de Sant Pau днём, Bunkers del Carmel на закат, ужин на Carrer de Blai.",opt:true,st:"EXPLORING"},
+ {d:"2026-11-08",t:null,tz:TZ.bcn,title:"Воскресенье по-местному",place:"Mercat de Sant Antoni",note:"Утром книжный рынок Sant Antoni, вермут в Bodega Quimet или в Грасии, Laberint d'Horta бесплатно.",opt:true,st:"EXPLORING"},
+ {d:"2026-11-09",t:null,tz:TZ.bcn,title:"Выселение · нет данных",place:null,note:"Время выселения неизвестно без брони.",st:"RETURNING",missing:true},
+ {d:"2026-11-09",t:"2026-11-09T14:00:00Z",tz:TZ.bcn,title:"Выезд в аэропорт",place:"Aeropuerto Barcelona-El Prat",note:"Автобус 46 от Pl. Espanya. Терминал проверь в посадочном. Время примерное.",approx:true,st:"RETURNING"},
+ {d:"2026-11-09",t:"2026-11-09T16:45:00Z",tz:TZ.bcn,title:"✈ Вылет VY1198 Барселона → Прага",place:"Aeropuerto Barcelona-El Prat (BCN)",note:"Бронь "+BREF+". Посадочного пока нет.",st:"RETURNING",key:true},
+ {d:"2026-11-09",t:"2026-11-09T19:10:00Z",tz:TZ.prg,title:"Прилёт в Прагу · дома",place:"Letiště Praha (PRG)",note:"По расписанию.",st:"COMPLETED"}
+];
+const DAYNAMES={"2026-11-05":"DAY 1 · DEPARTURE","2026-11-06":"DAY 2 · MIRA","2026-11-07":"DAY 3 · CITY","2026-11-08":"DAY 4 · CITY","2026-11-09":"LAST DAY · RETURN"};
+const STATUSES=["PREPARING","ON THE WAY","CHECK-IN","BOARDING","DEPARTED","ARRIVED","HOTEL CHECK-IN","EXPLORING","RETURNING","COMPLETED"];
+
+function liveStatus(now){
+  const t=x=>new Date(x).getTime(), n=now.getTime();
+  if(n<t("2026-11-05T05:00:00Z"))return "PREPARING";
+  if(n<t("2026-11-05T07:15:00Z"))return "ON THE WAY";
+  if(n<t("2026-11-05T08:05:00Z"))return "CHECK-IN";
+  if(n<t("2026-11-05T08:45:00Z"))return "BOARDING";
+  if(n<t("2026-11-05T11:15:00Z"))return "DEPARTED";
+  if(n<t("2026-11-05T13:00:00Z"))return "ARRIVED";
+  if(n<t("2026-11-09T08:00:00Z"))return "EXPLORING";
+  if(n<t("2026-11-09T19:10:00Z"))return "RETURNING";
+  return "COMPLETED";
+}
+function nextEvent(now){return EV.filter(e=>e.t&&new Date(e.t)>now)[0]}
+
+/* ---------- docs ---------- */
+const blobCache={};
+function docBlob(name){if(blobCache[name])return blobCache[name];const d=DOCS[name];const bin=atob(d.b64);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return blobCache[name]=URL.createObjectURL(new Blob([u],{type:d.mime}))}
+function openDoc(name,title,urlOverride,mime){
+  const url=urlOverride||docBlob(name); mime=mime||DOCS[name].mime;
+  $("#mTitle").textContent=title||name; $("#mOpen").href=url; $("#mDl").href=url; $("#mDl").download=name;
+  $("#mBody").innerHTML= mime.startsWith("image/")?`<img src="${url}" alt="">`:`<iframe src="${url}" title="документ"></iframe>`;
+  $("#modal").classList.add("on");
+}
+$("#mClose").onclick=()=>{$("#modal").classList.remove("on");$("#mBody").innerHTML=""};
+document.addEventListener("click",e=>{const b=e.target.closest("[data-doc]");if(b){e.preventDefault();openDoc(b.dataset.doc,b.dataset.title)}});
+
+/* ---------- nav ---------- */
+const TABS=[["home","Сейчас"],["tickets","Билеты"],["plan","План"],["calendar","Календарь"],["guide","Гид"],["budget","Бюджет"],["atlas","Атлас"],["sos","SOS"],["audit","Аудит"]];
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));store.set("tab",id);scrollTo(0,0)}
+$("#nav").innerHTML=TABS.map(([id,l])=>`<button data-t="${id}">${l}</button>`).join("");
+$("#nav").onclick=e=>{const b=e.target.closest("button");if(b)show(b.dataset.t)};
+
+/* ---------- header ---------- */
+function renderClock(){const n=NOW();$("#clocks").innerHTML=`Прага ${hm(n,TZ.prg)} · Барселона ${hm(n,TZ.bcn)}<span class="net ${navigator.onLine?"":"off"}">${navigator.onLine?"онлайн":"офлайн · данные не обновляются"}</span>`}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const now=NOW(), st=liveStatus(now), nx=nextEvent(now), idx=STATUSES.indexOf(st);
+  $("#live").innerHTML=`<div class="row between"><span class="status">${st==="PREPARING"?"PREPARING":"I'M ON THE WAY · "+st}</span><span class="pill">по расписанию</span></div>
+   <div class="steps">${STATUSES.map((s,i)=>`<i class="${i<=idx?"on":""}" title="${s}"></i>`).join("")}</div>
+   ${nx?`<div style="margin-top:10px" class="muted small">Следующее · через ${until(new Date(nx.t)-now)}</div>
+   <div class="row between" style="align-items:flex-start;margin-top:2px"><div><div style="font-size:18px;font-weight:600">${esc(nx.title)}</div>
+   <div class="small muted">${dm(nx.t,nx.tz)}, ${hm(nx.t,nx.tz)}${nx.approx?" (примерно)":""}${nx.place?" · "+esc(nx.place):""}</div></div></div>`:`<div style="margin-top:10px">Поездок впереди нет.</div>`}
+   <div class="row" style="gap:8px;margin-top:12px;flex-wrap:wrap"><button class="btn" data-doc="5_2026-11-05_Praha-Barcelona_Vueling_VY1195.pdf" data-title="Посадочный VY1195">Посадочный VY1195</button><button class="btn ghost" onclick="show('plan')">Весь план</button></div>
+   <p class="small muted" style="margin:10px 0 0">Статус считается по времени из билетов. Живого трекинга рейса и гейта нет.</p>`;
+  const dep=new Date("2026-11-05T08:45:00Z"), days=Math.max(0,Math.ceil((dep-now)/864e5));
+  $("#hero").innerHTML=`<svg class="sky" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+   <g fill="#0b1626"><rect x="0" y="95" width="400" height="25"/><path d="M20 95v-30h10v-10h8v40zM60 95V70h18v25zM300 95V60h6V40h4v20h6v35z"/>
+   <path d="M150 95V52l6-10 6 10v43zM168 95V38l7-14 7 14v57zM188 95V30l8-18 8 18v65zM210 95V40l6-12 6 12v55zM228 95V55l5-9 5 9v40z"/><path d="M330 95V75h40v20z"/></g></svg>
+   <div style="position:relative"><div class="kicker">MY NEXT JOURNEY · ИСПАНИЯ</div><h1 class="serif">Барселона</h1>
+   <div class="sub">5 – 9 ноября 2026 · 4 ночи</div>
+   <div class="facts"><div><small>Туда</small><b>VY1195</b><div class="small muted">5.11, 09:45</div></div><div><small>Обратно</small><b>VY1198</b><div class="small muted">9.11, 17:45</div></div><div><small>Главное</small><b>MIRA</b><div class="small muted">6.11, 17:30</div></div></div>
+   <div class="row" style="margin-top:12px;gap:10px;flex-wrap:wrap"><span class="pill gold">${now<dep?(fmt(now,TZ.prg,{day:"numeric"})==="5"?"вылет сегодня":days<=1?"вылет завтра":"через "+days+" дн"):"в поездке"}</span><span class="pill bad">жильё: нет брони в файлах</span></div></div>`;
+  const al=[], ret=store.get("retCheckin",false);
+  al.push(`<div class="alert bad"><b>Жильё в Барселоне.</b> В документах нет брони, а в бюджете написано, что жильё оплачено. Пришли подтверждение, и я добавлю адрес, заселение и выселение в план.</div>`);
+  if(!ret)al.push(`<div class="alert"><b>Онлайн-регистрация на VY1198 (9.11) не сделана.</b> Посадочного на обратный рейс нет. <label class="small" style="display:block;margin-top:6px"><input type="checkbox" id="retCb"> Уже зарегистрировался</label></div>`);
+  al.push(`<div class="alert"><b>Погода на 5.11 противоречивая</b> (в одном источнике до 17 мм дождя). Перепроверь утром, бери непромокаемое.</div>`);
+  al.push(`<div class="alert ok">Посадочный VY1195 есть и открывается без интернета. Место 23E, группа 3, только личная вещь.</div>`);
+  $("#alerts").innerHTML=al.join("");
+  const cb=$("#retCb"); if(cb)cb.onchange=()=>{store.set("retCheckin",true);renderHome()};
+  $("#upcoming").innerHTML=EV.filter(e=>e.t&&new Date(e.t)>now&&e.key).slice(0,4).map(e=>`<div class="card row between"><div><div style="font-weight:600">${esc(e.title)}</div><div class="small muted">${dm(e.t,e.tz)}, ${hm(e.t,e.tz)}${e.place?" · "+esc(e.place):""}</div></div>${e.doc?`<button class="btn sm" data-doc="${e.doc}" data-title="${esc(e.title)}">Билет</button>`:""}</div>`).join("");
+  const W=[["Чт 5.11","14° / 10°","дождь до 17 мм, вечером туман"],["Пт 6.11","17° / 8°","днём ясно, сухо"],["Сб 7.11","17° / 8°","облачно, сухо"],["Вс 8.11","18° / 12°","переменная облачность"],["Пн 9.11","20° / 14°","облачно, возможен слабый дождь"]];
+  $("#weather").innerHTML=`<table>${W.map(w=>`<tr><td>${w[0]}</td><td style="white-space:nowrap"><b>${w[1]}</b></td><td class="muted">${w[2]}</td></tr>`).join("")}</table><p class="small muted" style="margin:8px 0 0">Прогноз yr.no от 4.11, 14:17 (из guide/Погода_по_маршруту.md). Не обновляется автоматически. <a href="https://www.yr.no/en/forecast/daily-table/2-3128760/Spain/Catalonia/Barcelona/Barcelona" target="_blank" rel="noopener">Свежий прогноз</a></p>`;
+  $("#stats").innerHTML=[["2","поездки"],["5","стран за 2 поездки"],["8","городов"],["9","дней в дороге (Европа)"]].map(s=>`<div class="card stat"><div class="big">${s[0]}</div><div class="small muted">${s[1]}</div></div>`).join("");
+}
+
+/* ---------- tickets ---------- */
+const ICON={flight:"✈",bus:"🚌",train:"🚆",car:"🚗",event:"🎶",other:"•"};
+function ticketCard(s,trip){
+  const past=s.dep&&new Date(s.arr||s.dep)<NOW();
+  const tzF=s.tzFrom,tzT=s.tzTo||s.tzFrom;
+  const codes=s.type==="flight"?[s.from.match(/[A-Z]{3}/)[0],s.to.match(/[A-Z]{3}/)[0]]:null;
+  const kv=[["Дата",s.dep?fmt(s.dep,tzF,{day:"numeric",month:"short",weekday:"short"}):"—"],["Отпр.",s.dep?hm(s.dep,tzF):"—"],["Приб.",s.arr?hm(s.arr,tzT):"—"]];
+  if(s.flight)kv.push(["Рейс",s.flight]); if(s.ref)kv.push(["Бронь",s.ref]); if(s.seat)kv.push(["Место",s.seat]); if(s.group)kv.push(["Группа",s.group]); if(s.price)kv.push(["Цена",s.price]); if(s.baggage)kv.push(["Багаж",s.baggage]);
+  const links=[]; if(s.doc)links.push(`<button class="btn sm" data-doc="${s.doc}" data-title="${esc(s.carrier+" "+(s.flight||""))}">Оригинал</button>`);
+  if(s.flight&&!past)links.push(`<a class="btn ghost sm" href="https://www.flightradar24.com/data/flights/${s.flight.toLowerCase()}" target="_blank" rel="noopener">Статус рейса ↗</a>`);
+  return `<div class="ticket ${past?"past":""}"><div class="main">
+   <div class="row between"><span class="lbl">${ICON[s.type]||""} ${esc(s.carrier)}</span>${past?'<span class="lbl">использован</span>':""}</div>
+   ${codes?`<div class="iata">${codes[0]}<span class="arrow"></span>${codes[1]}</div><div class="small">${esc(s.from)} → ${esc(s.to)}</div>`:`<div style="font-weight:700;margin-top:4px">${esc(s.title||"")}${s.title?"<br>":""}${esc(s.from)}${s.to?" → "+esc(s.to):""}</div>`}
+   <div class="kv">${kv.map(k=>`<div><div class="lbl">${k[0]}</div><b>${esc(k[1])}</b></div>`).join("")}</div>
+   ${s.note?`<div class="warn">${esc(s.note)}</div>`:""}
+   ${s.type==="flight"?`<div class="small" style="margin-top:6px;color:#6b6250">Терминал/гейт: ${s.flight==="VY1195"?"терминал 2 по посадочному, гейт на табло":"нет данных"} · время по расписанию</div>`:""}
+   <div class="row" style="gap:6px;margin-top:10px;flex-wrap:wrap">${links.join("")}</div></div>
+   <div class="stub"><span class="lbl">${trip}</span><b>${s.dep?fmt(s.dep,tzF,{day:"numeric"}):"—"}</b><span class="lbl">${s.dep?fmt(s.dep,tzF,{month:"short"}):""}</span></div></div>`;
+}
+function renderTickets(){
+  const [eu,bcn]=DATA.trips;
+  $("#ticketList").innerHTML=`<h2>Барселона · впереди</h2>`+bcn.segments.map(s=>ticketCard(s,"BCN")).join("")+
+   `<h2>Европа · архив</h2>`+eu.segments.slice().reverse().map(s=>ticketCard(s,"EU")).join("")+
+   `<h2>Файлы поездки</h2><div class="card"><div class="row between"><span>Маршрут (0_Маршрут.md)</span><button class="btn ghost sm" data-doc="0_Маршрут.md">Открыть</button></div><div class="row between" style="margin-top:8px"><span>Исходный календарь (.ics)</span><button class="btn ghost sm" data-doc="Поездка_календарь.ics">Открыть</button></div></div>`;
+}
+/* local docs (IndexedDB) */
+let db; const idb=indexedDB.open("travel-os",1);
+idb.onupgradeneeded=()=>idb.result.createObjectStore("docs",{keyPath:"id"});
+idb.onsuccess=()=>{db=idb.result;renderLocal()}; idb.onerror=()=>{$("#localDocs").innerHTML='<p class="small muted">Хранилище устройства недоступно в этом браузере.</p>'};
+function renderLocal(){if(!db)return;const r=db.transaction("docs").objectStore("docs").getAll();r.onsuccess=()=>{$("#localDocs").innerHTML=r.result.map(d=>`<div class="card"><div class="row between"><div><b>${esc(d.title)}</b> <span class="pill ice">на устройстве</span><div class="small muted">${esc(d.ref||"")} ${esc(d.note||"")}</div></div><div class="row" style="gap:6px">${d.file?`<button class="btn sm" data-local="${d.id}">Открыть</button>`:""}<button class="btn ghost sm" data-del="${d.id}">✕</button></div></div></div>`).join("");
+ document.querySelectorAll("[data-local]").forEach(b=>b.onclick=()=>{const d=r.result.find(x=>x.id==b.dataset.local);openDoc(d.fileName||"doc",d.title,URL.createObjectURL(d.file),d.file.type||"application/pdf")});
+ document.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{if(confirm("Удалить с устройства?")){db.transaction("docs","readwrite").objectStore("docs").delete(Number(b.dataset.del)).onsuccess=renderLocal}})}}
+$("#adSave").onclick=()=>{if(!db)return;const f=$("#adFile").files[0],t=$("#adTitle").value.trim();if(!t&&!f){alert("Добавь название или файл");return}
+ const tx=db.transaction("docs","readwrite");tx.objectStore("docs").put({id:Date.now(),title:t||f.name,ref:$("#adRef").value,note:$("#adNote").value,file:f||null,fileName:f?f.name:null});tx.oncomplete=()=>{["#adTitle","#adRef","#adNote","#adFile"].forEach(s=>$(s).value="");renderLocal()}};
+
+/* ---------- timeline ---------- */
+function renderPlan(){
+  const done=store.get("done",{}), now=NOW(), nx=nextEvent(now);
+  const days=[...new Set(EV.map(e=>e.d))];
+  $("#timeline").innerHTML=days.map(d=>{const dt=new Date(d+"T12:00:00Z");return `<div class="day"><div class="dayh"><b>${DAYNAMES[d]}</b><span class="small muted">${fmt(dt,TZ.bcn,{weekday:"long",day:"numeric",month:"long"})}</span></div>`+
+   EV.filter(e=>e.d===d).map((e,i)=>{const id=d+"-"+EV.indexOf(e);return `<div class="ev ${done[id]?"done":""} ${e===nx?"next":""}"><div class="t">${e.t?hm(e.t,e.tz):"—"}${e.approx?"<small>примерно</small>":""}${e.opt?"<small>идея</small>":""}</div>
+   <div><div class="title">${esc(e.title)} ${e.missing?'<span class="pill bad">нет данных</span>':""}</div><div class="small muted">${esc(e.note||"")}</div>
+   <div class="row small" style="gap:12px;margin-top:4px;flex-wrap:wrap">${e.place?`<a href="${maps(e.place)}" target="_blank" rel="noopener">📍 ${esc(e.place)}</a>`:""}${e.doc?`<a href="#" data-doc="${e.doc}" data-title="${esc(e.title)}">🎫 билет</a>`:""}<span class="muted">${e.st}</span></div></div>
+   <input type="checkbox" data-done="${id}" ${done[id]?"checked":""} aria-label="сделано"></div>`}).join("")+`</div>`}).join("");
+  document.querySelectorAll("[data-done]").forEach(c=>c.onchange=()=>{const d=store.get("done",{});d[c.dataset.done]=c.checked;store.set("done",d);renderPlan()});
+  const eu=DATA.trips[0];
+  $("#europe").innerHTML=`<div class="card">`+eu.segments.map(s=>`<div class="ev" style="grid-template-columns:72px 1fr auto"><div class="t">${s.dep?dm(s.dep,s.tzFrom):"—"}<small>${s.dep?hm(s.dep,s.tzFrom):""}</small></div><div><div class="title">${ICON[s.type]} ${esc(s.from)} → ${esc(s.to)}</div><div class="small muted">${esc(s.carrier)}${s.ref?" · "+s.ref:""}${s.note?" · "+esc(s.note):""}</div></div>${s.doc?`<button class="btn ghost sm" data-doc="${s.doc}">🎫</button>`:"<span></span>"}</div>`).join("")+`</div>`;
+}
+
+/* ---------- calendar ---------- */
+let calM=store.get("calM",10);
+const CAL_EV=[...DATA.trips[0].segments.filter(s=>s.dep).map(s=>({t:s.dep,tz:s.tzFrom,title:`${ICON[s.type]} ${s.from} → ${s.to}`})),...EV.filter(e=>e.t&&e.key).map(e=>({t:e.t,tz:e.tz,title:e.title}))];
+function renderCal(){
+  const y=2026,m=calM,first=new Date(Date.UTC(y,m,1)),dim=new Date(Date.UTC(y,m+1,0)).getUTCDate(),off=(first.getUTCDay()+6)%7;
+  $("#calTitle").textContent=fmt(first,"UTC",{month:"long",year:"numeric"});
+  const todayKey=fmt(NOW(),TZ.prg,{year:"numeric",month:"2-digit",day:"2-digit"});
+  let h=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"].map(d=>`<div class="h">${d}</div>`).join("")+"<div></div>".repeat(off);
+  for(let d=1;d<=dim;d++){const key=`${String(d).padStart(2,"0")}.${String(m+1).padStart(2,"0")}.${y}`;const iso=`${y}-${String(m+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
+   const cls=(iso>="2026-10-25"&&iso<="2026-11-02")?"trip1":(iso>="2026-11-05"&&iso<="2026-11-09")?"trip2":"";
+   const has=CAL_EV.some(e=>fmt(e.t,e.tz,{year:"numeric",month:"2-digit",day:"2-digit"})===key);
+   h+=`<div class="d ${cls} ${key===todayKey?"today":""}">${d}${has?"<i></i>":""}</div>`}
+  $("#cal").innerHTML=h;
+  const list=CAL_EV.filter(e=>new Date(e.t).getUTCMonth()===m);
+  $("#calList").innerHTML=`<div class="card">`+list.map(e=>`<div class="ev" style="grid-template-columns:72px 1fr"><div class="t">${dm(e.t,e.tz)}<small>${hm(e.t,e.tz)}</small></div><div>${esc(e.title)}</div></div>`).join("")+`</div>`;
+}
+$("#calPrev").onclick=()=>{calM=Math.max(9,calM-1);store.set("calM",calM);renderCal()};
+$("#calNext").onclick=()=>{calM=Math.min(10,calM+1);store.set("calM",calM);renderCal()};
+function renderRem(){
+  const R=[["5.11 07:15","Выезд в аэропорт (за 30 мин и в момент)"],["5.11 09:00","Посадка VY1195: открыть посадочный"],["5.11 20:00","Онлайн-регистрация на VY1198"],["6.11 16:00","MIRA: проверить билет в DICE"],["9.11 14:30","Выезд в аэропорт Барселоны"],["9.11 17:00","Посадка VY1198"]];
+  const n=NOW();
+  $("#remTable").innerHTML=`<tr><th>Когда</th><th>Что</th><th>Статус</th></tr>`+R.map(r=>`<tr><td style="white-space:nowrap">${r[0]}</td><td>${r[1]}</td><td><span class="pill">только через .ics</span></td></tr>`).join("");
+  $("#icsNew").href=URL.createObjectURL(new Blob([ICS_NEW],{type:"text/calendar"}));
+}
+
+/* ---------- guide ---------- */
+const PLACES=[
+ ["Bunkers del Carmel","Turó de la Rovira","Зенитная батарея времён гражданской войны и лучшая панорама города. Бесплатно. Приходи на закат.","бесплатно",true],
+ ["Laberint d'Horta","Parc del Laberint d'Horta","Настоящий лабиринт из кипарисов в парке XVIII века. В воскресенье 8.11 бесплатно.","€2–3, вс бесплатно",true],
+ ["Hospital de Sant Pau","Sant Pau Recinte Modernista","Модерн как у Гауди, но без толпы Саграды. Снаружи смотреть бесплатно.","снаружи бесплатно"],
+ ["Bar Marsella","Bar Marsella, Carrer de Sant Pau 65","Бар 1820 года в Равале: абсент и паутина на бутылках."],
+ ["Carrer de Blai","Carrer de Blai, Poble Sec","Улица пинчос по €1–2, дешёвый ужин.","€1–2 за пинчо"],
+ ["Bodega Quimet / вермут в Грасии","Bodega Quimet, Barcelona","Вермут в воскресенье перед обедом, местный ритуал."],
+ ["El Xampanyet","El Xampanyet, Barcelona","Кава и закуски в Борне, всегда битком."],
+ ["Carretera de les Aigües","Carretera de les Aigües, Barcelona","Ровная тропа по склону Кольсеролы, весь город под ногами."],
+ ["Рынок Sant Antoni","Mercat de Sant Antoni","В воскресенье утром: старые книги, монеты, комиксы."],
+ ["Саграда Фамилия","Sagrada Família","Если тратиться в Барселоне, то на неё. Билет заранее онлайн.","~€26–33"]];
+function renderGuide(){$("#guideList").innerHTML=`<div class="card">`+PLACES.map(p=>`<div class="place"><div class="row between"><b>${p[4]?"⭐ ":""}${esc(p[0])}</b>${p[3]?`<span class="pill">${esc(p[3])}</span>`:""}</div><div class="small muted" style="margin:3px 0">${esc(p[2])}</div><a class="small" href="${maps(p[1])}" target="_blank" rel="noopener">📍 На карте</a></div>`).join("")+`</div><p class="small muted">Подборка из твоего guide/Необычные_места.md. Фото и расстояния появятся, когда приложение будет жить онлайн.</p>`}
+
+/* ---------- budget ---------- */
+function renderBudget(){
+  const ex=store.get("ex",[]), spent=ex.reduce((a,b)=>a+b.a,0), plan=125;
+  const day=Math.min(5,Math.max(1,Math.ceil((NOW()-new Date("2026-11-04T23:00:00Z"))/864e5)));
+  $("#budStats").innerHTML=[["€"+plan,"план на 5 дней"],["€"+spent.toFixed(2),"потрачено"],["€"+(plan-spent).toFixed(2),"остаток"],["€"+(spent/day).toFixed(2),"в среднем за день"]].map(s=>`<div class="card stat"><div class="big">${s[0]}</div><div class="small muted">${s[1]}</div></div>`).join("")+
+   `<div class="card" style="grid-column:1/-1"><div class="small muted">Уже оплачено заранее</div><div class="row between"><span>MIRA Festival (DICE)</span><b>€130.16</b></div><div class="row between"><span>Перелёты Vueling ${BREF}</span><span class="muted">сумма не в файлах</span></div><div class="row between"><span>Жильё</span><span class="muted">нет брони</span></div></div>`;
+  $("#exList").innerHTML=ex.length?`<div class="card"><table>${ex.slice().reverse().map((e,i)=>`<tr><td class="muted small">${e.d}</td><td>${esc(e.c)}${e.n?" · "+esc(e.n):""}</td><td style="text-align:right"><b>€${e.a.toFixed(2)}</b></td><td><button class="btn ghost sm" data-exdel="${ex.length-1-i}">✕</button></td></tr>`).join("")}</table></div>`:"";
+  document.querySelectorAll("[data-exdel]").forEach(b=>b.onclick=()=>{const e=store.get("ex",[]);e.splice(Number(b.dataset.exdel),1);store.set("ex",e);renderBudget()});
+}
+$("#exAdd").onclick=()=>{const a=parseFloat($("#exAmt").value);if(!(a>0))return;const e=store.get("ex",[]);e.push({a,c:$("#exCat").value,n:$("#exNote").value,d:fmt(NOW(),TZ.bcn,{day:"numeric",month:"short"})});store.set("ex",e);$("#exAmt").value="";$("#exNote").value="";renderBudget()};
+
+/* ---------- atlas ---------- */
+const CITIES=[["Прага",14.42,50.08,"home"],["Мюнхен",11.58,48.14,"eu"],["Галльцайн",11.76,47.33,"eu"],["Инсбрук",11.40,47.27,"eu"],["Верона",10.99,45.44,"eu"],["Милан",9.19,45.46,"eu"],["Лион",4.84,45.76,"eu"],["Париж",2.35,48.86,"eu"],["Барселона",2.17,41.39,"next"]];
+function renderAtlas(){
+  const X=l=>(l-0)*24+20, Y=b=>(52-b)*24+12;
+  const eu=["Прага","Мюнхен","Галльцайн","Инсбрук","Верона","Милан","Лион","Париж","Прага"].map(n=>CITIES.find(c=>c[0]===n));
+  const path=eu.map((c,i)=>(i?"L":"M")+X(c[1]).toFixed(1)+" "+Y(c[2]).toFixed(1)).join(" ");
+  const pr=CITIES[0],bc=CITIES[8];
+  $("#map").innerHTML=`<defs><pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#1d2a42" stroke-width=".6"/></pattern></defs>
+   <rect width="400" height="300" fill="url(#g)"/>
+   <path d="${path}" fill="none" stroke="#8ecae6" stroke-width="1.8" stroke-linejoin="round" opacity=".85"/>
+   <path d="M${X(pr[1])} ${Y(pr[2])} Q ${X(9)} ${Y(44)} ${X(bc[1])} ${Y(bc[2])}" fill="none" stroke="#e0b85c" stroke-width="1.8" stroke-dasharray="5 4"/>
+   ${CITIES.map(c=>`<circle cx="${X(c[1])}" cy="${Y(c[2])}" r="${c[3]==="home"?5:3.5}" fill="${c[3]==="next"?"#e0b85c":c[3]==="home"?"#c8865a":"#f7f4ee"}"/><text x="${X(c[1])+6}" y="${Y(c[2])+(c[0]==="Инсбрук"?11:c[0]==="Галльцайн"?-4:4)}" font-size="9.5" fill="#e9dcc3">${c[0]}</text>`).join("")}
+   <text x="10" y="292" font-size="9" fill="#93a0b5">схема без масштаба · ━ Европа (пройдено) · ┅ Барселона (впереди)</text>`;
+  $("#atlasStats").innerHTML=[["4","страны посещено (DE, AT, IT, FR)"],["7","городов по пути"],["9","дней в дороге"],["8","поездок транспортом"]].map(s=>`<div class="card stat"><div class="big">${s[0]}</div><div class="small muted">${s[1]}</div></div>`).join("");
+  $("#countries").innerHTML=[["🇩🇪","Германия","Мюнхен · 25.10"],["🇦🇹","Австрия","Галльцайн, Шваз, Инсбрук · 25–26.10"],["🇮🇹","Италия","Верона, Милан · 26–29.10"],["🇫🇷","Франция","Лион, Париж · 29.10–1.11"],["🇪🇸","Испания","Барселона · 5–9.11 · впереди"]].map(c=>`<div class="row" style="padding:6px 0"><span style="font-size:22px">${c[0]}</span><div><b>${c[1]}</b><div class="small muted">${c[2]}</div></div></div>`).join("")+`<div class="small muted" style="margin-top:6px">Дом: Прага 🇨🇿</div>`;
+}
+
+/* ---------- audit ---------- */
+function renderAudit(){
+  const A=[
+   ["ok","Билеты Европы: 6 файлов, все сходятся с 0_Маршрут.md и календарём."],
+   ["ok","Посадочный VY1195 есть: 5.11, 09:45, терминал 2, место 23E, группа 3, бронь "+BREF+"."],
+   ["bad","Нет брони жилья в Барселоне на 5–9.11, хотя бюджет считает жильё оплаченным."],
+   ["warn","VY1198 (9.11): нет посадочного, онлайн-регистрация не сделана."],
+   ["warn","MIRA Festival: билет только в приложении DICE, копии в папке нет. Проверь, что DICE открывается офлайн."],
+   ["warn","Сумма за перелёты Vueling не записана в бюджете."],
+   ["warn","Страховки в папке нет."],
+   ["warn","Отрезки без билетов: Шваз → Инсбрук (куплен на месте), Верона → Милан (у друга)."],
+   ["info","Исходный календарь ставит одно напоминание за 2 часа для всех событий. Для Барселоны сделан отдельный календарь с напоминаниями по ситуации."],
+   ["info","В папке uploads/ лежат скриншоты карт и фото из поездки, бронирований среди них нет."]];
+  $("#auditList").innerHTML=A.map(a=>`<div class="alert ${a[0]==="ok"?"ok":a[0]==="bad"?"bad":""}">${esc(a[1])}</div>`).join("")+`<p class="small muted">Оригиналы в tickets/ не изменялись. База поездок: travel-os/trips.json.</p>`;
+}
+
+function renderAll(){renderClock();renderHome();renderTickets();renderPlan();renderCal();renderRem();renderGuide();renderBudget();renderAtlas();renderAudit()}
+renderAll(); show(store.get("tab","home"));
+setInterval(()=>{renderClock();if($("#home").classList.contains("on"))renderHome()},30000);
+addEventListener("online",renderClock);addEventListener("offline",renderClock);
+</script>
+</body>
+</html>

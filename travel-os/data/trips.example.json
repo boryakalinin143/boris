@@ -1,0 +1,223 @@
+{
+  "schema": "travel-os/1",
+  "updated": "2026-11-04T20:00:00Z",
+  "home": {
+    "city": "Прага",
+    "country": "CZ",
+    "tz": "Europe/Prague"
+  },
+  "trips": [
+    {
+      "id": "europe-2026",
+      "title": "Европа по суше",
+      "dates": [
+        "2026-10-25",
+        "2026-11-02"
+      ],
+      "status": "COMPLETED",
+      "countries": [
+        "DE",
+        "AT",
+        "IT",
+        "FR"
+      ],
+      "cities": [
+        "Мюнхен",
+        "Галльцайн / Шваз",
+        "Инсбрук",
+        "Верона",
+        "Милан",
+        "Лион",
+        "Париж"
+      ],
+      "hotel": null,
+      "note": "Посещение городов взято из плана маршрута, а не подтверждено чек-инами.",
+      "segments": [
+        {
+          "id": "s1",
+          "type": "bus",
+          "carrier": "Student Agency (Omio)",
+          "from": "Прага, ÚAN Florenc",
+          "to": "Мюнхен, ZOB",
+          "dep": "2026-10-25T06:00:00Z",
+          "arr": "2026-10-25T10:45:00Z",
+          "tzFrom": "Europe/Prague",
+          "tzTo": "Europe/Berlin",
+          "ref": "XXXXXX",
+          "seat": "16",
+          "doc": "example.pdf"
+        },
+        {
+          "id": "s2",
+          "type": "car",
+          "carrier": "BlaBlaCar",
+          "from": "Унтерфёринг, Allguth, Dieselstraße 100",
+          "to": "Галльцайн",
+          "dep": "2026-10-25T19:10:00Z",
+          "arr": "2026-10-25T21:00:00Z",
+          "tzFrom": "Europe/Berlin",
+          "tzTo": "Europe/Vienna",
+          "ref": null,
+          "seat": "3 места",
+          "price": "£27.85",
+          "doc": "example.jpg"
+        },
+        {
+          "id": "s3",
+          "type": "train",
+          "carrier": "ÖBB (региональный)",
+          "from": "Шваз",
+          "to": "Инсбрук Hbf",
+          "dep": null,
+          "arr": null,
+          "tzFrom": "Europe/Vienna",
+          "tzTo": "Europe/Vienna",
+          "ref": null,
+          "note": "билет на месте, время не зафиксировано",
+          "doc": null
+        },
+        {
+          "id": "s4",
+          "type": "train",
+          "carrier": "Trenitalia IC 89",
+          "from": "Инсбрук Hbf",
+          "to": "Верона Porta Nuova",
+          "dep": "2026-10-26T16:30:00Z",
+          "arr": "2026-10-26T20:01:00Z",
+          "tzFrom": "Europe/Vienna",
+          "tzTo": "Europe/Rome",
+          "ref": null,
+          "seat": "вагон 264, место 56",
+          "doc": "example.jpg"
+        },
+        {
+          "id": "s5",
+          "type": "other",
+          "carrier": "—",
+          "from": "Верона",
+          "to": "Милан",
+          "dep": null,
+          "arr": null,
+          "tzFrom": "Europe/Rome",
+          "tzTo": "Europe/Rome",
+          "ref": null,
+          "note": "билет у друга, данных нет",
+          "doc": null
+        },
+        {
+          "id": "s6",
+          "type": "bus",
+          "carrier": "FlixBus",
+          "from": "Милан, Lampugnano",
+          "to": "Лион, Gerland",
+          "dep": "2026-10-29T04:45:00Z",
+          "arr": "2026-10-29T11:00:00Z",
+          "tzFrom": "Europe/Rome",
+          "tzTo": "Europe/Paris",
+          "ref": "XXXXXX",
+          "doc": "example.pdf"
+        },
+        {
+          "id": "s7",
+          "type": "bus",
+          "carrier": "FlixBus",
+          "from": "Лион, Gerland",
+          "to": "Париж, Bercy Seine",
+          "dep": "2026-10-29T14:45:00Z",
+          "arr": "2026-10-29T20:50:00Z",
+          "tzFrom": "Europe/Paris",
+          "tzTo": "Europe/Paris",
+          "ref": "XXXXXX",
+          "doc": "example.pdf"
+        },
+        {
+          "id": "s8",
+          "type": "bus",
+          "carrier": "FlixBus N109",
+          "from": "Париж, Bercy Seine",
+          "to": "Прага, Na Knížecí",
+          "dep": "2026-11-01T22:05:00Z",
+          "arr": "2026-11-02T11:45:00Z",
+          "tzFrom": "Europe/Paris",
+          "tzTo": "Europe/Prague",
+          "ref": "XXXXXX",
+          "note": "перенесённый билет; старый на 2.11 недействителен",
+          "doc": "example.pdf"
+        }
+      ]
+    },
+    {
+      "id": "barcelona-2026",
+      "title": "Барселона",
+      "dates": [
+        "2026-11-05",
+        "2026-11-09"
+      ],
+      "status": "UPCOMING",
+      "countries": [
+        "ES"
+      ],
+      "cities": [
+        "Барселона"
+      ],
+      "hotel": null,
+      "hotelNote": "В документах нет брони жилья. В бюджете сказано, что жильё оплачено: нужна бронь, чтобы добавить адрес и время заселения.",
+      "segments": [
+        {
+          "id": "b1",
+          "type": "flight",
+          "carrier": "Vueling",
+          "flight": "VY1195",
+          "from": "Прага PRG, терминал 2",
+          "to": "Барселона BCN",
+          "dep": "2026-11-05T08:45:00Z",
+          "arr": "2026-11-05T11:15:00Z",
+          "tzFrom": "Europe/Prague",
+          "tzTo": "Europe/Madrid",
+          "ref": "XXXXXX",
+          "seat": "23E (середина)",
+          "group": "3",
+          "baggage": "только личная вещь под сиденье (до 40×30×20 см)",
+          "checkinCloses": "2026-11-05T08:05:00Z",
+          "boardingCloses": "2026-11-05T08:25:00Z",
+          "boardingPass": true,
+          "doc": "example.pdf"
+        },
+        {
+          "id": "b2",
+          "type": "event",
+          "carrier": "DICE",
+          "title": "MIRA Festival 2026",
+          "from": "Fira Montjuïc, Av. de la Reina Maria Cristina, 08004 Barcelona",
+          "dep": "2026-11-06T16:30:00Z",
+          "arr": null,
+          "tzFrom": "Europe/Madrid",
+          "ref": null,
+          "seat": "1 × Abono",
+          "price": "€130.16",
+          "note": "двери с 17:30; билет только в приложении DICE, PDF нет",
+          "doc": null
+        },
+        {
+          "id": "b3",
+          "type": "flight",
+          "carrier": "Vueling",
+          "flight": "VY1198",
+          "from": "Барселона BCN",
+          "to": "Прага PRG",
+          "dep": "2026-11-09T16:45:00Z",
+          "arr": "2026-11-09T19:10:00Z",
+          "tzFrom": "Europe/Madrid",
+          "tzTo": "Europe/Prague",
+          "ref": "XXXXXX",
+          "seat": "назначат при регистрации",
+          "baggage": "только личная вещь",
+          "boardingPass": false,
+          "note": "онлайн-регистрация ещё не сделана",
+          "doc": null
+        }
+      ]
+    }
+  ],
+  "note": "Пример структуры. Настоящая база лежит в папке проекта (travel-os/trips.json), номера броней здесь скрыты."
+}

@@ -15,6 +15,7 @@ Specialty-кофе роастери из Праги. Seven Unique Roasts: сем
 | Рынки | рынок по брифу, страны Европы и регионы мира | https://claude.ai/artifact/YFCMFsDy2zskNSPAeXoX4Z |
 | Склад | зелёный кофе по годам, лоты, оборудование, упаковка и расходники | https://claude.ai/artifact/1QeX2CX8XqSwSCww2uuMzx |
 | Инвесторы и цели | раунд 6 × 1 млн Kč, воронка инвесторов, план vs факт из таблицы, цели и вехи M1 → M26 | https://claude.ai/artifact/TDmpwv4qscVxkNhaEmTEdf |
+| Инвесторы suroast | канбан «к кому идти за инвестициями»: этапы от идеи до «да», тикеты 1 млн Kč ≈ 1% доли, ближайшие шаги | https://claude.ai/artifact/RH3vJE5mKD8KFZBXmMWzC4 |
 
 Ссылки приватные: чтобы коллега их открыл, их нужно расшарить в меню Share у каждого офиса.
 
@@ -29,12 +30,15 @@ offices/klienty/               страница «Клиенты»
 offices/markets/               страница «Рынки» + источники
 offices/sklad/                 страница «Склад» + источники
 offices/investory/             страница «Инвесторы и цели»
+offices/investor-tracker/      страница «Инвесторы suroast» (канбан людей для раунда; сами записи живут в базе офиса)
 data/markets/                  страны и регионы (JSON)
 data/investory/                цели (targets.json) и вехи пути к прибыли (milestones.json)
 hypotheses/H01_night_shift_brandbook.md   гипотеза H01: бренд-бук SUR «Night Shift», сравнение с брифом, плюсы, риски, расхождения в цифрах
 hypotheses/night-shift/        копии двух версий: v1 бренд-бук, v2 инвесторская презентация (24 слайда)
 references/festival-packaging/ 12 фото упаковки с кофейного фестиваля (Dark Arts / NOT, ilse, april, kolo, 2:AM, Paloma, Sprout, Foundation, MTPAK)
 sources/lyubov_original_brief.md   исходный бриф из файла «Любовь», с которого всё началось
+research/laptop_coffee_findings.md  кофейные материалы с ноутбука: стандарты заваривания, цены на зелёное зерно, шаблон линейки, QC-отчёт
+research/financing_debt_equity_hybrid.md  разбор «долг, доля или гибрид» для раунда 6 млн Kč (копия документа https://claude.ai/artifact/6tzhovLu9yMNebpTP7R5go)
 ```
 
 Оригиналы Night Shift: бренд-бук https://claude.ai/artifact/HV3reU8X1qDMFCuYisqeGx · презентация https://claude.ai/artifact/1HwcTXNaSJX5ui89ZtJgX6

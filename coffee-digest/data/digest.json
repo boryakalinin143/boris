@@ -1,0 +1,341 @@
+{
+ "updated": "2026-11-04",
+ "map_url": "https://claude.ai/artifact/GpUhjv8dV2jREn4MHNex5j",
+ "categories": {
+  "products": "Продукты и форматы",
+  "gear": "Оборудование и обжарка",
+  "processing": "Обработка и сырьё",
+  "brewing": "Приготовление",
+  "trends": "Рынок и тренды",
+  "champs": "Чемпионаты",
+  "events": "Фестивали и события"
+ },
+ "issues": [
+  {
+   "date": "2026-11-04",
+   "headline": "Барселона на выходных, новый чемпион мира по бариста и отказ Nespresso от бумажных капсул",
+   "lead": "Первый выпуск. Собрал главное за последние недели, чтобы было от чего отталкиваться: итоги сезона чемпионатов 2026, что ждать на MY Coffee Awards в Барселоне, движение в капсулах и порционных форматах, волна электрических ростеров и ко-ферментация как массовая категория.",
+   "items": [
+    {
+     "cat": "events",
+     "top": true,
+     "date": "2026-11-06",
+     "title": "MY Coffee Awards, Барселона, 6–8 ноября, Nau Bostik",
+     "text": "Главный осенний спешелти-фестиваль Испании, 10:00–19:00 все три дня, площадка Nau Bostik в районе Ла Сагрера. Среди заявленных участников национальные чемпионы 2026: Alexa Elizabeth Lee (Великобритания), Lakis Psomas (Швеция), Catherine Queiroz (Швейцария), Sierra Yeo (Brewers Cup Швейцарии), Andrés Paparoni (Испания), June Simon (Германия). Одна афиша называет гостем Dale Harris, чемпиона мира 2017 года. В программе Champions Room с открытыми сессиями, коктейль от Suki Ma (Coffee in Good Spirits, Швейцария) и «Silent Barista», где учат заказывать кофе у глухого бариста на языке жестов. По дням: первый день дегустации, второй доклады, воркшопы и финалы конкурсов, третий закрывающие дегустации и панели производителей.",
+     "why": "Что посмотреть для suroast: какие испанские и европейские обжарщики продают дрип-пакеты и капсулы, какие ко-ферментированные лоты на столах, и как чемпионы подают светлую обжарку в эспрессо. Разговор с импортёрами о свежем урожае Колумбии полезен к поездке в январе.",
+     "sources": [
+      {
+       "name": "mycoffeeawards.com",
+       "url": "https://mycoffeeawards.com/"
+      },
+      {
+       "name": "Hule y Mantel",
+       "url": "https://www.huleymantel.com/menu-dia/cafe-especialidad-toma-barcelona-my-coffee-awards-2026-vuelve-nau-bostik_103829_102.html"
+      },
+      {
+       "name": "femturisme.cat",
+       "url": "https://femturisme.cat/fr/agenda/meet-your-coffee-awards-barcelona"
+      }
+     ]
+    },
+    {
+     "cat": "champs",
+     "top": true,
+     "date": "2026-10-25",
+     "title": "Pan Wei (Китай) стал чемпионом мира по бариста 2026 в Панаме",
+     "text": "Финал WBC прошёл 25 октября на World of Coffee Panama. Победил Pan Wei из Parking Coffee, второе место у Shing Win (Малайзия, первый подиум страны), третье у Frederick Ruben (ОАЭ). Почему выиграл: две Гейши (Панама и Колумбия). Колумбийская Гейша шла в молочный курс. Сигнатурный напиток «The Family Link» соединил обе: охлаждённый эспрессо панамской Гейши, настой мёда из кофейной вишни и сусло (mosto), всё насыщено азотом. Шоты для сигнатуры он сварил и охладил до начала выступления. Для него это второй выход на мировой уровень: в 2024 году он был 27-м.",
+     "why": "Тренд сезона: охлаждённый эспрессо, азот и продукты из кофейной вишни (каскара, мёд, сусло) как часть рецепта. Гейша в молоке тоже уже норма на сцене.",
+     "sources": [
+      {
+       "name": "Sprudge",
+       "url": "https://sprudge.com/pan-wei-of-china-is-the-2026-world-barista-champion-1523583.html"
+      },
+      {
+       "name": "Agronegocios",
+       "url": "https://www.agronegocios.co/ferias/cafe-colombiano-hizo-parte-de-la-rutina-con-la-que-pan-wei-gano-el-mundial-de-baristas-4511498"
+      },
+      {
+       "name": "Malay Mail",
+       "url": "https://www.malaymail.com/amp/news/eat-drink/2026/10/26/malaysia-makes-history-as-tan-shing-win-claims-first-ever-podium-finish-at-2026-world-barista-championship/240587"
+      }
+     ]
+    },
+    {
+     "cat": "products",
+     "top": true,
+     "date": "2026-10-08",
+     "title": "Nespresso сворачивает бумажные компостируемые капсулы и возвращается к алюминию",
+     "text": "Бумажные капсулы для домашнего компоста запускали в 2023 году и тестировали в 14 странах Европы. Причина отказа: качество. Алюминий держит кофе от света, воздуха и влаги до года, а бумажные капсулы нужно было использовать в течение четырёх недель после вскрытия упаковки. Компания обещает вкладываться в переработку алюминия.",
+     "why": "Если suroast будет делать капсулы, урок прямой: компостируемый формат требует короткого срока продажи и азотной упаковки поверх. Для старта надёжнее алюминиевые совместимые капсулы.",
+     "sources": [
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/2026/10/08/citing-quality-nespresso-discontinues-compostable-capsules/"
+      },
+      {
+       "name": "Packaging Europe",
+       "url": "https://www.packagingeurope.com/why-is-nestle-discontinuing-its-paper-based-nespresso-capsules/"
+      },
+      {
+       "name": "swissinfo",
+       "url": "https://www.swissinfo.ch/eng/agribusiness/nespresso-is-phasing-out-its-compostable-paper-capsules/92142073"
+      }
+     ]
+    },
+    {
+     "cat": "products",
+     "date": "2026-10-30",
+     "title": "Keurig Alta: прессованные таблетки кофе без пластика и алюминия",
+     "text": "Keurig запустил в США систему Alta за 499 $. Вместо капсул прессованные порции кофе AltaRounds в оболочке на растительной основе. Похожую идею в Швейцарии с 2022 года продвигает CoffeeB от Migros (это наш фон, не из статьи).",
+     "why": "Порционный формат уходит от капсулы к «шайбе» без упаковки. В Европе за этим стоит следить как за альтернативой капсулам.",
+     "sources": [
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/2026/10/30/weekly-coffee-news-fao-grant-opportunity-multiple-home-brewer-launches/"
+      }
+     ]
+    },
+    {
+     "cat": "products",
+     "date": "2026-03-01",
+     "title": "Global Coffee Awards ввели категории для дрип-пакетов и капсул, есть европейский этап",
+     "text": "В расписании Global Coffee Awards 2026 отдельные номинации «Specialty Drip Bag» и капсулы, совместимые с Nespresso. Каждая делится на бленд, моносорт, экспериментальный и декаф. Есть этап для Европы. Бельгийская Caffenation (Антверпен) уже продаёт совместимые капсулы и дрип-пакеты трёх цветов по происхождению или обработке.",
+     "why": "Дешёвый способ проверить дрип-пакеты suroast на внешней оценке. Цветовая система Caffenation по сути та же идея, что ваша линейка Agtron по цветам.",
+     "sources": [
+      {
+       "name": "Perfect Daily Grind",
+       "url": "https://perfectdailygrind.com/2026/03/global-coffee-awards-world-championship-winners-2026-schedule/"
+      },
+      {
+       "name": "Caffenation",
+       "url": "https://caffenation.be/"
+      }
+     ]
+    },
+    {
+     "cat": "trends",
+     "date": "2026-11-03",
+     "title": "Keurig и Luckin: покупатели уходят в более дешёвые форматы",
+     "text": "Глава Keurig Dr Pepper сказал, что семьи с низким и средним доходом стали чувствительнее к цене, и часть переходит с порционного кофе на более дешёвые форматы. У Luckin третий квартал подряд падают продажи в сопоставимых кофейнях. В тот же день Kraft Heinz объявил продажу североамериканского кофейного бизнеса (Maxwell House, Gevalia) фонду One Rock за 650 млн $.",
+     "why": "Дорогое зелёное давит на массовый рынок. Для спешелти это аргумент в пользу честной цены за чашку дома: дрип-пакет дешевле похода в кофейню.",
+     "sources": [
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/2026/11/03/keurig-and-luckin-report-growth-amid-coffee-market-shifts/"
+      },
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/2026/11/04/kraft-heinz-selling-north-american-coffee-business-for-650-million/"
+      }
+     ]
+    },
+    {
+     "cat": "processing",
+     "date": "2026-08-12",
+     "title": "Ко-ферментация стала коммерческой категорией, а не экспериментом",
+     "text": "По обзорам Perfect Daily Grind, экспериментальные обработки ушли с периферии в основу продаж. Колумбия лидирует, ко-ферментация распространяется в Эфиопию. Производители ждут стандартов и понятных категорий. Для этого нужны лаборатории брожения, контроль качества и данные. Обжарщики (Climpson & Sons) при этом отмечают: основной спрос спешелти по-прежнему на чистую сбалансированную чашку.",
+     "why": "Для PROCESS+ это подтверждение ниши. Для основной линейки 65–115 держать чистые мытые и натуральные лоты.",
+     "sources": [
+      {
+       "name": "Perfect Daily Grind",
+       "url": "https://perfectdailygrind.com/2026/08/coffee-producers-scrutinising-processing/"
+      },
+      {
+       "name": "Perfect Daily Grind",
+       "url": "https://perfectdailygrind.com/2026/07/how-will-coffee-processing-change-from-co-fermentation/"
+      },
+      {
+       "name": "Climpson & Sons",
+       "url": "https://climpsonandsons.com/blogs/journal/2026-specialty-coffee-trends-to-watch"
+      }
+     ]
+    },
+    {
+     "cat": "gear",
+     "date": "2026-07-21",
+     "title": "Электрические ростеры: волна новых машин 2026 года",
+     "text": "Sivetz после слияния с Peachey выпускает электрические ростеры кипящего слоя на 4 и 9 кг с тем же PLC-управлением, что у газовой модели. Stronghold начал мировые продажи компактного S2. Bellwether принимает заказы на поставку в первом квартале 2027 года. Typhoon ещё в 2025 году перевёл всю линейку на электричество. Mago Maga вывела на Kickstarter домашний ростер Roma-X с «ИИ»-профилями.",
+     "why": "Прямо к вашему расчёту электрообжарки в Чехии (coffee-library/materials/Elektro_obzharka_Chekhiya_raschet_2026-10.md): 4–9 кг электрический кипящий слой закрывает разрыв между Ikawa и Giesen 15.",
+     "sources": [
+      {
+       "name": "pulse.bot (Sivetz)",
+       "url": "https://www.pulse.bot/ma/blogs/sivetz-expands-into-electric-heat-with-peachey-roasters-0889f42c-c4b7-4038-a522-33a2c3826f29"
+      },
+      {
+       "name": "GCR (Typhoon)",
+       "url": "https://www.gcrmag.com/typhoon-roasters-transitions-product-line-to-electric"
+      },
+      {
+       "name": "Bellwether",
+       "url": "https://bellwethercoffee.com"
+      },
+      {
+       "name": "PR Newswire (Roma-X)",
+       "url": "https://tools.prnewswire.com/en-us/live/20813/release/20260721EN07776"
+      }
+     ]
+    },
+    {
+     "cat": "brewing",
+     "date": "2026-11-04",
+     "title": "Турбо-шоты, soup shots и бумажные фильтры в эспрессо",
+     "text": "Турбо-шот: помол крупнее, давление около 6 бар, пролив до 15 секунд, соотношение примерно 1:2,5–3. Метод вышел из исследования «Systematically Improving Espresso» (2020) и сообщества владельцев Decent. В обзорах 2026 года его ставят в один ряд с soup shots, низким давлением, бумажным фильтром под таблеткой и эспрессо без крема. Минус: с молоком такой шот теряется.",
+     "why": "Турбо-шот лучше всего работает на светлой обжарке (Agtron 95–115), где обычный эспрессо кислит. Это аргумент продавать светлые позиции и под эспрессо, с рецептом на пачке.",
+     "sources": [
+      {
+       "name": "CoffeeGeek",
+       "url": "https://coffeegeek.com/opinions/history-technology/turbo-shot-espresso-a-detailed-exploration/"
+      },
+      {
+       "name": "Clive Coffee",
+       "url": "https://clivecoffee.com/blogs/learn/where-espresso-is-headed-2026-and-beyond"
+      }
+     ]
+    },
+    {
+     "cat": "champs",
+     "date": "2026-06-27",
+     "title": "Чемпион мира по обжарке 2026: Benjamin Brassart (Бельгия)",
+     "text": "World Coffee Roasting Championship в Брюсселе выиграл Benjamin Brassart, сооснователь Boo Coffee Roasters (Андерлехт). Это его первый выход на чемпионат мира, первая победа Бельгии, 619 баллов. Дальше Li Zhong Xiang (Китай), Thanasis Angelopoulos (Греция), Ashton Huang (Тайвань), Andrea Trevisan (Австрия), Wang JianNing (Китай).",
+     "why": "Boo Coffee рядом, в Брюсселе: можно купить их лоты и сравнить с нашими профилями на кап-тесте.",
+     "sources": [
+      {
+       "name": "WCC",
+       "url": "https://wcc.coffee/latest-news/wcrc-winners"
+      },
+      {
+       "name": "Focus on Belgium",
+       "url": "https://focusonbelgium.be/en/lifestyle/worlds-best-coffee-roaster-based-brussels"
+      }
+     ]
+    },
+    {
+     "cat": "champs",
+     "date": "2026-06-27",
+     "title": "Brewers Cup 2026: Nas Jaafar (Малайзия), в финале была Чехия",
+     "text": "Первая победа Малайзии. Тема выступления: сопротивление слоя кофе и как оно меняет поток воды, экстракцию и чашку. Тренер Jhon Christhoper (Fugol Coffee Roasters, финалист 2022). В финале были представители Австралии, Чехии, Гонконга, Кореи и Франции. Сорт и обработку в открытых источниках пока не нашёл, они есть в видео выступления на YouTube WCC.",
+     "why": "Чешский финалист — повод познакомиться в Праге и, возможно, обжаривать для следующего сезона.",
+     "sources": [
+      {
+       "name": "WCC",
+       "url": "https://wcc.coffee/latest-news/wbrc-winners"
+      },
+      {
+       "name": "Malay Mail",
+       "url": "https://www.malaymail.com/news/eat-drink/2026/07/11/from-outsider-to-world-champion-the-story-behind-malaysian-nas-jaafars-historic-world-brewers-cup-victory/227141"
+      }
+     ]
+    },
+    {
+     "cat": "events",
+     "date": "2026-11-19",
+     "title": "Science Driven Coffee Cup, 19–20 ноября, Италия",
+     "text": "Научная кофейная конференция в кампусе Simonelli Group (Belforte del Chienti). Обычно там темы воды, экстракции и обжарки с данными.",
+     "why": "Если будут записи докладов, добавлю в coffee-library/science.",
+     "sources": [
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/"
+      }
+     ]
+    },
+    {
+     "cat": "gear",
+     "date": "2026-11-02",
+     "title": "Wilfa выходит в США с новым гриндером Uniform EVO",
+     "text": "Норвежская Wilfa открыла американское подразделение и выпустила три капельные кофеварки и обновлённую кофемолку Uniform EVO.",
+     "why": "Uniform популярна у домашних клиентов в Европе: рецепты на пачке можно давать с её настройками.",
+     "sources": [
+      {
+       "name": "Daily Coffee News",
+       "url": "https://dailycoffeenews.com/2026/11/02/wilfa-establishes-us-operations-introduces-new-home-coffee-equipment/"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "calendar": [
+  {
+   "date": "2026-11-06",
+   "end": "2026-11-08",
+   "name": "MY Coffee Awards",
+   "place": "Барселона, Nau Bostik",
+   "url": "https://mycoffeeawards.com/",
+   "mine": true
+  },
+  {
+   "date": "2026-11-19",
+   "end": "2026-11-20",
+   "name": "Science Driven Coffee Cup",
+   "place": "Belforte del Chienti, Италия",
+   "url": "https://dailycoffeenews.com/"
+  },
+  {
+   "date": "2027-01-01",
+   "name": "Поездка в Колумбию",
+   "place": "Колумбия, даты не названы",
+   "url": "",
+   "mine": true,
+   "month": true
+  }
+ ],
+ "champions": [
+  {
+   "comp": "Бариста (WBC)",
+   "name": "Pan Wei",
+   "country": "Китай",
+   "where": "Панама, октябрь",
+   "why": "Две Гейши, азотированный охлаждённый эспрессо с мёдом из вишни и суслом",
+   "url": "https://sprudge.com/pan-wei-of-china-is-the-2026-world-barista-champion-1523583.html"
+  },
+  {
+   "comp": "Обжарка (WCRC)",
+   "name": "Benjamin Brassart",
+   "country": "Бельгия",
+   "where": "Брюссель, июнь",
+   "why": "619 баллов, первый выход на мировой уровень",
+   "url": "https://wcc.coffee/latest-news/wcrc-winners"
+  },
+  {
+   "comp": "Brewers Cup",
+   "name": "Nas Jaafar",
+   "country": "Малайзия",
+   "where": "Брюссель, июнь",
+   "why": "Выступление о сопротивлении слоя и потоке воды",
+   "url": "https://wcc.coffee/latest-news/wbrc-winners"
+  },
+  {
+   "comp": "Coffee in Good Spirits",
+   "name": "Andy Philein",
+   "country": "Китай",
+   "where": "Брюссель, июнь",
+   "why": "",
+   "url": "https://freshcup.com/the-2026-world-brewers-cup-coffee-in-good-spirits-and-roasters-champions/"
+  },
+  {
+   "comp": "Cup Tasters",
+   "name": "Le Quang Cuong (Nicky)",
+   "country": "Вьетнам",
+   "where": "Бангкок",
+   "why": "",
+   "url": "https://wcc.coffee/latest-news/congratulations-to-the-2026-world-cup-tasters-champion-"
+  },
+  {
+   "comp": "Latte Art",
+   "name": "Bala Shao-Sing",
+   "country": "",
+   "where": "Сан-Диего",
+   "why": "",
+   "url": "https://backend.qahwaworld.com/tag/san-diego/"
+  },
+  {
+   "comp": "Cezve/Ibrik",
+   "name": "Jane Espante",
+   "country": "ОАЭ",
+   "where": "Дубай, январь",
+   "why": "",
+   "url": "https://wcc.coffee/latest-news/2026-cezve-ibrik-champion-announcement"
+  }
+ ]
+}

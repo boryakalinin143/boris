@@ -2,7 +2,7 @@
   "system_id": "example-os",
   "name": "Example OS",
   "version": "0.1.0",
-  "description": "Шаблон специалиста LOS/1. Скопируй папку в новый репозиторий и замени поля.",
+  "description": "Шаблон специалиста LOS/1. Скопируй папку в boris/<system>-os/ и замени поля.",
   "domain": "other",
   "protocol_version": "LOS/1",
   "capabilities": [

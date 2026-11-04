@@ -1,0 +1,6 @@
+dist/
+data/private/
+*.pdf
+*.jpg
+*.ics
+s_*.png

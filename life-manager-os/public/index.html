@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Life Manager OS</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><span class="mark"></span>LIFE MANAGER OS</div>
+    <nav>
+      <button data-view="today" class="active">My life today</button>
+      <button data-view="overview">Life overview</button>
+      <button data-view="briefing">Briefing</button>
+      <button data-view="goals">Goals</button>
+    </nav>
+    <button id="refresh" class="ghost" title="Обновить данные из систем">Обновить</button>
+  </header>
+
+  <main>
+    <section id="view-today" class="view active">
+      <div class="hero">
+        <div>
+          <div class="eyebrow" id="weekday"></div>
+          <h1 id="date"></h1>
+          <div class="muted" id="weather"></div>
+        </div>
+        <div class="morning">
+          <div class="eyebrow">Good morning</div>
+          <p id="good-morning"></p>
+        </div>
+      </div>
+      <div class="grid">
+        <article class="panel"><h2>Главные цели</h2><ul id="goals-list"></ul></article>
+        <article class="panel"><h2>Задачи на сегодня</h2><ul id="tasks-list"></ul></article>
+        <article class="panel"><h2>Напоминания</h2><ul id="reminders-list"></ul></article>
+        <article class="panel"><h2>Ближайшие события</h2><ul id="events-list"></ul></article>
+        <article class="panel"><h2>Рекомендации</h2><ul id="insights-list"></ul></article>
+        <article class="panel"><h2>Проекты</h2><ul id="projects-list"></ul></article>
+        <article class="panel"><h2>Ждут подтверждения</h2><ul id="proposals-list"></ul></article>
+        <article class="panel wide"><h2>Статус AI-систем <span class="count" id="connected"></span></h2><div id="systems" class="systems"></div></article>
+      </div>
+    </section>
+
+    <section id="view-overview" class="view"><div id="cards" class="cards"></div></section>
+
+    <section id="view-briefing" class="view"><div id="briefing" class="briefing"></div></section>
+
+    <section id="view-goals" class="view">
+      <div class="grid">
+        <article class="panel wide"><h2>Цели</h2><ul id="all-goals"></ul></article>
+        <article class="panel wide">
+          <h2>Новая цель</h2>
+          <form id="goal-form" class="form">
+            <input name="title" placeholder="Название" required>
+            <select name="category" required>
+              <option value="health">Health</option><option value="fitness">Fitness</option><option value="finance">Finance</option>
+              <option value="career">Career</option><option value="business">Business</option><option value="education">Education</option>
+              <option value="travel">Travel</option><option value="personal_development">Personal Development</option><option value="lifestyle">Lifestyle</option>
+            </select>
+            <select name="priority"><option value="medium">Средний</option><option value="high">Высокий</option><option value="critical">Критичный</option><option value="low">Низкий</option></select>
+            <input name="due" type="date">
+            <input name="reason" placeholder="Причина: зачем мне это">
+            <input name="measurable_result" placeholder="Измеримый результат">
+            <textarea name="description" placeholder="Описание"></textarea>
+            <button type="submit">Добавить цель</button>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

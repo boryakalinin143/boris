@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://personal-life-os/protocol/los1/manifest.schema.json",
+  "title": "LOS/1 specialist manifest (GET /api/v1/profile → data)",
+  "type": "object",
+  "required": ["system_id", "name", "version", "description", "domain", "protocol_version", "capabilities", "data_offered", "permissions_supported", "connection_status", "last_updated", "sync_state"],
+  "additionalProperties": true,
+  "properties": {
+    "system_id": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+" },
+    "description": { "type": "string" },
+    "domain": { "enum": ["health", "finance", "fitness", "nutrition", "travel", "coffee", "knowledge", "productivity", "home", "style", "other"] },
+    "protocol_version": { "const": "LOS/1" },
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "level", "critical"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "level": { "enum": ["PROPOSE", "EXECUTE"] },
+          "critical": { "type": "boolean" },
+          "params_schema": { "type": "object" }
+        }
+      }
+    },
+    "data_offered": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["key", "sensitivity"],
+        "properties": {
+          "key": { "type": "string" },
+          "description": { "type": "string" },
+          "sensitivity": { "enum": ["normal", "personal", "sensitive"] }
+        }
+      }
+    },
+    "permissions_supported": { "type": "array", "items": { "enum": ["READ", "ANALYZE", "PROPOSE", "EXECUTE"] } },
+    "connection_status": { "enum": ["connected", "partial", "disconnected"] },
+    "last_updated": { "type": ["string", "null"], "format": "date-time" },
+    "sync_state": { "enum": ["idle", "syncing", "error", "never"] }
+  }
+}

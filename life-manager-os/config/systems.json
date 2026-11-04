@@ -1,0 +1,15 @@
+{
+  "_comment": "Реестр специалистов. base_url = null — система ещё не развернута. Адрес можно задать переменной окружения LOS_URL_<SYSTEM_ID> (например LOS_URL_FINANCE_OS), токен — только переменной LOS_TOKEN_<SYSTEM_ID>. Токены в этот файл не пишутся.",
+  "systems": [
+    { "system_id": "health-os",         "name": "Health OS",          "domain": "health",       "base_url": null },
+    { "system_id": "finance-os",        "name": "Finance OS",         "domain": "finance",      "base_url": null },
+    { "system_id": "fitness-coach-os",  "name": "Fitness Coach OS",   "domain": "fitness",      "base_url": null },
+    { "system_id": "personal-chef-os",  "name": "Personal Chef OS",   "domain": "nutrition",    "base_url": null },
+    { "system_id": "travel-os",         "name": "Travel OS",          "domain": "travel",       "base_url": null },
+    { "system_id": "coffee-lab-os",     "name": "Coffee Lab OS",      "domain": "coffee",       "base_url": null },
+    { "system_id": "knowledge-os",      "name": "Knowledge OS",       "domain": "knowledge",    "base_url": null },
+    { "system_id": "productivity-os",   "name": "Productivity OS",    "domain": "productivity", "base_url": null },
+    { "system_id": "home-os",           "name": "Home OS",            "domain": "home",         "base_url": null },
+    { "system_id": "personal-style-os", "name": "Personal Style OS",  "domain": "style",        "base_url": null }
+  ]
+}

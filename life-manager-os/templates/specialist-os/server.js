@@ -1,4 +1,4 @@
-// Эталонный специалист LOS/1. Копируешь в новый репозиторий (health-os, finance-os, ...),
+// Эталонный специалист LOS/1. Копируешь в новую папку репозитория boris (health-os/, finance-os/, ...),
 // меняешь manifest.json и функции в `providers` — остальное уже соответствует протоколу.
 //
 // Запуск: LOS_TOKEN=<длинный случайный токен> LOS_SCOPES=los:read,los:analyze node server.js

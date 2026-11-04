@@ -40,4 +40,4 @@ LOS_URL_PRODUCTIVITY_OS=http://127.0.0.1:4200 LOS_TOKEN_PRODUCTIVITY_OS=<ток�
 
 ## Новый специалист
 
-Скопировать `templates/specialist-os/` в новый репозиторий, заполнить `manifest.json`, подставить реальные источники в `providers`. Подробно — §10 в ARCHITECTURE.md.
+Скопировать `templates/specialist-os/` в новую папку `boris/<system>-os/`, заполнить `manifest.json`, подставить реальные источники в `providers`. Подробно — §10 в ARCHITECTURE.md.

@@ -1,0 +1,174 @@
+<title>Кофейный дайджест suroast</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: выпуск дня лентой слева (главное крупно), справа календарь событий, чемпионы сезона и ссылка на карту цен. Цвета категорий взяты из шкалы Agtron линейки suroast. */
+:root{
+  --bg:#e3edf5; --surface:#f7fafc; --ink:#1a120a; --muted:#5b6670; --line:#cfdbe5;
+  --accent:#a5582a; --chip:#eaf1f7;
+  --c-products:#c48248; --c-gear:#64260c; --c-processing:#8a3e1c; --c-brewing:#a5582a;
+  --c-trends:#2f6f8e; --c-champs:#b8860b; --c-events:#24507a;
+  --f-display:"Unbounded", "Arial Black", system-ui, sans-serif;
+  --f-body:"Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0f1a24; --surface:#16232f; --ink:#f7ead6; --muted:#9fb0bf; --line:#263646;
+  --accent:#e09a62; --chip:#1c2c3a;
+  --c-products:#dca564; --c-gear:#d9875a; --c-processing:#e0916a; --c-brewing:#e3b273;
+  --c-trends:#6fb3d4; --c-champs:#e6c25a; --c-events:#8fb8de; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#0f1a24; --surface:#16232f; --ink:#f7ead6; --muted:#9fb0bf; --line:#263646;
+  --accent:#e09a62; --chip:#1c2c3a;
+  --c-products:#dca564; --c-gear:#d9875a; --c-processing:#e0916a; --c-brewing:#e3b273;
+  --c-trends:#6fb3d4; --c-champs:#e6c25a; --c-events:#8fb8de; color-scheme:dark; }
+
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px 24px;padding-bottom:18px;border-bottom:2px solid var(--ink)}
+.brand{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(26px,4.2vw,40px);line-height:1.05;margin:0;text-wrap:balance}
+.issues{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.issues .lbl{font-family:var(--f-mono);font-size:12px;color:var(--muted);margin-right:4px}
+.pill{font:500 13px var(--f-mono);padding:5px 10px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.pill[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.lead{display:grid;gap:8px;padding-block:22px 6px;max-width:72ch}
+.lead h2{font-family:var(--f-display);font-weight:500;font-size:clamp(19px,2.4vw,24px);line-height:1.25;margin:0;text-wrap:balance}
+.lead p{margin:0;color:var(--muted)}
+
+.filters{display:flex;flex-wrap:wrap;gap:6px;padding-block:16px}
+.filters button{font:500 13px var(--f-body);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.filters button .dot{width:9px;height:9px;border-radius:50%;background:var(--dot,var(--ink))}
+.filters button[aria-pressed="true"]{background:var(--surface);border-color:var(--ink)}
+.filters .n{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:start}
+@media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+
+.feed{display:grid;gap:14px;min-width:0}
+.item{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:grid;gap:8px;min-width:0}
+.item.top{border-color:var(--ink);border-width:1.5px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.cat{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:500}
+.cat .dot{width:9px;height:9px;border-radius:50%;background:var(--dot)}
+.star{color:var(--accent);font-weight:500}
+.item h3{font-family:var(--f-display);font-weight:500;font-size:17px;line-height:1.3;margin:0;text-wrap:balance}
+.item.top h3{font-size:20px}
+.item p{margin:0;max-width:75ch}
+.why{border-left:3px solid var(--dot);padding:6px 0 6px 12px;background:var(--chip);border-radius:0 6px 6px 0}
+.why b{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:500;color:var(--muted);display:block;margin-bottom:2px}
+.src{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:13px;color:var(--muted)}
+.src a{color:var(--muted);text-underline-offset:2px}
+.src a:hover{color:var(--ink)}
+
+aside{display:grid;gap:18px;min-width:0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:10px}
+.box h4{font-family:var(--f-display);font-weight:500;font-size:14px;margin:0;letter-spacing:.01em}
+.cal{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.cal li{display:grid;grid-template-columns:62px 1fr;gap:10px;align-items:baseline}
+.cal .d{font-family:var(--f-mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted)}
+.cal .mine .d{color:var(--accent);font-weight:500}
+.cal .nm{font-weight:600}
+.cal .pl{display:block;font-size:13px;color:var(--muted)}
+.champ{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.champ li{display:grid;gap:1px}
+.champ .c{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.champ .who{font-weight:600}
+.champ .y{font-size:13px;color:var(--muted)}
+.maplink{display:block;text-decoration:none;font-weight:600}
+.maplink span{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.empty{padding:20px;color:var(--muted)}
+footer{margin-top:28px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <span class="eyebrow">suroast · Прага · ежедневно</span>
+      <h1>Кофейный дайджест</h1>
+    </div>
+    <div class="issues" id="issues"><span class="lbl">Выпуск</span></div>
+  </header>
+
+  <section class="lead" id="lead"><h2>Загружаю выпуск…</h2></section>
+  <nav class="filters" id="filters" aria-label="Категории"></nav>
+
+  <div class="grid">
+    <main class="feed" id="feed"></main>
+    <aside>
+      <div class="box">
+        <h4>Календарь</h4>
+        <ul class="cal" id="cal"></ul>
+      </div>
+      <div class="box">
+        <h4>Чемпионы мира 2026</h4>
+        <ul class="champ" id="champ"></ul>
+      </div>
+      <div class="box">
+        <a class="maplink" id="maplink" href="https://claude.ai/artifact/GpUhjv8dV2jREn4MHNex5j" target="_blank" rel="noopener">Цены на зелёное и биржа →<span>На карте кофе: арабика, робуста, €/кг, урожаи. В дайджесте их нет, чтобы не дублировать.</span></a>
+      </div>
+    </aside>
+  </div>
+  <footer id="foot">Каждая новость со ссылкой на источник. «Что это значит для нас» — мой вывод, не цитата.</footer>
+</div>
+
+<script>
+const MONTHS=["янв","фев","мар","апр","мая","июн","июл","авг","сен","окт","ноя","дек"];
+const MONTHS_FULL=["январь","февраль","март","апрель","май","июнь","июль","август","сентябрь","октябрь","ноябрь","декабрь"];
+function fmt(s){const [y,m,d]=s.split("-").map(Number);return d+" "+MONTHS[m-1];}
+function esc(s){return String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+let DATA=null, cur=0, filt="all";
+
+function renderIssues(){
+  const box=document.getElementById("issues");
+  box.querySelectorAll("button").forEach(b=>b.remove());
+  DATA.issues.slice(0,10).forEach((is,i)=>{
+    const b=document.createElement("button");b.className="pill";b.textContent=fmt(is.date);
+    b.setAttribute("aria-pressed",i===cur);b.onclick=()=>{cur=i;filt="all";render();};box.appendChild(b);
+  });
+}
+function render(){
+  renderIssues();
+  const is=DATA.issues[cur];
+  document.getElementById("lead").innerHTML=`<span class="eyebrow">Выпуск ${esc(fmt(is.date))} ${is.date.slice(0,4)}</span><h2>${esc(is.headline)}</h2><p>${esc(is.lead)}</p>`;
+  const counts={};is.items.forEach(it=>counts[it.cat]=(counts[it.cat]||0)+1);
+  const f=document.getElementById("filters");f.innerHTML="";
+  const mk=(key,label,n)=>{const b=document.createElement("button");b.setAttribute("aria-pressed",filt===key);
+    b.style.setProperty("--dot",key==="all"?"var(--ink)":`var(--c-${key})`);
+    b.innerHTML=`<span class="dot"></span>${esc(label)} <span class="n">${n}</span>`;b.onclick=()=>{filt=key;render();};f.appendChild(b);};
+  mk("all","Всё",is.items.length);
+  Object.keys(DATA.categories).forEach(k=>{if(counts[k])mk(k,DATA.categories[k],counts[k]);});
+  const feed=document.getElementById("feed");
+  const items=is.items.filter(it=>filt==="all"||it.cat===filt).slice().sort((a,b)=>(b.top?1:0)-(a.top?1:0));
+  feed.innerHTML=items.length?items.map(it=>`
+    <article class="item${it.top?" top":""}" style="--dot:var(--c-${esc(it.cat)})">
+      <div class="meta"><span class="cat"><span class="dot"></span>${esc(DATA.categories[it.cat]||it.cat)}</span><span>${esc(fmt(it.date))}</span>${it.top?'<span class="star">главное</span>':""}</div>
+      <h3>${esc(it.title)}</h3>
+      <p>${esc(it.text)}</p>
+      ${it.why?`<div class="why"><b>Что это значит для нас</b>${esc(it.why)}</div>`:""}
+      <div class="src">${(it.sources||[]).map(s=>`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.name)}</a>`).join("")}</div>
+    </article>`).join(""):'<div class="empty">В этой категории сегодня ничего.</div>';
+}
+function renderSide(){
+  const today=new Date().toISOString().slice(0,10);
+  document.getElementById("cal").innerHTML=(DATA.calendar||[]).filter(e=>(e.end||e.date)>=today||e.month).map(e=>{
+    const [y,m]=e.date.split("-").map(Number);
+    const d=e.month?MONTHS_FULL[m-1]+" "+y:(fmt(e.date)+(e.end?"–"+e.end.slice(8).replace(/^0/,""):""));
+    const nm=e.url?`<a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.name)}</a>`:esc(e.name);
+    return `<li class="${e.mine?"mine":""}"><span class="d">${esc(d)}</span><span><span class="nm">${nm}</span><span class="pl">${esc(e.place)}${e.mine?" · вы едете":""}</span></span></li>`;}).join("");
+  document.getElementById("champ").innerHTML=(DATA.champions||[]).map(c=>`<li><span class="c">${esc(c.comp)}</span><a class="who" href="${esc(c.url)}" target="_blank" rel="noopener">${esc(c.name)}</a><span class="y">${esc([c.country,c.where].filter(Boolean).join(", "))}${c.why?". "+esc(c.why):""}</span></li>`).join("");
+  if(DATA.map_url)document.getElementById("maplink").href=DATA.map_url;
+  document.getElementById("foot").textContent=`Обновлено ${fmt(DATA.updated)} ${DATA.updated.slice(0,4)}. Каждая новость со ссылкой на источник. «Что это значит для нас» — мой вывод, не цитата.`;
+}
+fetch("data/digest.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json();})
+  .then(d=>{DATA=d;DATA.issues.sort((a,b)=>b.date.localeCompare(a.date));render();renderSide();})
+  .catch(()=>{document.getElementById("lead").innerHTML="<h2>Не удалось загрузить выпуск</h2><p>Файл data/digest.json не ответил. Обновите страницу через минуту.</p>";});
+</script>

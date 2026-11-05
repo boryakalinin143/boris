@@ -1,0 +1,711 @@
+<title>Агенты Бориса</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Golos+Text:wght@400;500;600&family=Prata&family=Literata:opsz,wght@7..72,400;7..72,600&family=Caveat:wght@600;700&family=Nunito:wght@400;600;800&family=IBM+Plex+Serif:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&family=Playfair+Display:ital,wght@0,700;1,600&family=Rubik:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=Raleway:wght@400;500;600&family=Oswald:wght@500;600&family=Exo+2:wght@400;500;600&family=Manrope:wght@500;700;800&family=Yeseva+One&family=Commissioner:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600&family=Jura:wght@500;700&family=JetBrains+Mono:wght@400;600&family=Comfortaa:wght@600;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: hub = control-room grid of agent tiles, each tile already wearing its agent's identity; agent view = full-bleed themed room with tool + prompt tabs. */
+:root{
+  --bg:#ECEEF0; --fg:#15181C; --muted:#5B636E; --card:#FFFFFF; --line:#D5DAE0; --accent:#2D3440;
+  --display:"Unbounded","Golos Text",system-ui,sans-serif; --body:"Golos Text",system-ui,sans-serif;
+  /* agent tokens, overwritten per agent */
+  --a-bg:#fff; --a-fg:#111; --a-muted:#666; --a-card:#fff; --a-line:#ddd; --a-acc:#333; --a-acc2:#777; --a-on:#fff;
+  --a-d:var(--display); --a-b:var(--body); --a-m:"IBM Plex Mono",ui-monospace,monospace; --a-r:8px;
+  --ok:#2F8F5B; --warn:#C98A12; --bad:#C23B3B;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0F1114;--fg:#ECEEF1;--muted:#99A2AE;--card:#181B20;--line:#2A2F37;--accent:#C9D1DB;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1114;--fg:#ECEEF1;--muted:#99A2AE;--card:#181B20;--line:#2A2F37;--accent:#C9D1DB;color-scheme:dark}
+
+/* per-agent identities (deliberately single-look each) */
+.t-mentor{--a-bg:#142037;--a-fg:#F3ECDD;--a-muted:#A9B3C7;--a-card:#1C2B47;--a-line:#2E4166;--a-acc:#D4A548;--a-acc2:#8FB3E0;--a-on:#142037;--a-d:"Prata",Georgia,serif;--a-b:"Literata",Georgia,serif;--a-r:3px}
+.t-journal{--a-bg:#FAF6EC;--a-fg:#33322E;--a-muted:#7A776E;--a-card:#FFFDF7;--a-line:#E3DCCB;--a-acc:#5E8C5A;--a-acc2:#D2553F;--a-on:#fff;--a-d:"Caveat",cursive;--a-b:"Nunito",system-ui,sans-serif;--a-r:14px}
+.t-lawyer{--a-bg:#F5F4F0;--a-fg:#1D1E22;--a-muted:#5E6068;--a-card:#FFFFFF;--a-line:#1D1E22;--a-acc:#7A1F2B;--a-acc2:#9A7B3E;--a-on:#fff;--a-d:"IBM Plex Serif",Georgia,serif;--a-b:"IBM Plex Sans",system-ui,sans-serif;--a-r:0}
+.t-chef{--a-bg:#FFF4E4;--a-fg:#2B1A12;--a-muted:#866650;--a-card:#FFFBF4;--a-line:#EBD3B5;--a-acc:#C93E24;--a-acc2:#3F7D3A;--a-on:#fff;--a-d:"Playfair Display",Georgia,serif;--a-b:"Rubik",system-ui,sans-serif;--a-r:10px}
+.t-chashechki{--a-bg:#F4F7FB;--a-fg:#10204A;--a-muted:#55638C;--a-card:#FFFFFF;--a-line:#C9D3EA;--a-acc:#1F48A8;--a-acc2:#7F9BDA;--a-on:#fff;--a-d:"Cormorant Garamond",Georgia,serif;--a-b:"Raleway",system-ui,sans-serif;--a-r:22px}
+.t-doctor{--a-bg:#0C1714;--a-fg:#E8F5EF;--a-muted:#8AA89C;--a-card:#13231F;--a-line:#24402F;--a-acc:#3BE8A9;--a-acc2:#FF6B5E;--a-on:#0C1714;--a-d:"Oswald",Impact,sans-serif;--a-b:"Exo 2",system-ui,sans-serif;--a-r:6px}
+.t-lyudmila{--a-bg:#EFF3EA;--a-fg:#17271F;--a-muted:#56685C;--a-card:#FBFCF8;--a-line:#BFD0BC;--a-acc:#1E6B4B;--a-acc2:#233E8B;--a-on:#fff;--a-d:"Manrope",system-ui,sans-serif;--a-b:"Manrope",system-ui,sans-serif;--a-m:"IBM Plex Mono",ui-monospace,monospace;--a-r:3px}
+.t-travel{--a-bg:#F8EEDF;--a-fg:#16324A;--a-muted:#5F6F7D;--a-card:#FFF9F0;--a-line:#E3CFB3;--a-acc:#DD5730;--a-acc2:#1D5C8C;--a-on:#fff;--a-d:"Yeseva One",Georgia,serif;--a-b:"Commissioner",system-ui,sans-serif;--a-r:16px}
+.t-suroast{--a-bg:#17100A;--a-fg:#F2EADF;--a-muted:#B39D85;--a-card:#1F160D;--a-line:#3A2A1A;--a-acc:#C48248;--a-acc2:#DCA564;--a-on:#17100A;--a-d:"Instrument Serif","Cormorant Garamond",Georgia,serif;--a-b:"Bricolage Grotesque","Golos Text",system-ui,sans-serif;--a-r:2px}
+.t-vadim{--a-bg:#0E1217;--a-fg:#DCE6F2;--a-muted:#7F90A6;--a-card:#151B23;--a-line:#28323F;--a-acc:#FF7A1A;--a-acc2:#4C8DFF;--a-on:#0E1217;--a-d:"Jura",system-ui,sans-serif;--a-b:"Jura",system-ui,sans-serif;--a-m:"JetBrains Mono",ui-monospace,monospace;--a-r:4px}
+.t-translator{--a-bg:#FBFAFF;--a-fg:#1E1641;--a-muted:#6A6390;--a-card:#FFFFFF;--a-line:#E2DCFA;--a-acc:#6A4CF0;--a-acc2:#12A889;--a-on:#fff;--a-d:"Comfortaa",system-ui,sans-serif;--a-b:"Onest",system-ui,sans-serif;--a-r:20px}
+
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--fg)}
+body{font-family:var(--body);font-size:15px;line-height:1.5;-webkit-text-size-adjust:100%}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+h1,h2,h3{text-wrap:balance;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- HUB ---------- */
+#hub{padding-block:28px 48px}
+.hub-head{display:grid;gap:10px;margin-bottom:22px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.hub-head h1{font-family:var(--display);font-size:clamp(26px,5vw,40px);font-weight:700;letter-spacing:-.01em}
+.hub-head p{margin:0;color:var(--muted);max-width:62ch}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;gap:10px;min-height:178px;padding:16px;background:var(--a-bg);color:var(--a-fg);border:1px solid var(--a-line);border-radius:var(--a-r);position:relative;overflow:hidden;transition:transform .15s}
+.tile:hover{transform:translateY(-2px)}
+.tile:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.tile>*{min-width:0}
+.tile .tname{font-family:var(--a-d);font-size:24px;line-height:1.1;overflow-wrap:anywhere;padding-right:4px}
+.t-doctor .tname,.t-vadim .tname{font-size:22px}
+.t-journal .tname{font-size:30px}
+.tile .trole{font-family:var(--a-b);font-size:13.5px;color:var(--a-muted)}
+.tile .tfoot{display:flex;justify-content:space-between;align-items:center;font-family:var(--a-m);font-size:11.5px;color:var(--a-muted);gap:8px}
+.tile .tsys{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tile .tdot{width:12px;height:12px;border-radius:50%;background:var(--a-acc);box-shadow:16px 0 0 var(--a-acc2);margin-right:18px;flex:none}
+.tile .flag{position:absolute;top:12px;right:12px;font-family:var(--body);font-size:11px;background:var(--a-acc2);color:var(--a-on);padding:2px 8px;border-radius:99px}
+.howto{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.howto div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.howto b{display:block;font-family:var(--display);font-size:13px;font-weight:500;margin-bottom:4px}
+.howto p{margin:0;color:var(--muted);font-size:14px}
+
+/* ---------- AGENT ROOM ---------- */
+#room{min-height:100%;background:var(--a-bg);color:var(--a-fg);font-family:var(--a-b)}
+html.in-room,html.in-room body{background:var(--rb,var(--bg))}
+.room-top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--a-bg);border-bottom:1px solid var(--a-line)}
+.room-top .wrap{display:flex;align-items:center;gap:10px;padding-block:10px;flex-wrap:wrap}
+.back{all:unset;cursor:pointer;font-size:13.5px;padding:6px 12px;border:1px solid var(--a-line);border-radius:99px;color:var(--a-fg)}
+.back:focus-visible{outline:2px solid var(--a-acc)}
+.tabs{display:flex;gap:4px;margin-left:auto}
+.tab{all:unset;cursor:pointer;padding:6px 14px;border-radius:99px;font-size:13.5px;color:var(--a-muted)}
+.tab[aria-selected="true"]{background:var(--a-acc);color:var(--a-on)}
+.tab:focus-visible{outline:2px solid var(--a-acc)}
+.room-hero{padding-block:26px 8px;display:grid;gap:8px}
+.room-hero h1{font-family:var(--a-d);font-size:clamp(32px,6vw,54px);line-height:1.05;font-weight:700}
+.t-mentor .room-hero h1,.t-suroast .room-hero h1,.t-travel .room-hero h1,.t-chef .room-hero h1{font-weight:400}
+.t-journal .room-hero h1{font-size:clamp(44px,8vw,70px)}
+.t-doctor .room-hero h1{text-transform:uppercase;letter-spacing:.02em}
+.room-hero .role{font-size:16px;color:var(--a-muted);max-width:60ch;margin:0}
+.room-hero .meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:3px 10px;border:1px solid var(--a-line);border-radius:99px;color:var(--a-fg);background:transparent}
+.chip.mono{font-family:var(--a-m)}
+.hand{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--a-muted)}
+.hand button{all:unset;cursor:pointer;font-size:12.5px;padding:3px 10px;border-radius:99px;border:1px dashed var(--a-line);color:var(--a-fg)}
+.hand button:hover{border-style:solid;border-color:var(--a-acc)}
+.room-body{padding-block:18px 56px}
+.panel{background:var(--a-card);border:1px solid var(--a-line);border-radius:var(--a-r);padding:16px}
+.grid2{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px}
+@media (max-width:760px){.grid2{grid-template-columns:minmax(0,1fr)}}
+.ph{font-family:var(--a-d);font-size:20px;margin:0 0 4px}
+.t-journal .ph{font-size:28px}
+.t-doctor .ph,.t-vadim .ph{text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+.sub{font-size:13px;color:var(--a-muted);margin:0 0 12px}
+.note{font-size:12.5px;color:var(--a-muted);margin-top:10px}
+.btn{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:13.5px;padding:7px 14px;border-radius:calc(var(--a-r) + 4px);background:var(--a-acc);color:var(--a-on);font-weight:600}
+.btn.ghost{background:transparent;color:var(--a-fg);border:1px solid var(--a-line);font-weight:500}
+.btn:focus-visible{outline:2px solid var(--a-fg)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.inp{background:var(--a-bg);border:1px solid var(--a-line);border-radius:calc(var(--a-r) + 2px);padding:7px 10px;color:var(--a-fg);min-width:0}
+.inp:focus{outline:2px solid var(--a-acc);outline-offset:0}
+.example{display:inline-block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:99px;background:var(--a-acc2);color:var(--a-on);margin-left:6px;vertical-align:middle}
+.empty{padding:14px;border:1px dashed var(--a-line);border-radius:var(--a-r);color:var(--a-muted);font-size:14px;text-align:center}
+.num{font-family:var(--a-m);font-variant-numeric:tabular-nums}
+table.t{width:100%;border-collapse:collapse;font-size:14px}
+table.t th,table.t td{text-align:left;padding:7px 6px;border-bottom:1px solid var(--a-line)}
+table.t th{font-size:12px;color:var(--a-muted);font-weight:500;text-transform:uppercase;letter-spacing:.05em}
+.scroll{overflow-x:auto}
+
+/* prompt view */
+.prompt{max-width:76ch;font-size:15.5px;line-height:1.62}
+.prompt h1{font-family:var(--a-d);font-size:26px;margin:0 0 10px}
+.prompt h2{font-family:var(--a-d);font-size:20px;margin:26px 0 8px;padding-top:12px;border-top:1px solid var(--a-line)}
+.prompt p{margin:8px 0}
+.prompt ul{padding-left:20px;margin:6px 0}
+.prompt ol{padding-left:22px;margin:6px 0}
+.prompt li{margin:3px 0}
+.prompt code{font-family:var(--a-m);font-size:.88em;background:var(--a-card);border:1px solid var(--a-line);padding:0 4px;border-radius:4px}
+.prompt pre{font-family:var(--a-m);font-size:13px;background:var(--a-card);border:1px solid var(--a-line);border-radius:var(--a-r);padding:12px;overflow-x:auto;line-height:1.45}
+.prompt pre code{border:0;background:none;padding:0}
+.prompt blockquote{margin:10px 0;padding:10px 14px;border-left:3px solid var(--a-acc2);background:var(--a-card)}
+.prompt strong{color:var(--a-fg)}
+.prompt-bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.prompt-bar .path{font-family:var(--a-m);font-size:12.5px;color:var(--a-muted)}
+.toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--a-fg);color:var(--a-bg);padding:8px 16px;border-radius:99px;font-size:13.5px;z-index:20}
+
+/* ---------- signature visuals ---------- */
+/* mentor: book spines */
+.skills{display:grid;gap:10px}
+.skill{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:center}
+.skill .sn{font-size:15px}
+.spines{display:flex;gap:4px}
+.spine{all:unset;cursor:pointer;width:16px;height:34px;border:1px solid var(--a-line);border-radius:2px 2px 0 0;background:transparent}
+.spine.on{background:var(--a-acc);border-color:var(--a-acc)}
+.spine:nth-child(2n).on{background:#C3933A}
+.spine:focus-visible{outline:2px solid var(--a-acc2)}
+.del{all:unset;cursor:pointer;color:var(--a-muted);font-size:13px;padding:2px 6px}
+.srs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.srs div{background:var(--a-bg);border:1px solid var(--a-line);border-radius:3px;padding:8px 6px;text-align:center}
+.srs b{display:block;font-family:var(--a-d);font-size:20px;color:var(--a-acc)}
+.srs span{font-size:12px;color:var(--a-muted)}
+/* journal */
+.t-journal #room{background-image:radial-gradient(var(--a-line) 1.1px,transparent 1.2px);background-size:18px 18px}
+.hgrid{display:grid;grid-template-columns:minmax(78px,1.6fr) repeat(7,minmax(26px,1fr));gap:4px;align-items:center}
+.hgrid .hn small{display:block;font-family:"Caveat",cursive;font-size:17px;font-weight:600;color:var(--a-acc2)}
+.hgrid .hd{font-size:12px;color:var(--a-muted);text-align:center}
+.hgrid .hn{font-size:14px;font-weight:600}
+.hcell{all:unset;cursor:pointer;height:32px;border-radius:9px;border:1.5px solid var(--a-line);display:grid;place-items:center;font-family:"Caveat",cursive;font-size:22px;color:var(--a-acc)}
+.hcell.on{background:var(--a-acc);border-color:var(--a-acc);color:#fff}
+.hcell:focus-visible{outline:2px solid var(--a-acc2)}
+.streak{font-family:"Caveat",cursive;font-size:20px;color:var(--a-acc2);text-align:center}
+.mood{all:unset;cursor:pointer;height:32px;border-radius:9px;display:grid;place-items:center;font-size:18px;border:1.5px dashed var(--a-line)}
+/* lawyer */
+.docrow{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(130px,auto) minmax(110px,auto);gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid #D9D7CF}
+.docrow:first-child{border-top:2px solid var(--a-line)}
+.docrow .dn{font-weight:600}
+.docrow .dh{font-size:12.5px;color:var(--a-muted)}
+.stamp{font-family:var(--a-m);font-size:12px;padding:3px 8px;border:1.5px solid currentColor;text-transform:uppercase;letter-spacing:.05em;justify-self:start}
+.st-ok{color:var(--ok)}.st-warn{color:var(--warn)}.st-bad{color:var(--bad)}.st-none{color:var(--a-muted)}
+.tl{position:relative;height:56px;border-top:2px solid var(--a-line);margin-top:26px}
+.tl .tick{position:absolute;top:-8px;width:2px;height:14px;background:var(--a-acc)}
+.tl .tl-l{position:absolute;top:10px;font-size:11.5px;transform:translateX(-50%);white-space:nowrap;color:var(--a-muted)}
+.tl .mk{position:absolute;top:-7px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%);border:2px solid var(--a-card)}
+@media (max-width:560px){.docrow{grid-template-columns:minmax(0,1fr) auto}.docrow .dd{grid-column:1/-1}}
+/* chef */
+.t-chef .room-top{background-image:repeating-linear-gradient(90deg,rgba(201,62,36,.13) 0 14px,transparent 14px 28px),repeating-linear-gradient(0deg,rgba(201,62,36,.13) 0 14px,transparent 14px 28px);background-color:var(--a-bg)}
+.menu{display:grid;grid-template-columns:34px repeat(3,minmax(92px,1fr));gap:6px;min-width:360px}
+.menu .mh{font-size:12px;color:var(--a-muted);text-transform:uppercase;letter-spacing:.06em;text-align:center}
+.menu .md{font-family:var(--a-d);font-style:italic;font-weight:600;align-self:center}
+.mc{all:unset;cursor:pointer;min-height:46px;padding:6px 8px;border-radius:8px;border:1px dashed var(--a-line);font-size:13px;line-height:1.25;display:flex;align-items:center}
+.mc.f{border:1px solid var(--a-line);background:var(--a-card)}
+.mc.sel{outline:2px solid var(--a-acc);outline-offset:1px}
+.dishes{display:flex;flex-wrap:wrap;gap:6px}
+.dish{all:unset;cursor:pointer;font-size:13px;padding:5px 11px;border-radius:99px;background:var(--a-card);border:1px solid var(--a-line)}
+.dish:hover{border-color:var(--a-acc)}
+.shop li{list-style:none;display:flex;gap:8px;align-items:center;padding:4px 0;border-bottom:1px dotted var(--a-line);font-size:14px}
+.shop ul{padding:0;margin:4px 0 10px}
+.shop h4{margin:10px 0 2px;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--a-acc2)}
+.shop .done{text-decoration:line-through;color:var(--a-muted)}
+/* chashechki */
+.attrs{display:grid;gap:8px}
+.attr{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,1.4fr) 48px;gap:10px;align-items:center;font-size:14px}
+.attr .en{font-size:11.5px;color:var(--a-muted);display:block}
+.attr input[type=range]{width:100%;accent-color:var(--a-acc)}
+.score{font-family:var(--a-d);font-size:64px;line-height:1;color:var(--a-acc)}
+.radar text{font-family:"Raleway",sans-serif;font-size:10px;fill:var(--a-muted)}
+.notes{display:flex;flex-wrap:wrap;gap:6px}
+.note-c{all:unset;cursor:pointer;font-size:12.5px;padding:4px 10px;border-radius:99px;border:1px solid var(--a-line);color:var(--a-fg)}
+.note-c.on{background:var(--a-acc);color:#fff;border-color:var(--a-acc)}
+/* doctor */
+.ecg{height:34px;width:100%;display:block}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.dayb{all:unset;cursor:pointer;border:1px solid var(--a-line);border-radius:6px;padding:10px 4px;text-align:center;display:grid;gap:4px}
+.dayb .dl{font-family:var(--a-d);font-size:15px;color:var(--a-muted)}
+.dayb .dt{font-size:12px;font-weight:600}
+.k-rest{color:var(--a-muted)} .k-str{background:var(--a-acc);color:var(--a-on);border-color:var(--a-acc)} .k-str .dl{color:var(--a-on)}
+.k-car{background:#1F6E58;border-color:#2C8A6F} .k-mob{border-color:var(--a-acc);color:var(--a-acc)}
+.flags details{border-top:1px solid var(--a-line);padding:8px 0}
+.flags summary{cursor:pointer;font-weight:600;color:var(--a-acc2)}
+.spark{width:100%;height:46px;display:block}
+/* lyudmila */
+.t-lyudmila #room{background-image:repeating-linear-gradient(180deg,transparent 0 27px,rgba(30,107,75,.09) 27px 28px)}
+.env{display:grid;grid-template-columns:minmax(0,1fr) 96px;gap:6px 12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--a-line)}
+.env .bar{grid-column:1/-1;height:8px;background:rgba(30,107,75,.12);border-radius:2px;overflow:hidden}
+.env .bar i{display:block;height:100%;background:var(--a-acc)}
+.env .bar i.over{background:var(--bad)}
+.env .lbl{font-weight:700}
+.env .lim{text-align:right;width:96px}
+.env .meta2{grid-column:1/-1;display:flex;justify-content:space-between;font-family:var(--a-m);font-size:12.5px;color:var(--a-muted)}
+.total{font-family:var(--a-m);font-size:28px;color:var(--a-acc2);font-weight:600}
+/* travel */
+.map{width:100%;height:auto;display:block;background:#DCEAF2;border-radius:12px}
+.map .city{cursor:pointer}
+.map text{font-family:"Commissioner",sans-serif;font-size:12.5px;fill:#16324A;pointer-events:none}
+.legs{display:grid;gap:6px}
+.leg{display:flex;justify-content:space-between;gap:8px;padding:7px 10px;background:var(--a-card);border:1px solid var(--a-line);border-radius:10px;font-size:14px}
+.stampbox{border:2px dashed var(--a-acc);border-radius:8px;padding:10px 12px;color:var(--a-acc);font-family:var(--a-d);font-size:18px;text-align:center;transform:rotate(-2deg)}
+/* suroast */
+.agtron{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.ag{all:unset;cursor:pointer;aspect-ratio:3/5;max-width:100%;display:flex;align-items:flex-end;padding:6px;font-family:var(--a-m);font-size:11px;color:#F2EADF;border:1px solid #3A2A1A}
+.ag.sel{outline:2px solid var(--a-acc2);outline-offset:2px}
+.ag:nth-child(-n+2){color:#17100A}
+.agd{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;margin-top:14px}
+.agd .big{font-family:var(--a-d);font-size:46px;line-height:1}
+.offices a{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--a-line);color:var(--a-fg);text-decoration:none}
+.offices a:hover span:first-child{color:var(--a-acc2)}
+.offices a span:last-child{color:var(--a-muted);font-size:13px;text-align:right}
+/* vadim */
+.t-vadim .panel{box-shadow:inset 0 0 0 1px rgba(76,141,255,.08)}
+.lcd{font-family:var(--a-m);font-size:30px;color:var(--a-acc2);font-variant-numeric:tabular-nums}
+.phase{display:flex;height:34px;border-radius:3px;overflow:hidden;border:1px solid var(--a-line)}
+.phase div{display:grid;place-items:center;font-family:var(--a-m);font-size:11.5px;color:#0E1217;min-width:0;overflow:hidden;white-space:nowrap}
+.sl{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:4px 10px;align-items:center;font-size:14px}
+.sl input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--a-acc)}
+.gauge{position:relative;height:12px;border-radius:2px;background:linear-gradient(90deg,#28323F 0 30%,rgba(255,122,26,.35) 30% 66%,#28323F 66%)}
+.gauge i{position:absolute;top:-4px;width:3px;height:20px;background:var(--a-fg)}
+/* translator */
+.sits{display:flex;flex-wrap:wrap;gap:6px}
+.sit{all:unset;cursor:pointer;padding:6px 14px;border-radius:99px;font-size:14px;border:1px solid var(--a-line)}
+.sit.on{background:var(--a-acc);color:#fff;border-color:var(--a-acc)}
+.langs{display:flex;gap:4px;background:var(--a-card);border:1px solid var(--a-line);border-radius:99px;padding:3px}
+.lang{all:unset;cursor:pointer;padding:5px 12px;border-radius:99px;font-size:13px;font-weight:600}
+.lang.on{background:var(--a-acc2);color:#fff}
+.bub{display:grid;gap:6px}
+.q{all:unset;cursor:pointer;justify-self:end;max-width:85%;background:var(--a-acc);color:#fff;padding:9px 14px;border-radius:18px 18px 4px 18px;font-size:14.5px}
+.a{justify-self:start;max-width:88%;background:#E8FBF6;color:#0C3B31;padding:9px 14px;border-radius:18px 18px 18px 4px;font-size:15px}
+.a .tr{display:block;font-size:12.5px;color:#3B6E62;margin-top:2px}
+.a .say{all:unset;cursor:pointer;font-size:12px;font-weight:600;color:#0E7E67;margin-top:4px;display:inline-block}
+</style>
+
+<div id="hub" class="wrap" hidden>
+  <header class="hub-head">
+    <span class="eyebrow">Life Manager OS · проект Boris</span>
+    <h1>Агенты Бориса</h1>
+    <p>Одиннадцать постоянных агентов. Нажми на плитку, чтобы открыть экран агента: его инструмент, в котором можно всё потыкать, и полный системный промпт.</p>
+  </header>
+  <div class="tiles" id="tiles"></div>
+  <section class="howto" aria-label="Как переключаться">
+    <div><b>1 · Тред по имени</b><p>Каждый агент живёт в своём треде проекта Boris. Открыл тред «Людмила, бухгалтер» и пишешь Людмиле.</p></div>
+    <div><b>2 · Обращение в чате проекта</b><p>Пиши в общий чат: «Vadim, профиль для Гуджи». Координатор передаст в нужный тред.</p></div>
+    <div><b>3 · Этот хаб</b><p>Плитка открывает экран агента. Ссылки агентов друг на друга внизу каждого экрана.</p></div>
+  </section>
+</div>
+
+<div id="room" hidden></div>
+
+<script>
+const PROMPTS = /*__PROMPTS__*/{};
+const AGENTS = [
+ {id:"mentor",name:"Наставник",full:"Наставник по обучению",role:"Карта навыков, учебные планы, конспекты и интервальное повторение.",sys:"knowledge-os/",lvl:"READ → PROPOSE",style:"Библиотека",hand:["journal","vadim","translator"]},
+ {id:"journal",name:"Дневник",full:"Дневник и привычки",role:"Запись дня, настроение, энергия и трекер привычек без стыда за пропуски.",sys:"journal-os/",lvl:"READ, только сводки",style:"Блокнот в точку",hand:["doctor","mentor","lyudmila"]},
+ {id:"lawyer",name:"Юрист",full:"Юрист и документы",role:"Реестр документов со сроками, разбор договоров, чек-листы для чешских ведомств.",sys:"legal-os/",lvl:"READ, PROPOSE",style:"Досье",hand:["lyudmila","suroast","travel","translator"]},
+ {id:"chef",name:"Повар",full:"Повар",role:"Меню на неделю, список покупок для чешских магазинов, рецепты с режимом готовки.",sys:"chef-os/",lvl:"PROPOSE, без заказов",style:"Бистро",hand:["doctor","lyudmila","chashechki"]},
+ {id:"chashechki",name:"Чашечки",full:"Чашечки",role:"Каппинг и дегустация кофе по протоколу SCA, калибровка вкуса команды.",sys:"coffee-lab-os/cupping/",lvl:"READ",style:"Фарфор",hand:["vadim","suroast"],guess:true},
+ {id:"doctor",name:"Петр Генадич",full:"Петр Генадич, врач и тренер",role:"Тренировки на неделю, журнал показателей, подготовка к врачу. Без диагнозов.",sys:"health-os/ + fitness-coach-os/",lvl:"ANALYZE / READ",style:"Спортивная медицина",hand:["chef","journal"]},
+ {id:"lyudmila",name:"Людмила",full:"Людмила, бухгалтер",role:"Бюджет-конверты, учёт трат, подписки, чешские налоги и сроки.",sys:"finance-os/",lvl:"ANALYZE, без платежей",style:"Гроссбух",hand:["lawyer","travel","suroast"]},
+ {id:"travel",name:"Поездки",full:"Поездка по Европе + Испания",role:"Маршрут, билеты, план по дням, бюджет поездки и SOS. База — Прага.",sys:"travel-os/",lvl:"PROPOSE, покупки по «да»",style:"Открытка",hand:["translator","lyudmila","lawyer"]},
+ {id:"suroast",name:"suroast",full:"suroast",role:"Specialty-обжарка из Праги: бренд, финмодель, клиенты, инвесторы, вехи.",sys:"brand/ · offices/",lvl:"READ",style:"Бренд-бриф",hand:["vadim","chashechki","lyudmila","lawyer"]},
+ {id:"vadim",name:"Vadim",full:"Vadim, виртуальный обжарщик",role:"Профили обжарки по книгам и пробам, журнал уроков, база лотов.",sys:"roasting-knowledge/",lvl:"READ",style:"Ростер-лаборатория",hand:["chashechki","suroast","mentor"]},
+ {id:"translator",name:"Переводчик",full:"Переводчик",role:"Русский ↔ чешский, испанский, английский. Письма, разговорник, произношение.",sys:"language-os/",lvl:"READ",style:"Пузыри диалога",hand:["travel","lawyer","suroast"]}
+];
+const A = Object.fromEntries(AGENTS.map(a=>[a.id,a]));
+
+/* ---------- utils ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const load = (k,d) => { try{ const v = localStorage.getItem("agents:"+k); return v ? JSON.parse(v) : d; }catch(e){ return d; } };
+const save = (k,v) => { try{ localStorage.setItem("agents:"+k, JSON.stringify(v)); }catch(e){} };
+const fmt = (n,d=0) => Number(n).toLocaleString("ru-RU",{minimumFractionDigits:d,maximumFractionDigits:d});
+const today = () => { const d=new Date(); d.setHours(0,0,0,0); return d; };
+const iso = d => d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+const DOW = ["Вс","Пн","Вт","Ср","Чт","Пт","Сб"];
+function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.getElementById("room").appendChild(t); setTimeout(()=>t.remove(),1800); }
+
+function md(src){
+  const lines = src.split("\n"); let out = [], i = 0, list = null;
+  const inline = s => esc(s).replace(/`([^`]+)`/g,"<code>$1</code>").replace(/\*\*([^*]+)\*\*/g,"<strong>$1</strong>").replace(/\[([^\]]+)\]\(([^)]+)\)/g,"$1");
+  const closeList = () => { if(list){ out.push("</"+list+">"); list=null; } };
+  while(i < lines.length){
+    let l = lines[i];
+    if(l.startsWith("```")){ closeList(); let buf=[]; i++; while(i<lines.length && !lines[i].startsWith("```")){ buf.push(esc(lines[i])); i++; } out.push("<pre><code>"+buf.join("\n")+"</code></pre>"); i++; continue; }
+    if(/^#{1,3} /.test(l)){ closeList(); const n=l.match(/^#+/)[0].length; out.push(`<h${n}>${inline(l.slice(n+1))}</h${n}>`); i++; continue; }
+    if(l.startsWith(">")){ closeList(); let buf=[]; while(i<lines.length && lines[i].startsWith(">")){ buf.push(lines[i].replace(/^>\s?/,"")); i++; } out.push("<blockquote>"+inline(buf.join(" "))+"</blockquote>"); continue; }
+    if(/^\s*- /.test(l)){ if(list!=="ul"){ closeList(); out.push("<ul>"); list="ul"; } out.push("<li>"+inline(l.replace(/^\s*- /,""))+"</li>"); i++; continue; }
+    if(/^\d+\. /.test(l)){ if(list!=="ol"){ closeList(); out.push("<ol>"); list="ol"; } out.push("<li>"+inline(l.replace(/^\d+\. /,""))+"</li>"); i++; continue; }
+    if(/^\s+\S/.test(l) && list){ out[out.length-1] = out[out.length-1].replace(/<\/li>$/," "+inline(l.trim())+"</li>"); i++; continue; }
+    closeList();
+    if(l.trim()===""){ i++; continue; }
+    out.push("<p>"+inline(l)+"</p>"); i++;
+  }
+  closeList(); return out.join("\n");
+}
+
+/* ---------- hub ---------- */
+function renderHub(){
+  document.getElementById("tiles").innerHTML = AGENTS.map(a=>`
+    <button class="tile t-${a.id}" data-go="${a.id}" aria-label="Открыть: ${esc(a.full)}">
+      ${a.guess?'<span class="flag">предположение</span>':''}
+      <span class="tname">${esc(a.full)}</span>
+      <span class="trole">${esc(a.role)}</span>
+      <span class="tfoot"><span class="tdot"></span><span class="tsys">${esc(a.style)} · ${esc(a.sys)}</span></span>
+    </button>`).join("");
+}
+document.addEventListener("click", e=>{ const g=e.target.closest("[data-go]"); if(g){ location.hash = g.dataset.go; } });
+
+/* ---------- room ---------- */
+let curTab = "tool";
+function renderRoom(id){
+  const a = A[id]; const room = document.getElementById("room");
+  room.className = "t-"+id;
+  document.documentElement.style.setProperty("--rb", getComputedStyle(room).getPropertyValue("--a-bg"));
+  room.innerHTML = `
+   <div class="room-top"><div class="wrap">
+     <button class="back" data-go="hub">← Все агенты</button>
+     <div class="tabs" role="tablist">
+       <button class="tab" role="tab" data-tab="tool" aria-selected="${curTab==='tool'}">Инструмент</button>
+       <button class="tab" role="tab" data-tab="prompt" aria-selected="${curTab==='prompt'}">Промпт</button>
+     </div>
+   </div></div>
+   <div class="wrap">
+     <header class="room-hero">
+       ${id==="doctor"?'<svg class="ecg" viewBox="0 0 400 34" preserveAspectRatio="none" aria-hidden="true"><polyline fill="none" stroke="#3BE8A9" stroke-width="2" points="0,20 120,20 132,20 140,6 148,30 156,14 164,20 260,20 272,20 280,4 288,32 296,12 304,20 400,20"/></svg>':''}
+       ${id==="suroast"?suroastLogo(56):''}
+       <h1>${esc(a.full)}${a.guess?' <span class="example">предположение</span>':''}</h1>
+       <p class="role">${esc(a.role)}</p>
+       <div class="meta"><span class="chip mono">${esc(a.sys)}</span><span class="chip">доступ центра: ${esc(a.lvl)}</span><span class="chip">дизайн: ${esc(a.style)}</span></div>
+     </header>
+     <main class="room-body" id="rb"></main>
+     <div class="hand" style="padding-bottom:40px">Передаёт задачи: ${a.hand.map(h=>`<button data-go="${h}">${esc(A[h].full)}</button>`).join("")}</div>
+   </div>`;
+  room.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{ curTab=b.dataset.tab; renderRoom(id); });
+  const rb = document.getElementById("rb");
+  if(curTab==="prompt"){
+    rb.innerHTML = `<div class="prompt-bar"><button class="btn" id="cp">Скопировать промпт</button><span class="path">agents/${id}/PROMPT.md</span></div><article class="prompt" id="pt">${md(PROMPTS[id]||"")}</article>`;
+    document.getElementById("cp").onclick = () => {
+      navigator.clipboard.writeText(PROMPTS[id]).then(()=>toast("Промпт скопирован")).catch(()=>{ const r=document.createRange(); r.selectNodeContents(document.getElementById("pt")); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast("Выделил текст, скопируй вручную"); });
+    };
+  } else { TOOLS[id](rb); }
+}
+
+function route(){
+  const id = location.hash.slice(1);
+  const hub = document.getElementById("hub"), room = document.getElementById("room");
+  if(A[id]){ hub.hidden = true; room.hidden = false; document.documentElement.classList.add("in-room"); renderRoom(id); scrollTo(0,0); }
+  else { room.hidden = true; hub.hidden = false; document.documentElement.classList.remove("in-room"); curTab="tool"; }
+}
+addEventListener("hashchange", route);
+
+/* ================= TOOLS ================= */
+const TOOLS = {};
+
+/* ---- mentor ---- */
+TOOLS.mentor = el => {
+  let s = load("mentor", {skills:[["Обжарка кофе",0],["Каппинг",0],["Чешский язык",0],["Испанский язык",0],["Финансы и инвестиции",0]], ex:true});
+  const draw = () => {
+    const d0 = today();
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Карта навыков ${s.ex?'<span class="example">направления-пример</span>':''}</h2>
+        <p class="sub">Нажми на корешок, чтобы поставить свой уровень от 1 до 5. Повторное нажатие на тот же уровень сбрасывает его. Уровни ставишь ты, Наставник их не угадывает.</p>
+        <div class="skills">${s.skills.map((k,i)=>`<div class="skill"><span class="sn">${esc(k[0])}</span>
+          <span class="spines">${[1,2,3,4,5].map(n=>`<button class="spine ${k[1]>=n?'on':''}" data-i="${i}" data-n="${n}" aria-label="${esc(k[0])}: уровень ${n}"></button>`).join("")}</span>
+          <button class="del" data-del="${i}" aria-label="Удалить">✕</button></div>`).join("")}</div>
+        <form class="row" id="addsk" style="margin-top:14px"><input class="inp" id="mentor-new" placeholder="Новое направление" style="flex:1"><button class="btn">Добавить</button></form>
+        <p class="note">Оценено: ${s.skills.filter(k=>k[1]>0).length} из ${s.skills.length}. ${s.skills.some(k=>k[1]>0)?'Средний уровень оценённых: '+fmt(s.skills.filter(k=>k[1]>0).reduce((a,k)=>a+k[1],0)/s.skills.filter(k=>k[1]>0).length,1):'Средний уровень: недостаточно данных.'}</p>
+      </section>
+      <section class="panel"><h2 class="ph">Интервальное повторение</h2>
+        <p class="sub">Если выучить карточку сегодня, Наставник вернёт её в эти дни:</p>
+        <div class="srs">${[1,3,7,14,30].map(n=>{const d=addDays(d0,n);return `<div><b>+${n}</b><span>${DOW[d.getDay()]} ${d.getDate()}.${String(d.getMonth()+1).padStart(2,"0")}</span></div>`}).join("")}</div>
+        <h2 class="ph" style="margin-top:18px">Как Наставник ведёт тему</h2>
+        <ol style="padding-left:20px;margin:6px 0;font-size:14.5px"><li>Карта темы на 5–9 узлов</li><li>Задание на 25–45 минут</li><li>Выжимка, 3 вопроса и одно действие</li><li>Разбор недели в воскресенье</li></ol>
+      </section></div>`;
+    el.querySelectorAll(".spine").forEach(b=>b.onclick=()=>{ const k=s.skills[b.dataset.i]; const n=+b.dataset.n; k[1] = k[1]===n?0:n; s.ex=false; save("mentor",s); draw(); });
+    el.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>{ s.skills.splice(+b.dataset.del,1); save("mentor",s); draw(); });
+    el.querySelector("#addsk").onsubmit = e => { e.preventDefault(); const v=el.querySelector("#mentor-new").value.trim(); if(v){ s.skills.push([v,0]); save("mentor",s); draw(); } };
+  }; draw();
+};
+
+/* ---- journal ---- */
+TOOLS.journal = el => {
+  let s = load("journal", {habits:["Вода 2 л","Прогулка 30 мин","Чтение 20 мин","Без телефона после 23:00"], marks:{}, mood:{}});
+  const MOODS = ["·","😞","🙁","😐","🙂","😄"];
+  const draw = () => {
+    const d0 = today(); const days = [...Array(7)].map((_,i)=>addDays(d0,i-6));
+    const streak = h => { let n=0; for(let i=0;;i++){ if(s.marks[h+"|"+iso(addDays(d0,-i))]) n++; else if(i===0) continue; else break; if(i>365) break; } return n; };
+    const done = days.reduce((a,d)=>a+s.habits.filter(h=>s.marks[h+"|"+iso(d)]).length,0);
+    const moods = days.map(d=>s.mood[iso(d)]).filter(Boolean);
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Неделя привычек</h2><p class="sub">Нажимай на клетку, чтобы отметить. Пропуск не обнуляет неделю: серия считается по факту.</p>
+        <div class="scroll"><div class="hgrid">
+          <span></span>${days.map(d=>`<span class="hd">${DOW[d.getDay()]}<br>${d.getDate()}</span>`).join("")}
+          ${s.habits.map((h,hi)=>`<span class="hn">${esc(h)}${streak(h)?`<small>серия ${streak(h)}</small>`:""}</span>${days.map(d=>{const k=h+"|"+iso(d);return `<button class="hcell ${s.marks[k]?'on':''}" data-k="${esc(k)}" aria-label="${esc(h)} ${iso(d)}">${s.marks[k]?'✓':''}</button>`}).join("")}`).join("")}
+          <span class="hn">Настроение</span>${days.map(d=>`<button class="mood" data-m="${iso(d)}" aria-label="Настроение ${iso(d)}">${MOODS[s.mood[iso(d)]||0]}</button>`).join("")}
+        </div></div>
+        <form class="row" id="addh" style="margin-top:12px"><input class="inp" id="journal-new" placeholder="Новая привычка" style="flex:1"><button class="btn">Добавить</button></form>
+      </section>
+      <section class="panel"><h2 class="ph">Итог недели</h2>
+        <p style="font-family:Caveat,cursive;font-size:44px;margin:0;color:var(--a-acc)">${done} из ${s.habits.length*7}</p>
+        <p class="sub">отметок привычек за 7 дней</p>
+        <p style="margin:8px 0 0">Среднее настроение: <b>${moods.length>=4?fmt(moods.reduce((a,b)=>a+b,0)/moods.length,1)+' из 5':'недостаточно данных'}</b></p>
+        <p class="note">Среднее считаю, когда есть хотя бы 4 оценки за неделю. Так же работает Дневник в треде. Отметки хранятся только в этом браузере.</p>
+        <button class="btn ghost" id="jclr" style="margin-top:8px">Очистить отметки</button>
+      </section></div>`;
+    el.querySelectorAll(".hcell").forEach(b=>b.onclick=()=>{ const k=b.dataset.k; if(s.marks[k]) delete s.marks[k]; else s.marks[k]=1; save("journal",s); draw(); });
+    el.querySelectorAll(".mood").forEach(b=>b.onclick=()=>{ const k=b.dataset.m; s.mood[k]=((s.mood[k]||0)%5)+1; save("journal",s); draw(); });
+    el.querySelector("#addh").onsubmit = e => { e.preventDefault(); const v=el.querySelector("#journal-new").value.trim(); if(v){ s.habits.push(v); save("journal",s); draw(); } };
+    el.querySelector("#jclr").onclick = () => { s.marks={}; s.mood={}; save("journal",s); draw(); };
+  }; draw();
+};
+
+/* ---- lawyer ---- */
+TOOLS.lawyer = el => {
+  const DOCS = [["pass","Загранпаспорт","продление в консульстве, срок до 3 месяцев"],["pobyt","ВНЖ / povolení k pobytu","подача в MV ČR заранее, проверить срок на mvcr.cz"],["ins","Медстраховка","для ВНЖ нужна непрерывная"],["dl","Водительские права","обмен или международные"],["rent","Договор аренды","уведомление о продлении по договору"],["zivn","Živnostenský list / s.r.o.","выписка из obchodní rejstřík"],["tax","Налоговая декларация","daňové přiznání, срок уточнить у Людмилы"]];
+  let s = load("lawyer", {});
+  const draw = () => {
+    const d0 = today();
+    const rows = DOCS.map(([k,n,h])=>{ const v=s[k]; let days=null, cls="st-none", lab="срок не указан"; if(v){ days=Math.round((new Date(v)-d0)/864e5); if(days<0){cls="st-bad";lab="просрочен"} else if(days<30){cls="st-bad";lab=days+" дн."} else if(days<=90){cls="st-warn";lab=days+" дн."} else {cls="st-ok";lab=days+" дн."} } return {k,n,h,v,days,cls,lab}; });
+    const withD = rows.filter(r=>r.days!==null); const max = Math.max(365, ...withD.map(r=>r.days));
+    const pos = d => Math.max(0,Math.min(100, d/max*100));
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Реестр документов</h2><p class="sub">Укажи дату окончания. Номера сюда не вносятся: только срок. 🟢 больше 90 дней · 🟡 30–90 · 🔴 меньше 30.</p>
+        ${rows.map(r=>`<div class="docrow"><div><div class="dn">${esc(r.n)}</div><div class="dh">${esc(r.h)}</div></div>
+          <input class="inp dd" type="date" id="lawyer-${r.k}" data-k="${r.k}" value="${r.v||""}" aria-label="Срок: ${esc(r.n)}">
+          <span class="stamp ${r.cls}">${r.lab}</span></div>`).join("")}
+      </section>
+      <section class="panel"><h2 class="ph">Шкала сроков</h2><p class="sub">От сегодня до ${max>365?fmt(max)+' дней':'года'} вперёд.</p>
+        ${withD.length?`<div class="tl">${[0,30,90].map(t=>`<span class="tick" style="left:${pos(t)}%"></span><span class="tl-l" style="left:${pos(t)}%">${t?'+'+t:'сегодня'}</span>`).join("")}
+          ${withD.map(r=>`<span class="mk" title="${esc(r.n)}" style="left:${pos(Math.max(0,r.days))}%;background:${r.cls==='st-ok'?'var(--ok)':r.cls==='st-warn'?'var(--warn)':'var(--bad)'}"></span>`).join("")}</div>
+          <table class="t" style="margin-top:8px"><tbody>${withD.sort((a,b)=>a.days-b.days).map(r=>`<tr><td>${esc(r.n)}</td><td class="num">${new Date(r.v).toLocaleDateString("ru-RU")}</td></tr>`).join("")}</tbody></table>`
+          :`<div class="empty">Недостаточно данных. Введи хотя бы одну дату слева, и здесь появится шкала.</div>`}
+        <p class="note">Напоминания Юрист ставит за 90, 30 и 7 дней через календарь, после твоего подтверждения.</p>
+      </section></div>`;
+    el.querySelectorAll("input[type=date]").forEach(i=>i.onchange=()=>{ if(i.value) s[i.dataset.k]=i.value; else delete s[i.dataset.k]; save("lawyer",s); draw(); });
+  }; draw();
+};
+
+/* ---- chef ---- */
+TOOLS.chef = el => {
+  const DISH = {
+    "Овсянка с грушей":{i:[["овсяные хлопья","Бакалея"],["груша","Овощи и фрукты"],["молоко","Молочное"]]},
+    "Скрамбл с тостом":{i:[["яйца","Молочное"],["хлеб","Бакалея"],["сливочное масло","Молочное"]]},
+    "Творог с ягодами":{i:[["tvaroh","Молочное"],["ягоды (заморозка)","Заморозка"]]},
+    "Паста с тунцом":{i:[["паста","Бакалея"],["тунец в банке","Бакалея"],["помидоры черри","Овощи и фрукты"],["чеснок","Овощи и фрукты"]]},
+    "Курица с рисом":{i:[["куриное филе","Мясо и рыба"],["рис","Бакалея"],["брокколи","Овощи и фрукты"]]},
+    "Гуляш":{i:[["говядина","Мясо и рыба"],["лук","Овощи и фрукты"],["паприка молотая","Бакалея"],["картофель","Овощи и фрукты"]]},
+    "Лосось с картофелем":{i:[["лосось","Мясо и рыба"],["картофель","Овощи и фрукты"],["лимон","Овощи и фрукты"]]},
+    "Чечевичный суп":{i:[["красная чечевица","Бакалея"],["морковь","Овощи и фрукты"],["лук","Овощи и фрукты"]]},
+    "Салат с фетой":{i:[["огурцы","Овощи и фрукты"],["помидоры","Овощи и фрукты"],["фета","Молочное"]]},
+    "Остатки ужина":{i:[]},
+    "Шакшука":{i:[["яйца","Молочное"],["помидоры в собственном соку","Бакалея"],["перец","Овощи и фрукты"]]},
+    "Бургер дома":{i:[["фарш говяжий","Мясо и рыба"],["булочки","Бакалея"],["сыр чеддер","Молочное"]]}
+  };
+  const MEALS=["Завтрак","Обед","Ужин"], D=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+  let s = load("chef", {m:{"0-0":"Овсянка с грушей","0-2":"Паста с тунцом","1-1":"Остатки ужина","1-2":"Курица с рисом","2-2":"Чечевичный суп","4-2":"Лосось с картофелем","5-0":"Шакшука","6-1":"Гуляш"}, have:{}, ex:true});
+  let sel = null;
+  const draw = () => {
+    const need = {}; Object.values(s.m).forEach(d=>(DISH[d]?DISH[d].i:[]).forEach(([n,g])=>{ need[g]=need[g]||{}; need[g][n]=(need[g][n]||0)+1; }));
+    const groups = ["Овощи и фрукты","Мясо и рыба","Молочное","Бакалея","Заморозка"].filter(g=>need[g]);
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Меню на неделю ${s.ex?'<span class="example">пример</span>':''}</h2>
+        <p class="sub">${sel?'Выбери блюдо для ячейки «'+D[sel.split("-")[0]]+', '+MEALS[sel.split("-")[1]].toLowerCase()+'» или очисти её.':'Нажми на ячейку, потом на блюдо.'}</p>
+        <div class="scroll"><div class="menu"><span></span>${MEALS.map(m=>`<span class="mh">${m}</span>`).join("")}
+          ${D.map((d,di)=>`<span class="md">${d}</span>${MEALS.map((_,mi)=>{const k=di+"-"+mi;return `<button class="mc ${s.m[k]?'f':''} ${sel===k?'sel':''}" data-c="${k}">${esc(s.m[k]||"+")}</button>`}).join("")}`).join("")}
+        </div></div>
+        <div class="dishes" style="margin-top:12px">${Object.keys(DISH).map(d=>`<button class="dish" data-d="${esc(d)}">${esc(d)}</button>`).join("")}<button class="dish" data-d="">✕ очистить</button></div>
+      </section>
+      <section class="panel shop"><h2 class="ph">Список покупок</h2><p class="sub">Собран из меню. Отметь, что уже есть дома. Цены не показываю: каталогов магазинов у Повара пока нет.</p>
+        ${groups.length?groups.map(g=>`<h4>${g}</h4><ul>${Object.entries(need[g]).map(([n,c])=>`<li><input type="checkbox" id="chef-${esc(n)}" data-h="${esc(n)}" ${s.have[n]?'checked':''}><label for="chef-${esc(n)}" class="${s.have[n]?'done':''}">${esc(n)}${c>1?' ×'+c:''}</label></li>`).join("")}</ul>`).join(""):'<div class="empty">Меню пустое. Выбери хотя бы одно блюдо.</div>'}
+        <button class="btn ghost" id="chclr">Очистить неделю</button>
+      </section></div>`;
+    el.querySelectorAll(".mc").forEach(b=>b.onclick=()=>{ sel = sel===b.dataset.c?null:b.dataset.c; draw(); });
+    el.querySelectorAll(".dish").forEach(b=>b.onclick=()=>{ if(!sel){ toast("Сначала выбери ячейку"); return; } if(b.dataset.d) s.m[sel]=b.dataset.d; else delete s.m[sel]; s.ex=false; sel=null; save("chef",s); draw(); });
+    el.querySelectorAll("[data-h]").forEach(c=>c.onchange=()=>{ s.have[c.dataset.h]=c.checked; save("chef",s); draw(); });
+    el.querySelector("#chclr").onclick=()=>{ s={m:{},have:{},ex:false}; save("chef",s); draw(); };
+  }; draw();
+};
+
+/* ---- chashechki ---- */
+TOOLS.chashechki = el => {
+  const ATT = [["fr","Аромат","Fragrance/Aroma"],["fl","Вкус","Flavor"],["af","Послевкусие","Aftertaste"],["ac","Кислотность","Acidity"],["bo","Тело","Body"],["ba","Баланс","Balance"],["ov","Общее","Overall"]];
+  const CUP = [["un","Однородность","Uniformity"],["cl","Чистота","Clean Cup"],["sw","Сладость","Sweetness"]];
+  const NOTES = ["цитрус","ягоды","косточковые","тропические","цветы","чай","карамель","шоколад","орех","специи","зерновые","землистые"];
+  let s = load("cup", {fr:8,fl:8,af:7.75,ac:8,bo:7.75,ba:7.75,ov:8,un:10,cl:10,sw:10,def:0,notes:["ягоды","шоколад"],name:"Образец A",ex:true});
+  const draw = () => {
+    const tot = ATT.reduce((a,[k])=>a+ +s[k],0) + CUP.reduce((a,[k])=>a+ +s[k],0) - s.def;
+    const cx=130, cy=120, R=88, n=ATT.length;
+    const pt = (i,v) => { const ang=-Math.PI/2+i*2*Math.PI/n; const r=R*(v-6)/4; return [cx+r*Math.cos(ang), cy+r*Math.sin(ang)]; };
+    const poly = ATT.map(([k],i)=>pt(i,s[k]).join(",")).join(" ");
+    const rings = [7,8,9,10].map(v=>`<polygon points="${ATT.map((_,i)=>pt(i,v).join(",")).join(" ")}" fill="none" stroke="#C9D3EA" stroke-width="1"/>`).join("");
+    const labels = ATT.map(([k,r],i)=>{ const [x,y]=pt(i,10.9); return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${r}</text>`}).join("");
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Бланк каппинга SCA ${s.ex?'<span class="example">пример заполнения</span>':''}</h2>
+        <p class="sub">Атрибуты от 6,00 до 10,00 с шагом 0,25. Двигай ползунки, итог и диаграмма пересчитаются. Баллы ставишь ты.</p>
+        <div class="row" style="margin-bottom:10px"><input class="inp" id="cup-name" value="${esc(s.name)}" aria-label="Название образца" style="flex:1"></div>
+        <div class="attrs">${ATT.map(([k,r,e])=>`<label class="attr"><span>${r}<span class="en">${e}</span></span><input type="range" id="cup-${k}" min="6" max="10" step="0.25" value="${s[k]}" data-k="${k}"><span class="num">${fmt(s[k],2)}</span></label>`).join("")}
+        ${CUP.map(([k,r,e])=>`<label class="attr"><span>${r}<span class="en">${e} · 5 чашек × 2</span></span><input type="range" id="cup-${k}" min="0" max="10" step="2" value="${s[k]}" data-k="${k}"><span class="num">${fmt(s[k],0)}</span></label>`).join("")}
+        <label class="attr"><span>Дефекты<span class="en">вычитаются из итога</span></span><input type="range" id="cup-def" min="0" max="20" step="2" value="${s.def}" data-k="def"><span class="num">−${s.def}</span></label></div>
+      </section>
+      <section class="panel" style="display:grid;gap:10px;align-content:start">
+        <div><span class="sub" style="margin:0">${esc(s.name)} · итог</span><div class="score">${fmt(tot,2)}</div>
+          <span class="chip">${tot>=90?'Outstanding':tot>=85?'Excellent':tot>=80?'Very Good · specialty':'ниже specialty'}</span></div>
+        <svg class="radar" viewBox="-34 0 328 240" role="img" aria-label="Диаграмма вкуса">${rings}<polygon points="${poly}" fill="rgba(31,72,168,.18)" stroke="#1F48A8" stroke-width="2"/>${ATT.map(([k],i)=>{const [x,y]=pt(i,s[k]);return `<circle cx="${x}" cy="${y}" r="3.5" fill="#1F48A8"/>`}).join("")}${labels}</svg>
+        <div><p class="sub" style="margin-bottom:6px">Ноты по колесу вкусов</p><div class="notes">${NOTES.map(x=>`<button class="note-c ${s.notes.includes(x)?'on':''}" data-n="${x}">${x}</button>`).join("")}</div></div>
+      </section></div>`;
+    el.querySelectorAll("input[type=range]").forEach(r=>r.oninput=()=>{ s[r.dataset.k]=+r.value; s.ex=false; save("cup",s); draw(); el.querySelector("#"+r.id).focus(); });
+    el.querySelector("#cup-name").onchange=e=>{ s.name=e.target.value||"Образец"; save("cup",s); draw(); };
+    el.querySelectorAll(".note-c").forEach(b=>b.onclick=()=>{ const n=b.dataset.n; s.notes = s.notes.includes(n)?s.notes.filter(x=>x!==n):[...s.notes,n]; save("cup",s); draw(); });
+  }; draw();
+};
+
+/* ---- doctor ---- */
+TOOLS.doctor = el => {
+  const KINDS = [["rest","Отдых","k-rest"],["str","Сила","k-str"],["car","Кардио","k-car"],["mob","Мобильность","k-mob"]];
+  let s = load("doctor", {plan:["str","car","rest","str","mob","car","rest"], log:[], ex:true});
+  const DN=["Пн","Вт","Ср","Чт","Пт","Сб","Вс"];
+  const spark = key => { const v=s.log.filter(r=>r[key]!=="" && r[key]!=null).map(r=>+r[key]); if(v.length<2) return '<div class="empty" style="padding:8px">Недостаточно данных: нужно 2+ замера</div>'; const mn=Math.min(...v),mx=Math.max(...v),rg=(mx-mn)||1; const p=v.map((x,i)=>[i/(v.length-1)*300, 40-(x-mn)/rg*34]); return `<svg class="spark" viewBox="0 0 300 46" preserveAspectRatio="none"><polyline fill="none" stroke="#3BE8A9" stroke-width="2" points="${p.map(q=>q.join(",")).join(" ")}"/><circle cx="${p[p.length-1][0]}" cy="${p[p.length-1][1]}" r="3.5" fill="#3BE8A9"/></svg><span class="num" style="font-size:12px;color:var(--a-muted)">${fmt(mn,1)} – ${fmt(mx,1)} · последний ${fmt(v[v.length-1],1)}</span>`; };
+  const draw = () => {
+    const cnt = k => s.plan.filter(x=>x===k).length;
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">План недели ${s.ex?'<span class="example">пример</span>':''}</h2><p class="sub">Нажимай на день: отдых → сила → кардио → мобильность.</p>
+        <div class="week">${s.plan.map((k,i)=>{const K=KINDS.find(x=>x[0]===k);return `<button class="dayb ${K[2]}" data-d="${i}"><span class="dl">${DN[i]}</span><span class="dt">${K[1]}</span></button>`}).join("")}</div>
+        <p style="margin:12px 0 0">Сила <b>${cnt("str")}</b> · Кардио <b>${cnt("car")}</b> · Мобильность <b>${cnt("mob")}</b> · Отдых <b>${cnt("rest")}</b></p>
+        <p class="note">${cnt("rest")===0?'Петр Генадич: «Борис, без героизма. Хотя бы один день отдыха.»':cnt("str")>=4?'Петр Генадич: четыре силовых подряд тяжело восстанавливать, проверь, чтобы между ними был день.':'Прогрессия: +5–10 % нагрузки, если прошлую тренировку закончил с RPE 8 или ниже.'}</p>
+        <h2 class="ph" style="margin-top:18px">Красные флаги</h2>
+        <div class="flags"><details><summary>Боль в груди, одышка, обморок</summary><p>Сразу 155 или 112. Никаких советов вместо помощи.</p></details><details><summary>Внезапная слабость, онемение лица или руки</summary><p>Возможен инсульт: 155 немедленно, запомни время начала.</p></details><details><summary>Боль в суставе, отёк после тренировки</summary><p>Остановить нагрузку на эту зону, обсудить с врачом, если не проходит за 48 часов.</p></details></div>
+      </section>
+      <section class="panel"><h2 class="ph">Журнал показателей</h2><p class="sub">Только твои замеры. Тренд появится после второго.</p>
+        <form id="dlog" class="row"><input class="inp" type="date" id="doctor-date" value="${iso(today())}"><input class="inp" id="doctor-w" type="number" step="0.1" placeholder="вес, кг" style="width:92px"><input class="inp" id="doctor-s" type="number" step="0.1" placeholder="сон, ч" style="width:80px"><input class="inp" id="doctor-p" type="number" placeholder="пульс" style="width:80px"><button class="btn">Записать</button></form>
+        <div style="display:grid;gap:10px;margin-top:12px"><div><b>Вес</b>${spark("w")}</div><div><b>Сон</b>${spark("s")}</div><div><b>Пульс покоя</b>${spark("p")}</div></div>
+        ${s.log.length?`<button class="btn ghost" id="dclr" style="margin-top:10px">Очистить журнал (${s.log.length})</button>`:''}
+      </section></div>`;
+    el.querySelectorAll(".dayb").forEach(b=>b.onclick=()=>{ const i=+b.dataset.d; const j=KINDS.findIndex(x=>x[0]===s.plan[i]); s.plan[i]=KINDS[(j+1)%4][0]; s.ex=false; save("doctor",s); draw(); });
+    el.querySelector("#dlog").onsubmit=e=>{ e.preventDefault(); const g=id=>el.querySelector(id).value; const r={d:g("#doctor-date"),w:g("#doctor-w"),s:g("#doctor-s"),p:g("#doctor-p")}; if(!r.w&&!r.s&&!r.p){ toast("Введи хотя бы один показатель"); return; } s.log.push(r); s.log.sort((a,b)=>a.d<b.d?-1:1); save("doctor",s); draw(); };
+    const c=el.querySelector("#dclr"); if(c) c.onclick=()=>{ s.log=[]; save("doctor",s); draw(); };
+  }; draw();
+};
+
+/* ---- lyudmila ---- */
+TOOLS.lyudmila = el => {
+  const CATS = ["Жильё","Еда","Транспорт","Кафе и рестораны","Здоровье и спорт","Подписки","Одежда","Разное"];
+  const blank = {lim:{}, ex:[], sample:false};
+  let s = load("lyud", blank);
+  const SAMPLE = {lim:{"Жильё":18000,"Еда":7000,"Транспорт":1500,"Кафе и рестораны":3000,"Подписки":800,"Разное":2000}, ex:[["Еда",642,"Albert"],["Еда",389,"Lidl"],["Кафе и рестораны",310,"кофе и обед"],["Транспорт",550,"проездной"],["Подписки",259,"музыка"],["Еда",1240,"Rohlik"]], sample:true};
+  const draw = () => {
+    const spent = {}; s.ex.forEach(([c,a])=>spent[c]=(spent[c]||0)+ +a);
+    const totL = Object.values(s.lim).reduce((a,b)=>a+ +b,0), totS = Object.values(spent).reduce((a,b)=>a+b,0);
+    const mon = new Date().toLocaleDateString("ru-RU",{month:"long",year:"numeric"});
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Конверты · ${mon} ${s.sample?'<span class="example">пример, не твои цифры</span>':''}</h2>
+        <p class="sub">Задай лимит справа. Траты добавляй формой ниже. Валюта: Kč.</p>
+        ${CATS.map(c=>{const L=+s.lim[c]||0, S=spent[c]||0; const pc=L?Math.min(100,S/L*100):0; return `<div class="env"><span class="lbl">${c}</span><input class="inp num lim" id="lyud-${c}" data-c="${c}" type="number" min="0" step="100" value="${L||""}" placeholder="лимит" aria-label="Лимит ${c}">
+          <span class="bar"><i class="${L&&S>L?'over':''}" style="width:${L?pc:0}%"></i></span>
+          <span class="meta2"><span>потрачено ${fmt(S)} Kč</span><span>${L?(S>L?'перерасход '+fmt(S-L):'остаток '+fmt(L-S))+' Kč':'лимит не задан'}</span></span></div>`}).join("")}
+      </section>
+      <section class="panel"><h2 class="ph">Итог месяца</h2>
+        <div class="total">${totS?fmt(totS)+' Kč':'—'}</div><p class="sub">${totL?'из '+fmt(totL)+' Kč лимитов · '+(totS<=totL?'в рамках':'перерасход '+fmt(totS-totL)+' Kč'):'Лимиты не заданы: недостаточно данных для сравнения.'}</p>
+        <form id="lexp" class="row"><select class="inp" id="lyud-cat">${CATS.map(c=>`<option>${c}</option>`).join("")}</select><input class="inp num" id="lyud-amt" type="number" min="1" placeholder="сумма" style="width:96px"><input class="inp" id="lyud-what" placeholder="где" style="flex:1;min-width:80px"><button class="btn">Добавить</button></form>
+        <table class="t" style="margin-top:10px"><tbody>${s.ex.slice().reverse().slice(0,8).map(([c,a,w])=>`<tr><td>${esc(w||"—")}</td><td style="color:var(--a-muted)">${esc(c)}</td><td class="num" style="text-align:right">${fmt(a)} Kč</td></tr>`).join("")||'<tr><td class="empty" colspan="3">Трат пока нет</td></tr>'}</tbody></table>
+        <div class="row" style="margin-top:12px">${s.sample||!s.ex.length?`<button class="btn ghost" id="lsmp">${s.sample?'Убрать пример':'Показать на примере'}</button>`:''}${s.ex.length&&!s.sample?'<button class="btn ghost" id="lclr">Очистить месяц</button>':''}</div>
+        <p class="note">Людмила никогда не просит пароль от банка и не делает переводов. Выписку присылай файлом CSV в её тред.</p>
+      </section></div>`;
+    el.querySelectorAll(".lim").forEach(i=>i.onchange=()=>{ if(s.sample) s=JSON.parse(JSON.stringify(blank)); if(i.value) s.lim[i.dataset.c]=+i.value; else delete s.lim[i.dataset.c]; save("lyud",s); draw(); });
+    el.querySelector("#lexp").onsubmit=e=>{ e.preventDefault(); const a=+el.querySelector("#lyud-amt").value; if(!a) { toast("Введи сумму"); return; } if(s.sample) s=JSON.parse(JSON.stringify(blank)); s.ex.push([el.querySelector("#lyud-cat").value,a,el.querySelector("#lyud-what").value.trim()]); save("lyud",s); draw(); };
+    const sm=el.querySelector("#lsmp"); if(sm) sm.onclick=()=>{ s = s.sample?JSON.parse(JSON.stringify(blank)):JSON.parse(JSON.stringify(SAMPLE)); save("lyud",s); draw(); };
+    const cl=el.querySelector("#lclr"); if(cl) cl.onclick=()=>{ s.ex=[]; save("lyud",s); draw(); };
+  };
+  if(!s.ex.length && !Object.keys(s.lim).length) s = JSON.parse(JSON.stringify(SAMPLE));
+  draw();
+};
+
+/* ---- travel ---- */
+TOOLS.travel = el => {
+  const C = {"Прага":[50.08,14.44],"Вена":[48.21,16.37],"Мюнхен":[48.14,11.58],"Берлин":[52.52,13.40],"Амстердам":[52.37,4.90],"Париж":[48.86,2.35],"Цюрих":[47.38,8.54],"Милан":[45.46,9.19],"Рим":[41.90,12.50],"Лион":[45.76,4.84],"Марсель":[43.30,5.37],"Барселона":[41.39,2.17],"Валенсия":[39.47,-0.38],"Мадрид":[40.42,-3.70],"Севилья":[37.39,-5.98],"Гранада":[37.18,-3.60],"Малага":[36.72,-4.42],"Бильбао":[43.26,-2.93],"Лиссабон":[38.72,-9.14],"Порту":[41.15,-8.61]};
+  const X = lon => (lon+10.5)*19, Y = lat => (53.8-lat)*25.5;
+  const hav = (a,b) => { const r=Math.PI/180, [la1,lo1]=C[a], [la2,lo2]=C[b]; const h=Math.sin((la2-la1)*r/2)**2+Math.cos(la1*r)*Math.cos(la2*r)*Math.sin((lo2-lo1)*r/2)**2; return 6371*2*Math.asin(Math.sqrt(h)); };
+  let s = load("travel", {route:["Прага","Барселона","Валенсия","Мадрид","Прага"], ex:true});
+  const draw = () => {
+    const W=X(17.5), H=Y(35.6); const r=s.route;
+    const legs = r.slice(1).map((c,i)=>[r[i],c,hav(r[i],c)]); const tot = legs.reduce((a,l)=>a+l[2],0);
+    el.innerHTML = `<div class="grid2">
+      <section class="panel" style="padding:10px"><h2 class="ph" style="padding:6px 6px 0">Маршрут ${s.ex?'<span class="example">пример</span>':''}</h2><p class="sub" style="padding:0 6px">Нажимай на города по порядку, чтобы построить маршрут.</p>
+        <svg class="map" viewBox="0 0 ${W} ${H}" role="img" aria-label="Карта городов Европы">
+          ${[-10,-5,0,5,10,15].map(l=>`<line x1="${X(l)}" y1="0" x2="${X(l)}" y2="${H}" stroke="#C3D9E6" stroke-width="1"/>`).join("")}${[40,45,50].map(l=>`<line x1="0" y1="${Y(l)}" x2="${W}" y2="${Y(l)}" stroke="#C3D9E6" stroke-width="1"/><text x="4" y="${Y(l)-3}" style="fill:#7FA3BB">${l}° с.ш.</text>`).join("")}
+          ${r.length>1?`<polyline fill="none" stroke="#DD5730" stroke-width="2.5" stroke-dasharray="6 4" stroke-linejoin="round" points="${r.map(c=>X(C[c][1])+","+Y(C[c][0])).join(" ")}"/>`:''}
+          ${Object.entries(C).map(([n,[la,lo]])=>{const on=r.includes(n);return `<g class="city" data-c="${n}" tabindex="0" role="button" aria-label="${n}"><circle cx="${X(lo)}" cy="${Y(la)}" r="${on?7:5}" fill="${on?'#DD5730':'#FFF9F0'}" stroke="#1D5C8C" stroke-width="1.5"/><text x="${X(lo)+8}" y="${Y(la)+4}">${n}</text></g>`}).join("")}
+        </svg>
+        <div class="row" style="padding:10px 6px 4px"><button class="btn ghost" id="tundo">Убрать последний</button><button class="btn ghost" id="tclr">Новый маршрут</button></div>
+      </section>
+      <section class="panel"><div class="stampbox">${r.length?esc(r[0])+' → '+esc(r[r.length-1]):'Маршрут пуст'}</div>
+        <p class="sub" style="margin-top:12px">Расстояния по прямой, считаются из координат. Время и цены переездов Поездки проверяют отдельно и указывают дату проверки.</p>
+        <div class="legs">${legs.map(([a,b,d])=>`<div class="leg"><span>${esc(a)} → ${esc(b)}</span><span class="num">${fmt(d)} км</span></div>`).join("")||'<div class="empty">Выбери хотя бы два города</div>'}</div>
+        ${legs.length?`<p style="margin:10px 0 0">Всего по прямой: <b class="num">${fmt(tot)} км</b> · ${r.length} точек</p>`:''}
+      </section></div>`;
+    el.querySelectorAll(".city").forEach(g=>{ const f=()=>{ s.route.push(g.dataset.c); s.ex=false; save("travel",s); draw(); }; g.onclick=f; g.onkeydown=e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); f(); } }; });
+    el.querySelector("#tundo").onclick=()=>{ s.route.pop(); save("travel",s); draw(); };
+    el.querySelector("#tclr").onclick=()=>{ s={route:["Прага"],ex:false}; save("travel",s); draw(); };
+  }; draw();
+};
+
+/* ---- suroast ---- */
+const AG = [["NORDIC",115,"#DCA564","Самая светлая. Прозрачная кислотность, чайность, цветы."],["FJORD",105,"#C48248","Светлая. Фрукт и сладость, акцентный цвет бренда."],["DUSK",95,"#A5582A","Светло-средняя. Баланс кислотности и сладости."],["EMBER",85,"#8A3E1C","Средняя. Карамель, тело плотнее."],["OBSIDIAN",75,"#64260C","Средне-тёмная. Шоколад, орех, для молока."],["VOID",65,"#3C1204","Тёмная. Горький шоколад, плотное тело."],["PROCESS+","●","#0A0A0A","Экспериментальные обработки, отдельный уровень."]];
+function suroastLogo(sz){ const P=[[-58,-30],[-20,18],[18,-38],[52,8],[-40,36],[30,40],[66,-24]]; return `<svg width="${sz*160/150}" height="${sz}" viewBox="0 0 160 150" aria-label="Знак suroast: семь точек">${P.map(([x,y],i)=>`<circle cx="${80+x}" cy="${75+y}" r="13" fill="${AG[i][2]}" ${i===6?'stroke="#3A2A1A" stroke-width="1.5"':''}/>`).join("")}</svg>`; }
+TOOLS.suroast = el => {
+  let sel = load("sur", 1);
+  const OFF = [["suroast HQ","финмодель v10, вехи, риски","https://claude.ai/artifact/TtFd3RBzUwH2SjLaxXdqag"],["Клиенты","кафе, воронка, цели 40 → 60 → 120","https://claude.ai/artifact/NDwTiVvsX8tg8yw91mHBW5"],["Рынки","страны Европы и регионы","https://claude.ai/artifact/YFCMFsDy2zskNSPAeXoX4Z"],["Склад","зелёный кофе, лоты, упаковка","https://claude.ai/artifact/1QeX2CX8XqSwSCww2uuMzx"],["Инвесторы и цели","раунд 6 × 1 млн Kč, вехи M1 → M26","https://claude.ai/artifact/TDmpwv4qscVxkNhaEmTEdf"],["Инвесторы suroast","канбан: к кому идти","https://claude.ai/artifact/RH3vJE5mKD8KFZBXmMWzC4"],["Финмодель CAPEX SUR","Google Sheet","https://docs.google.com/spreadsheets/d/1gPeGdmOiJ8aOQQswf53OxrsDTT1ltKAsK7AajdytW0E/edit"]];
+  const draw = () => {
+    const g = AG[sel];
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Seven Unique Roasts</h2><p class="sub">Шкала Agtron из бренд-брифа. Нажми на уровень.</p>
+        <div class="agtron">${AG.map((a,i)=>`<button class="ag ${i===sel?'sel':''}" data-i="${i}" style="background:${a[2]}" aria-label="${a[0]}">${a[1]}</button>`).join("")}</div>
+        <div class="agd">${suroastLogo(92)}<div><div class="big">${g[0]}</div><div class="num" style="color:var(--a-muted)">Agtron ${g[1]} · ${g[2]} · уровень ${sel+1} из 7</div><p style="margin:6px 0 0">${g[3]}</p></div></div>
+        <p class="note">«Seven boxes. One bag.» Семь коробок по уровню обжарки, пакет внутри один для всех лотов. Источник: brand/suroast_brand_brief.md. Описания вкуса — ориентир, у каждого лота своя кривая.</p>
+      </section>
+      <section class="panel offices"><h2 class="ph">Офисы компании</h2><p class="sub">Живые страницы в claude.ai. Цифры смотри там, здесь их не дублирую.</p>
+        ${OFF.map(([n,d,u])=>`<a href="${u}" target="_blank" rel="noopener"><span>${n} ↗</span><span>${d}</span></a>`).join("")}
+      </section></div>`;
+    el.querySelectorAll(".ag").forEach(b=>b.onclick=()=>{ sel=+b.dataset.i; save("sur",sel); draw(); });
+  }; draw();
+};
+
+/* ---- vadim ---- */
+TOOLS.vadim = el => {
+  let s = load("vadim", {dry:270, mai:210, dev:105, green:100, roasted:86, ag:2});
+  const mm = sec => Math.floor(sec/60)+":"+String(sec%60).padStart(2,"0");
+  const draw = () => {
+    const tot=s.dry+s.mai+s.dev, dtr=s.dev/tot*100, loss=s.green? (s.green-s.roasted)/s.green*100 : 0;
+    const p = v => v/tot*100;
+    el.innerHTML = `<div class="grid2">
+      <section class="panel"><h2 class="ph">Фазы обжарки</h2><p class="sub">Двигай длительность фаз. DTR = время развития после первого крэка / общее время.</p>
+        <div class="phase"><div style="width:${p(s.dry)}%;background:#E8D27A">сушка ${mm(s.dry)}</div><div style="width:${p(s.mai)}%;background:#D98A3C">Майяр ${mm(s.mai)}</div><div style="width:${p(s.dev)}%;background:${AG[s.ag][2]};color:${s.ag<2?'#0E1217':'#F2EADF'}">развитие</div></div>
+        <div style="display:grid;gap:12px;margin-top:14px">
+          ${[["dry","Сушка",120,420],["mai","Реакция Майяра",90,360],["dev","Развитие после 1-го крэка",30,240]].map(([k,n,a,b])=>`<label class="sl"><span>${n}</span><span class="num" style="text-align:right">${mm(s[k])}</span><input type="range" id="vadim-${k}" min="${a}" max="${b}" step="5" value="${s[k]}" data-k="${k}"></label>`).join("")}
+        </div>
+        <p class="sub" style="margin:14px 0 6px">Целевой Agtron</p>
+        <div class="row">${AG.slice(0,6).map((a,i)=>`<button class="chip mono" data-ag="${i}" style="background:${i===s.ag?a[2]:'transparent'};color:${i===s.ag&&i<2?'#0E1217':'inherit'};cursor:pointer">${a[1]} ${a[0]}</button>`).join("")}</div>
+      </section>
+      <section class="panel" style="display:grid;gap:14px;align-content:start">
+        <div><span class="sub">Общее время</span><div class="lcd">${mm(tot)}</div></div>
+        <div><span class="sub">DTR</span><div class="lcd" style="color:${dtr>=15&&dtr<=25?'var(--a-acc)':'var(--a-fg)'}">${fmt(dtr,1)} %</div>
+          <div class="gauge" aria-hidden="true"><i style="left:calc(${Math.min(100,dtr/50*100)}% - 1px)"></i></div>
+          <p class="note">Подсвечен диапазон 15–25 %: частый ориентир из практики, не правило. Для конкретного лота Vadim сверяет с roast-rules.md и журналом уроков.</p></div>
+        <div><span class="sub">Потеря массы</span>
+          <div class="row" style="margin:6px 0"><label class="row" style="gap:6px">зелёный <input class="inp num" id="vadim-green" type="number" min="1" value="${s.green}" style="width:80px"> г</label><label class="row" style="gap:6px">после <input class="inp num" id="vadim-roasted" type="number" min="0" value="${s.roasted}" style="width:80px"> г</label></div>
+          <div class="lcd">${s.green?fmt(loss,1)+' %':'—'}</div><p class="note">Считается из твоих весов. Пример по умолчанию: 100 г → 86 г.</p></div>
+      </section></div>`;
+    el.querySelectorAll("input[type=range]").forEach(r=>r.oninput=()=>{ s[r.dataset.k]=+r.value; save("vadim",s); draw(); el.querySelector("#"+r.id).focus(); });
+    el.querySelectorAll("[data-ag]").forEach(b=>b.onclick=()=>{ s.ag=+b.dataset.ag; save("vadim",s); draw(); });
+    ["green","roasted"].forEach(k=>el.querySelector("#vadim-"+k).onchange=e=>{ s[k]=+e.target.value; save("vadim",s); draw(); });
+  }; draw();
+};
+
+/* ---- translator ---- */
+TOOLS.translator = el => {
+  const P = {
+    "Кафе":[["Здравствуйте, два эспрессо, пожалуйста.",["Dobrý den, dvě espressa, prosím.","добри ден, две эспресса, просим"],["Hola, dos cafés solos, por favor.","ола, дос кафес солос, пор фавор"],["Hi, two espressos, please."]],
+            ["С собой, пожалуйста.",["S sebou, prosím.","с себоу, просим"],["Para llevar, por favor.","пара льевар, пор фавор"],["To go, please."]],
+            ["Есть растительное молоко?",["Máte rostlinné mléko?","мате ростлинэ млеко"],["¿Tienen leche vegetal?","тьенен лече вехеталь"],["Do you have plant-based milk?"]],
+            ["Счёт, пожалуйста.",["Zaplatím, prosím.","заплатим, просим"],["La cuenta, por favor.","ла куэнта, пор фавор"],["Could I have the bill, please?"]]],
+    "Транспорт":[["Где главный вокзал?",["Kde je hlavní nádraží?","гдэ е главни надражи"],["¿Dónde está la estación de tren?","дондэ эста ла эстасьон дэ трэн"],["Where is the main train station?"]],
+            ["Один билет до …, пожалуйста.",["Jednu jízdenku do …, prosím.","едну йиздэнку до …, просим"],["Un billete para …, por favor.","ун бийетэ пара …, пор фавор"],["One ticket to …, please."]],
+            ["Этот поезд идёт в …?",["Jede tento vlak do …?","едэ тэнто влак до …"],["¿Este tren va a …?","эстэ трэн ба а …"],["Does this train go to …?"]],
+            ["Мой рейс отменили.",["Můj let byl zrušen.","муй лет был зрушэн"],["Han cancelado mi vuelo.","ан канселадо ми буэло"],["My flight has been cancelled."]]],
+    "Врач":[["Мне нужен врач.",["Potřebuji lékaře.","потржебуйи лекаржэ"],["Necesito un médico.","нэсэсито ун мэдико"],["I need a doctor."]],
+            ["Болит вот здесь.",["Bolí mě tady.","боли мне тады"],["Me duele aquí.","мэ дуэлэ аки"],["It hurts here."]],
+            ["У меня аллергия на …",["Jsem alergický na …","сэм алергицки на …"],["Soy alérgico a …","сой алерхико а …"],["I'm allergic to …"]],
+            ["Где ближайшая аптека?",["Kde je nejbližší lékárna?","гдэ е нэйближши лекарна"],["¿Dónde está la farmacia más cercana?","дондэ эста ла фармасья мас серкана"],["Where is the nearest pharmacy?"]]],
+    "Кофейный бизнес":[["Мы обжарщики кофе из Праги.",["Jsme pražírna kávy z Prahy.","сме пражирна кавы з прагы"],["Somos tostadores de café de Praga.","сомос тостадорэс дэ кафэ дэ прага"],["We're a coffee roastery from Prague."]],
+            ["Можете прислать образцы для каппинга?",["Mohli byste nám poslat vzorky na cupping?","могли бысте нам послат взорки на каппинг"],["¿Podrían enviarnos muestras para catar?","подриан энвьярнос муэстрас пара катар"],["Could you send us samples for cupping?"]],
+            ["Какой минимальный заказ?",["Jaký je minimální odběr?","яки е минимални одбер"],["¿Cuál es el pedido mínimo?","куаль эс эль пэдидо минимо"],["What's the minimum order?"]],
+            ["Можем провести дегустацию у вас в кафе?",["Můžeme u vás v kavárně udělat ochutnávku?","мужеме у вас ф каварне удьелат охутнавку"],["¿Podemos hacer una cata en su cafetería?","подэмос асэр уна ката эн су кафэтэрия"],["Can we run a tasting at your café?"]]]
+  };
+  const L = [["cs","Čeština","cs-CZ"],["es","Español","es-ES"],["en","English","en-GB"]];
+  let s = load("tr", {sit:"Кафе", lang:0, open:{0:1}});
+  const draw = () => {
+    el.innerHTML = `<section class="panel" style="max-width:720px">
+      <h2 class="ph">Разговорник</h2><p class="sub">Выбери ситуацию и язык, нажми на фразу, чтобы увидеть перевод и транскрипцию.</p>
+      <div class="row" style="justify-content:space-between;margin-bottom:14px"><div class="sits">${Object.keys(P).map(k=>`<button class="sit ${k===s.sit?'on':''}" data-s="${k}">${k}</button>`).join("")}</div>
+      <div class="langs">${L.map((l,i)=>`<button class="lang ${i===s.lang?'on':''}" data-l="${i}">${l[1]}</button>`).join("")}</div></div>
+      <div class="bub">${P[s.sit].map((p,i)=>{ const t=p[1+s.lang]; return `<button class="q" data-q="${i}">${esc(p[0])}</button>${s.open[i]?`<div class="a">${esc(t[0])}${t[1]?`<span class="tr">[${esc(t[1])}]</span>`:''}<button class="say" data-say="${i}">▶ Произнести</button></div>`:''}`}).join("")}</div>
+      <p class="note">Транскрипция примерная, для чешского с переходом на «вы» (vykání). Произношение идёт через голос браузера, если он есть на устройстве. Письма и длинные тексты переводи в треде Переводчика.</p>
+    </section>`;
+    el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{ s.sit=b.dataset.s; s.open={0:1}; save("tr",s); draw(); });
+    el.querySelectorAll("[data-l]").forEach(b=>b.onclick=()=>{ s.lang=+b.dataset.l; save("tr",s); draw(); });
+    el.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{ const i=b.dataset.q; s.open[i]=s.open[i]?0:1; save("tr",s); draw(); });
+    el.querySelectorAll("[data-say]").forEach(b=>b.onclick=()=>{ try{ const t=P[s.sit][b.dataset.say][1+s.lang][0]; const u=new SpeechSynthesisUtterance(t); u.lang=L[s.lang][2]; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){ toast("Голос браузера недоступен"); } });
+  }; draw();
+};
+
+renderHub(); route();
+</script>

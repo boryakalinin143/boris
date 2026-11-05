@@ -1,0 +1,14 @@
+{
+  "updated": "2026-11-05",
+  "skills": [
+    {
+      "id": "english",
+      "area": "Языки",
+      "name": "Английский",
+      "level_cefr": "A1",
+      "level_source": "самооценка Бориса, 2026-11-05",
+      "target_cefr": "A2",
+      "target_date": null
+    }
+  ]
+}

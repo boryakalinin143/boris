@@ -13,7 +13,8 @@ function h(tag, props = {}, ...children) {
   return el;
 }
 
-const fmtTime = (iso) => (iso ? new Date(iso).toLocaleString('ru-RU', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : null);
+let TZ; // часовой пояс центра (config.timezone), чтобы время совпадало с брифингом
+const fmtTime = (iso) => (iso ? new Date(iso).toLocaleString('ru-RU', { timeZone: TZ, day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : null);
 
 function fillList(id, items, render) {
   const ul = $(id);
@@ -23,6 +24,7 @@ function fillList(id, items, render) {
 const src = (x) => (x.system_name ? h('span', { class: 'src' }, x.system_name) : null);
 
 function renderToday(d) {
+  TZ = d.today.timezone;
   $('weekday').textContent = d.today.weekday;
   $('date').textContent = d.today.date_label;
   $('weather').textContent = d.today.weather ? d.today.weather : 'Погода: источник не подключён';

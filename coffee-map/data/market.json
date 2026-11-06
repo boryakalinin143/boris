@@ -1,27 +1,27 @@
 {
- "updated": "2026-11-05",
+ "updated": "2026-11-06",
  "prices": [
   {
    "id": "kc",
    "name": "Арабика, ICE «C» (Нью-Йорк)",
    "unit": "¢/фунт",
-   "value": 279.5,
-   "change_pct": -1.6,
-   "date": "2026-11-04",
-   "note": "Закрытие Dec-26 (KCZ6) 4.11: −4,45 ¢ (−1,57 %), диапазон дня 277,4–283,6. Trading Economics даёт 279,75 (−1,48 %). Минимум с начала октября: хорошие виды на урожай Бразилии и слабый реал. Первое уведомление по Dec-26 — 19.11.",
+   "value": 277.4,
+   "change_pct": -0.8,
+   "date": "2026-11-05",
+   "note": "Закрытие Dec-26 (KCZ6) 5.11: −2,35 ¢ (−0,84 %), диапазон дня 276,4–284,2. Trading Economics даёт 277,15 (−0,93 %). Новый минимум с начала октября; первое уведомление по Dec-26 — 19.11.",
    "source": "Investing.com / Trading Economics",
-   "url": "https://in.investing.com/commodities/us-coffee-c"
+   "url": "https://www.investing.com/commodities/us-coffee-c"
   },
   {
    "id": "rc",
    "name": "Робуста, ICE Europe (Лондон)",
    "unit": "$/т",
-   "value": 3224,
-   "change_pct": 0.5,
-   "date": "2026-11-04",
-   "note": "Закрытие Jan-27 (RCF7) 4.11: +17 $ (+0,53 %), диапазон дня 3196–3248. Робуста держится у минимумов с весны 2024 (52 недели: 3113–4740); во Вьетнаме идёт пик сбора.",
+   "value": 3238,
+   "change_pct": 0.4,
+   "date": "2026-11-05",
+   "note": "Закрытие Jan-27 (RCF7) 5.11: +14 $ (+0,43 %), диапазон дня 3224–3297. Держится у минимумов с марта 2024 (52 недели: 3113–4689); во Вьетнаме пик сбора.",
    "source": "Investing.com",
-   "url": "https://in.investing.com/commodities/london-coffee"
+   "url": "https://www.investing.com/commodities/london-coffee"
   }
  ],
  "history_kc": [
@@ -54,6 +54,11 @@
    "date": "2026-11-04",
    "value": 279.5,
    "note": "закрытие Dec-26"
+  },
+  {
+   "date": "2026-11-05",
+   "value": 277.4,
+   "note": "закрытие Dec-26"
   }
  ],
  "facts": [
@@ -61,7 +66,13 @@
    "label": "Сертифицированные запасы арабики ICE",
    "value": "225 068 мешков",
    "date": "2026-10-29",
-   "note": "рядом с минимумом за 27 лет (218 838 мешков, середина сентября); около 44 тыс. мешков ждали грейдинга. 2.11 запасы снова снизились (CocoaIntel), точной новой цифры не нашёл"
+   "note": "+3033 за неделю, рядом с минимумом за 27 лет (около 218 тыс., середина сентября); около 44 тыс. мешков ждали грейдинга. Новее цифры в открытых источниках не нашёл"
+  },
+  {
+   "label": "Композитный индикатор ICO",
+   "value": "251,63 ¢/фунт",
+   "date": "2026-11-03",
+   "note": "−5,5 % за неделю; бразильские натуральные 283,94, колумбийские мытые 348,09, робусты 155,49 (по Woodpeckers)"
   },
   {
    "label": "Мировое производство 2026/27 (USDA)",
@@ -83,6 +94,54 @@
   }
  ],
  "news": [
+  {
+   "date": "2026-11-05",
+   "region": "Рынок",
+   "title": "Арабика −0,8 % до 277,4 ¢/фунт, робуста 3238 $/т",
+   "text": "Декабрьская арабика обновила минимум с начала октября (днём до 276,4). Давят виды на большой урожай Бразилии и слабый реал. Робуста прибавила 0,4 %.",
+   "url": "https://tradingeconomics.com/commodity/coffee",
+   "source": "Investing.com / Trading Economics"
+  },
+  {
+   "date": "2026-11-05",
+   "region": "Мир",
+   "title": "Исследователи оспаривают тезис о «климатоустойчивой» робусте",
+   "text": "Обзор научной литературы ставит под сомнение, что переход на робусту — надёжный ответ на потепление. Важно для долгосрочных прогнозов предложения.",
+   "url": "https://dailycoffeenews.com/2026/11/05/researchers-challenge-the-climate-resilient-robusta-narrative/",
+   "source": "Daily Coffee News"
+  },
+  {
+   "date": "2026-11-04",
+   "region": "США",
+   "title": "Kraft Heinz продаёт кофейный бизнес в Северной Америке за 650 млн $",
+   "text": "Покупатель — фонд One Rock Capital: Maxwell House, Gevalia, Tassimo и др., заводы в Джексонвилле и Ванкувере. Kraft Heinz оставляет 30 %, закрытие сделки в середине 2027.",
+   "url": "https://dailycoffeenews.com/2026/11/04/kraft-heinz-selling-north-american-coffee-business-for-650-million/",
+   "source": "Daily Coffee News"
+  },
+  {
+   "date": "2026-11-04",
+   "region": "Кения",
+   "title": "Сотни капперов соберут «вкусовой атлас» кенийского кофе",
+   "text": "Более 500 образцов из 34 округов. Полезно для выбора кенийских лотов по вкусу и региону.",
+   "url": "https://dailycoffeenews.com/2026/11/04/hundreds-of-cuppers-to-help-build-a-kenya-coffee-flavor-atlas/",
+   "source": "Daily Coffee News"
+  },
+  {
+   "date": "2026-11-03",
+   "region": "Бразилия",
+   "title": "Рекордный месячный экспорт Бразилии: около 4,93 млн мешков в октябре",
+   "text": "Реал упал примерно на 10,5 % к доллару после выборов 25.10, фермеры активнее продают. Идёт цветение под урожай 2027/28, El Niño остаётся риском.",
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
+   "source": "Woodpeckers Coffee"
+  },
+  {
+   "date": "2026-11-03",
+   "region": "Эфиопия",
+   "title": "Эфиопия запустила национальную систему прослеживаемости под EUDR",
+   "text": "Охватывает более 1,4 млн производителей. Для импорта в ЕС после 30.12.2026 это снижает риск задержек по эфиопским лотам.",
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
+   "source": "Woodpeckers Coffee"
+  },
   {
    "date": "2026-11-04",
    "region": "Рынок",
@@ -197,10 +256,10 @@
   }
  ],
  "fx": {
-  "eurusd": 1.1241,
+  "eurusd": 1.1224,
   "date": "2026-11-05",
-  "note": "EUR/USD утром 5.11 (+0,11 % за день) по Trading Economics. Официальный курс ЕЦБ за 4.11: 1,1267; за 5.11 ещё не опубликован.",
-  "source": "Trading Economics / ECB",
-  "url": "https://tradingeconomics.com/euro-area/currency"
+  "note": "Официальный курс ЕЦБ за 5.11 (за 4.11 было 1,1267). Курс за 6.11 ЕЦБ публикует около 16:00 по Праге.",
+  "source": "ECB",
+  "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
  }
 }

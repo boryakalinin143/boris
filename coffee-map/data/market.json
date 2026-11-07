@@ -1,27 +1,27 @@
 {
- "updated": "2026-11-06",
+ "updated": "2026-11-07",
  "prices": [
   {
    "id": "kc",
    "name": "Арабика, ICE «C» (Нью-Йорк)",
    "unit": "¢/фунт",
-   "value": 277.4,
-   "change_pct": -0.8,
-   "date": "2026-11-05",
-   "note": "Закрытие Dec-26 (KCZ6) 5.11: −2,35 ¢ (−0,84 %), диапазон дня 276,4–284,2. Trading Economics даёт 277,15 (−0,93 %). Новый минимум с начала октября; первое уведомление по Dec-26 — 19.11.",
+   "value": 280.0,
+   "change_pct": 1.0,
+   "date": "2026-11-06",
+   "note": "Закрытие Dec-26 (KCZ6) 6.11 по таблице Investing.com: 280,00 (+2,85 ¢, +1,03 %), диапазон дня 276,0–282,5. В шапке той же страницы 280,15 (+1,08 %), Trading Economics 280,11. Отскок от минимума с 24 сентября; первое уведомление по Dec-26 — 19.11.",
    "source": "Investing.com / Trading Economics",
-   "url": "https://www.investing.com/commodities/us-coffee-c"
+   "url": "https://www.investing.com/commodities/us-coffee-c-historical-data"
   },
   {
    "id": "rc",
    "name": "Робуста, ICE Europe (Лондон)",
    "unit": "$/т",
-   "value": 3238,
-   "change_pct": 0.4,
-   "date": "2026-11-05",
-   "note": "Закрытие Jan-27 (RCF7) 5.11: +14 $ (+0,43 %), диапазон дня 3224–3297. Держится у минимумов с марта 2024 (52 недели: 3113–4689); во Вьетнаме пик сбора.",
+   "value": 3270,
+   "change_pct": 0.9,
+   "date": "2026-11-06",
+   "note": "Закрытие Jan-27 (RCF7) 6.11: 3270 $ (+0,89 % к 3241 по таблице Investing.com; шапка страницы даёт +32 $, +0,99 %), диапазон дня 3217–3277. Держится у минимумов с марта 2024; во Вьетнаме пик сбора.",
    "source": "Investing.com",
-   "url": "https://www.investing.com/commodities/london-coffee"
+   "url": "https://www.investing.com/commodities/london-coffee-historical-data"
   }
  ],
  "history_kc": [
@@ -59,6 +59,11 @@
    "date": "2026-11-05",
    "value": 277.4,
    "note": "закрытие Dec-26"
+  },
+  {
+   "date": "2026-11-06",
+   "value": 280.0,
+   "note": "закрытие Dec-26"
   }
  ],
  "facts": [
@@ -67,6 +72,12 @@
    "value": "225 068 мешков",
    "date": "2026-10-29",
    "note": "+3033 за неделю, рядом с минимумом за 27 лет (около 218 тыс., середина сентября); около 44 тыс. мешков ждали грейдинга. Новее цифры в открытых источниках не нашёл"
+  },
+  {
+   "label": "Бразильский кофе на складах ICE",
+   "value": "83 678 мешков",
+   "date": "2026-11-05",
+   "note": "максимум за 9,25 месяца; ещё 55 396 мешков ждут грейдинга (максимум за 7 недель). Общие сертифицированные запасы новее 225 068 (29.10) не нашёл. Trading Economics"
   },
   {
    "label": "Композитный индикатор ICO",
@@ -94,6 +105,22 @@
   }
  ],
  "news": [
+  {
+   "date": "2026-11-06",
+   "region": "Рынок",
+   "title": "Арабика +1 % до 280 ¢/фунт, робуста 3270 $/т",
+   "text": "Технический отскок после минимума с 24 сентября. Фон прежний: виды на большой урожай Бразилии и слабый реал подталкивают фермеров продавать. Робуста +0,9 %.",
+   "url": "https://www.investing.com/commodities/us-coffee-c-historical-data",
+   "source": "Investing.com / Trading Economics"
+  },
+  {
+   "date": "2026-11-06",
+   "region": "Бразилия",
+   "title": "Бразильский кофе на складах ICE: максимум за 9 месяцев",
+   "text": "83,7 тыс. мешков к 5.11, ещё 55,4 тыс. ждут грейдинга. Hedgepoint: дожди и мягкие температуры в сентябре–октябре улучшают виды на урожай 2027/28; El Niño остаётся риском роста цен в начале 2027.",
+   "url": "https://tradingeconomics.com/commodity/coffee/news/599144",
+   "source": "Trading Economics / Hedgepoint"
+  },
   {
    "date": "2026-11-05",
    "region": "Рынок",
@@ -127,22 +154,6 @@
    "source": "Daily Coffee News"
   },
   {
-   "date": "2026-11-03",
-   "region": "Бразилия",
-   "title": "Рекордный месячный экспорт Бразилии: около 4,93 млн мешков в октябре",
-   "text": "Реал упал примерно на 10,5 % к доллару после выборов 25.10, фермеры активнее продают. Идёт цветение под урожай 2027/28, El Niño остаётся риском.",
-   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
-   "source": "Woodpeckers Coffee"
-  },
-  {
-   "date": "2026-11-03",
-   "region": "Эфиопия",
-   "title": "Эфиопия запустила национальную систему прослеживаемости под EUDR",
-   "text": "Охватывает более 1,4 млн производителей. Для импорта в ЕС после 30.12.2026 это снижает риск задержек по эфиопским лотам.",
-   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
-   "source": "Woodpeckers Coffee"
-  },
-  {
    "date": "2026-11-04",
    "region": "Рынок",
    "title": "Арабика −1,6 % до 279,5 ¢/фунт, минимум за месяц",
@@ -159,12 +170,20 @@
    "source": "Sucafina"
   },
   {
-   "date": "2026-10-27",
-   "region": "Вьетнам",
-   "title": "Во Вьетнаме начался сбор, прогноз рекордный: 32,5 млн мешков",
-   "text": "Пик сбора приходится на конец октября — начало ноября. Жаркая сухая погода могла немного снизить урожай в отдельных районах, цены продаж под давлением.",
-   "url": "https://asianews.network/vietnams-coffee-harvest-season-begins-as-selling-prices-face-uncertainty/",
-   "source": "Viet Nam News / Asia News Network"
+   "date": "2026-11-03",
+   "region": "Бразилия",
+   "title": "Рекордный месячный экспорт Бразилии: около 4,93 млн мешков в октябре",
+   "text": "Реал упал примерно на 10,5 % к доллару после выборов 25.10, фермеры активнее продают. Идёт цветение под урожай 2027/28, El Niño остаётся риском.",
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
+   "source": "Woodpeckers Coffee"
+  },
+  {
+   "date": "2026-11-03",
+   "region": "Эфиопия",
+   "title": "Эфиопия запустила национальную систему прослеживаемости под EUDR",
+   "text": "Охватывает более 1,4 млн производителей. Для импорта в ЕС после 30.12.2026 это снижает риск задержек по эфиопским лотам.",
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-28-october-3-november-2026",
+   "source": "Woodpeckers Coffee"
   },
   {
    "date": "2026-11-03",
@@ -207,12 +226,28 @@
    "source": "Trading Economics"
   },
   {
+   "date": "2026-10-27",
+   "region": "Вьетнам",
+   "title": "Во Вьетнаме начался сбор, прогноз рекордный: 32,5 млн мешков",
+   "text": "Пик сбора приходится на конец октября — начало ноября. Жаркая сухая погода могла немного снизить урожай в отдельных районах, цены продаж под давлением.",
+   "url": "https://asianews.network/vietnams-coffee-harvest-season-begins-as-selling-prices-face-uncertainty/",
+   "source": "Viet Nam News / Asia News Network"
+  },
+  {
    "date": "2026-10-25",
    "region": "Бразилия",
    "title": "Дожди в Минас-Жерайс: 82 % нормы за неделю",
    "text": "Идёт цветение под урожай 2027. Цветение неровное, El Niño остаётся риском для дождей.",
    "url": "https://finance.yahoo.com/markets/commodities/articles/coffee-prices-continue-fall-concern-165529317.html",
    "source": "Barchart / Yahoo Finance"
+  },
+  {
+   "date": "2026-10-20",
+   "region": "Европа",
+   "title": "EUDR вступает в силу 30 декабря 2026",
+   "text": "Импортёрам в ЕС нужна геолокация участков и подтверждение отсутствия вырубки. Малому бизнесу до 30.06.2027.",
+   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-14-20-october-2026",
+   "source": "Woodpeckers Coffee"
   },
   {
    "date": "2026-09-24",
@@ -229,36 +264,12 @@
    "text": "Рост за счёт Бразилии и Вьетнама (32,5 млн). Колумбия 13,4 млн.",
    "url": "https://www.comunicaffe.com/usda-world-coffee-production-6-exports-9-and-global-consumption-3-6-set-to-reach-record-levels-in-2026-27/",
    "source": "Comunicaffe / USDA"
-  },
-  {
-   "date": "2026-06-12",
-   "region": "Эфиопия",
-   "title": "Эфиопия станет 4-м производителем мира: 12,1 млн мешков",
-   "text": "Обгоняет Индонезию (11,4 млн). Экспорт 2026/27 около 7,1 млн мешков.",
-   "url": "https://dailycoffeenews.com/2026/06/12/ethiopia-coffee-report-production-up-government-promoting-modernization/",
-   "source": "Daily Coffee News"
-  },
-  {
-   "date": "2026-05-21",
-   "region": "Кения",
-   "title": "Экспорт Кении вырастет на 12 % до 940 тыс. мешков",
-   "text": "Новые посадки входят в плодоношение. С марта 2026 действует новый Coffee Act, регулятор снова Coffee Board of Kenya.",
-   "url": "https://www.ecofinagency.com/news-agriculture/2105-55798-kenya-set-for-12-rise-in-coffee-exports-in-2026/27",
-   "source": "Ecofin"
-  },
-  {
-   "date": "2026-10-20",
-   "region": "Европа",
-   "title": "EUDR вступает в силу 30 декабря 2026",
-   "text": "Импортёрам в ЕС нужна геолокация участков и подтверждение отсутствия вырубки. Малому бизнесу до 30.06.2027.",
-   "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-14-20-october-2026",
-   "source": "Woodpeckers Coffee"
   }
  ],
  "fx": {
-  "eurusd": 1.1224,
-  "date": "2026-11-05",
-  "note": "Официальный курс ЕЦБ за 5.11 (за 4.11 было 1,1267). Курс за 6.11 ЕЦБ публикует около 16:00 по Праге.",
+  "eurusd": 1.1165,
+  "date": "2026-11-06",
+  "note": "Официальный курс ЕЦБ за 6.11 (за 5.11 было 1,1224). EUR/CZK 24,35. Сегодня суббота, следующий курс ЕЦБ 9.11.",
   "source": "ECB",
   "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
  }

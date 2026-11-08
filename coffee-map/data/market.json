@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-07",
+ "updated": "2026-11-08",
  "prices": [
   {
    "id": "kc",
@@ -8,7 +8,7 @@
    "value": 280.0,
    "change_pct": 1.0,
    "date": "2026-11-06",
-   "note": "Закрытие Dec-26 (KCZ6) 6.11 по таблице Investing.com: 280,00 (+2,85 ¢, +1,03 %), диапазон дня 276,0–282,5. В шапке той же страницы 280,15 (+1,08 %), Trading Economics 280,11. Отскок от минимума с 24 сентября; первое уведомление по Dec-26 — 19.11.",
+   "note": "Последнее закрытие — пятница 6.11 (выходные, торгов не было): Dec-26 (KCZ6) 280,00 (+2,85 ¢, +1,03 %) по таблице Investing.com, диапазон дня 276,0–282,5; шапка той же страницы и Trading Economics дают 280,15 / 280,11. Первое уведомление по Dec-26 — 19.11. Следующие торги 9.11.",
    "source": "Investing.com / Trading Economics",
    "url": "https://www.investing.com/commodities/us-coffee-c-historical-data"
   },
@@ -19,7 +19,7 @@
    "value": 3270,
    "change_pct": 0.9,
    "date": "2026-11-06",
-   "note": "Закрытие Jan-27 (RCF7) 6.11: 3270 $ (+0,89 % к 3241 по таблице Investing.com; шапка страницы даёт +32 $, +0,99 %), диапазон дня 3217–3277. Держится у минимумов с марта 2024; во Вьетнаме пик сбора.",
+   "note": "Последнее закрытие — пятница 6.11 (выходные): Jan-27 (RCF7) 3270 $ (+0,89 % к 3241 по таблице Investing.com; шапка страницы +0,99 %), диапазон дня 3217–3277. Держится у минимумов с марта 2024; во Вьетнаме пик сбора. Следующие торги 9.11.",
    "source": "Investing.com",
    "url": "https://www.investing.com/commodities/london-coffee-historical-data"
   }
@@ -105,6 +105,22 @@
   }
  ],
  "news": [
+  {
+   "date": "2026-11-06",
+   "region": "Коста-Рика",
+   "title": "ICAFE снизил региональные оценки урожая на 10–15 %",
+   "text": "Неровные дожди и жара (El Niño) сбили удобрение и ухудшили вес и качество экспортного зелёного. Это снижение к прежним оценкам, а не подтверждённое падение к прошлому году; год урожая в статье не назван (источник CR Hoy говорит о 2027).",
+   "url": "https://dailycoffeenews.com/2026/11/06/weekly-coffee-news-costa-rica-harvest-concerns-restoring-iconic-coffee-sign/",
+   "source": "Daily Coffee News / ICAFE / CR Hoy"
+  },
+  {
+   "date": "2026-11-06",
+   "region": "Европа",
+   "title": "Rainforest Alliance запустил отчёт для производителей под EUDR",
+   "text": "Сертифицированные фермы кофе и какао могут выгрузить и передать покупателю геолокацию участков, оценку риска вырубки и данные о законности. Упрощает сбор документов к импорту в ЕС после 30.12.2026.",
+   "url": "https://dailycoffeenews.com/2026/11/06/weekly-coffee-news-costa-rica-harvest-concerns-restoring-iconic-coffee-sign/",
+   "source": "Daily Coffee News"
+  },
   {
    "date": "2026-11-06",
    "region": "Рынок",
@@ -248,28 +264,12 @@
    "text": "Импортёрам в ЕС нужна геолокация участков и подтверждение отсутствия вырубки. Малому бизнесу до 30.06.2027.",
    "url": "https://www.woodpeckerscoffee.com/post/global-coffee-roundup-14-20-october-2026",
    "source": "Woodpeckers Coffee"
-  },
-  {
-   "date": "2026-09-24",
-   "region": "Бразилия",
-   "title": "Conab повысила оценку урожая 2026 до 67,6 млн мешков",
-   "text": "Было 66,7 млн. USDA ещё выше: 71,9 млн, +14 % к прошлому году.",
-   "url": "https://www.fas.usda.gov/data/gain-report/2026/06/Coffee%20Annual_Brasilia_Brazil_BR2026-0025.pdf",
-   "source": "Conab / USDA"
-  },
-  {
-   "date": "2026-06-20",
-   "region": "Мир",
-   "title": "USDA: рекордный мировой урожай 2026/27, 189,7 млн мешков",
-   "text": "Рост за счёт Бразилии и Вьетнама (32,5 млн). Колумбия 13,4 млн.",
-   "url": "https://www.comunicaffe.com/usda-world-coffee-production-6-exports-9-and-global-consumption-3-6-set-to-reach-record-levels-in-2026-27/",
-   "source": "Comunicaffe / USDA"
   }
  ],
  "fx": {
   "eurusd": 1.1165,
   "date": "2026-11-06",
-  "note": "Официальный курс ЕЦБ за 6.11 (за 5.11 было 1,1224). EUR/CZK 24,35. Сегодня суббота, следующий курс ЕЦБ 9.11.",
+  "note": "Официальный курс ЕЦБ за 6.11 (пятница; за 5.11 было 1,1224). EUR/CZK 24,35. Выходные, следующий курс ЕЦБ 9.11.",
   "source": "ECB",
   "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.en.html"
  }

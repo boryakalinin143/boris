@@ -1,0 +1,178 @@
+openapi: 3.1.0
+info:
+  title: LOS/1 — Life OS Protocol
+  version: 1.0.0
+  description: |
+    Единый интерфейс, который реализует каждый специалист PERSONAL-LIFE-OS.
+    Нет данных — пустой список или null. Выдуманные значения запрещены.
+servers:
+  - url: https://{system}.example.internal
+    variables:
+      system: { default: finance-os }
+security:
+  - bearer: []
+components:
+  securitySchemes:
+    bearer: { type: http, scheme: bearer }
+  schemas:
+    Envelope:
+      type: object
+      required: [system_id, as_of, data]
+      properties:
+        system_id: { type: string }
+        as_of: { type: [string, "null"], format: date-time }
+        data: {}
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code: { type: string }
+            message: { type: string }
+    Manifest:
+      $ref: './manifest.schema.json'
+    Summary:
+      type: object
+      properties:
+        state: { type: [string, "null"] }
+        highlights:
+          type: array
+          items: { type: object, properties: { text: { type: string }, at: { type: string, format: date-time } } }
+        progress:
+          type: array
+          items:
+            type: object
+            required: [label, value]
+            properties:
+              label: { type: string }
+              value: { type: number }
+              unit: { type: string }
+              goal_id: { type: string }
+    Goal:
+      type: object
+      required: [id, title]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        description: { type: string }
+        reason: { type: string }
+        category: { enum: [health, fitness, finance, career, business, education, travel, personal_development, lifestyle] }
+        due: { type: [string, "null"], format: date }
+        priority: { enum: [low, medium, high, critical] }
+        measurable_result: { type: string }
+        progress: { type: [number, "null"], minimum: 0, maximum: 1 }
+        task_ids: { type: array, items: { type: string } }
+    Task:
+      type: object
+      required: [id, title, status]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        status: { enum: [todo, in_progress, done, cancelled, moved] }
+        due: { type: [string, "null"], format: date-time }
+        priority: { enum: [low, medium, high, critical] }
+        goal_id: { type: [string, "null"] }
+    Alert:
+      type: object
+      required: [id, text, severity]
+      properties:
+        id: { type: string }
+        text: { type: string }
+        severity: { enum: [info, reminder, warning, critical] }
+        at: { type: string, format: date-time }
+    Event:
+      type: object
+      required: [id, title, start]
+      properties:
+        id: { type: string }
+        title: { type: string }
+        kind: { type: string, description: "workout, trip, deadline, appointment, ..." }
+        start: { type: string, format: date-time }
+        end: { type: [string, "null"], format: date-time }
+    Analytics:
+      type: object
+      properties:
+        period: { enum: [day, week, month] }
+        from: { type: string, format: date }
+        metrics:
+          type: array
+          items:
+            type: object
+            required: [key, label, value]
+            properties:
+              key: { type: string }
+              label: { type: string }
+              value: { type: number }
+              unit: { type: string }
+              plan: { type: [number, "null"] }
+    Proposal:
+      type: object
+      required: [title]
+      properties:
+        title: { type: string }
+        body: { type: string }
+        source_insight_id: { type: string }
+        suggested_action:
+          type: object
+          properties: { capability: { type: string }, params: { type: object } }
+    ActionRequest:
+      type: object
+      required: [capability, idempotency_key]
+      properties:
+        capability: { type: string }
+        params: { type: object }
+        confirmation_id: { type: [string, "null"] }
+        idempotency_key: { type: string }
+    ActionResult:
+      type: object
+      properties:
+        status: { enum: [done, queued, rejected] }
+        result: {}
+paths:
+  /health:
+    get:
+      security: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema: { type: object, properties: { status: { enum: [ok, degraded, down] }, version: { type: string } } }
+  /api/v1/profile:
+    get:
+      description: "scope los:read"
+      responses: { '200': { description: "Envelope<Manifest>" } }
+  /api/v1/summary:
+    get:
+      description: "scope los:read"
+      responses: { '200': { description: "Envelope<Summary>" } }
+  /api/v1/goals:
+    get:
+      description: "scope los:read"
+      responses: { '200': { description: "Envelope<Goal[]>" } }
+  /api/v1/tasks:
+    get:
+      description: "scope los:read; ?from=&to=&status="
+      responses: { '200': { description: "Envelope<Task[]>" } }
+  /api/v1/alerts:
+    get:
+      description: "scope los:read"
+      responses: { '200': { description: "Envelope<Alert[]>" } }
+  /api/v1/events:
+    get:
+      description: "scope los:read; ?from=&to="
+      responses: { '200': { description: "Envelope<Event[]>" } }
+  /api/v1/analytics:
+    get:
+      description: "scope los:analyze; ?period=&from="
+      responses: { '200': { description: "Envelope<Analytics>" } }
+  /api/v1/proposals:
+    post:
+      description: "scope los:propose"
+      requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/Proposal' } } } }
+      responses: { '202': { description: "accepted" } }
+  /api/v1/actions:
+    post:
+      description: "scope los:execute; critical capabilities require confirmation_id"
+      requestBody: { content: { application/json: { schema: { $ref: '#/components/schemas/ActionRequest' } } } }
+      responses: { '200': { content: { application/json: { schema: { $ref: '#/components/schemas/ActionResult' } } } } }

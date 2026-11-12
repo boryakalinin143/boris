@@ -1,0 +1,18 @@
+{
+  "system_id": "travel-os",
+  "name": "Travel OS",
+  "version": "0.1.0",
+  "description": "Поездки, билеты и маршруты из базы Travel OS (trips.json)",
+  "domain": "travel",
+  "protocol_version": "LOS/1",
+  "capabilities": [],
+  "data_offered": [
+    { "key": "events", "description": "Сегменты поездок: рейсы, поезда, автобусы, мероприятия", "sensitivity": "personal" },
+    { "key": "alerts", "description": "Чего не хватает к ближайшей поездке: бронь жилья, посадочный, регистрация", "sensitivity": "normal" },
+    { "key": "analytics", "description": "Число предстоящих поездок и дни до ближайшей", "sensitivity": "normal" }
+  ],
+  "permissions_supported": ["READ", "ANALYZE", "PROPOSE"],
+  "connection_status": "disconnected",
+  "last_updated": null,
+  "sync_state": "never"
+}

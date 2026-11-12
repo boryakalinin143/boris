@@ -38,6 +38,8 @@ hypotheses/H01_night_shift_brandbook.md   гипотеза H01: бренд-бу�
 hypotheses/night-shift/        копии двух версий: v1 бренд-бук, v2 инвесторская презентация (24 слайда)
 references/festival-packaging/ 12 фото упаковки с кофейного фестиваля (Dark Arts / NOT, ilse, april, kolo, 2:AM, Paloma, Sprout, Foundation, MTPAK)
 sources/lyubov_original_brief.md   исходный бриф из файла «Любовь», с которого всё началось
+productivity-os/                    Productivity OS: календарь и задачи из Google для LIFE MANAGER OS, см. productivity-os/README.md
+life-manager-os/                    LIFE MANAGER OS: центральный оркестратор личных систем (архитектура, протокол LOS/1, каркас дашборда), см. life-manager-os/README.md
 travel-os/                     личная система поездок Бориса (не про suroast): офлайн-приложение, см. travel-os/README.md
 research/financing_debt_equity_hybrid.md  разбор «долг, доля или гибрид» для раунда 6 млн Kč (копия документа https://claude.ai/artifact/6tzhovLu9yMNebpTP7R5go)
 ```

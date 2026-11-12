@@ -1,0 +1,13 @@
+{
+  "name": "life-manager-os",
+  "version": "0.1.0",
+  "private": true,
+  "description": "LIFE MANAGER OS — центральный оркестратор персональной экосистемы PERSONAL-LIFE-OS",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "start": "node src/server.js",
+    "specialist": "node templates/specialist-os/server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

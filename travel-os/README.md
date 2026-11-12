@@ -26,3 +26,16 @@ python3 build.py --tickets /mnt/project-files/tickets \
 Результат: `dist/TravelOS.html` (в .gitignore). Для проверки другого момента времени: `TravelOS.html?now=2026-11-05T08:10:00Z`.
 
 Пока таймлайн и гид Барселоны заданы прямо в `app.html` (массивы `EV` и `PLACES`); на следующем этапе они переедут в базу поездок.
+
+## Подключение к LIFE MANAGER OS (`los/`)
+
+`los/` — адаптер протокола LOS/1: читает ту же базу `trips.json` и отдаёт центру ближайшую поездку, сегменты (рейсы, поезда, мероприятия) и предупреждения: нет брони жилья, скоро закрывается регистрация, нет посадочного. Фаза поездки считается по датам и времени первого сегмента. Номера броней, документы и цены центру не передаются. Офлайн-приложение адаптер не меняет.
+
+```bash
+cd travel-os/los
+LOS_TOKEN=<openssl rand -hex 32> TRAVEL_OS_TRIPS=/путь/к/trips.json npm start      # http://127.0.0.1:4202
+# в life-manager-os:
+LOS_URL_TRAVEL_OS=http://127.0.0.1:4202 LOS_TOKEN_TRAVEL_OS=<тот же токен> npm start
+```
+
+`npm test` в `los/`: 6 тестов на `data/trips.example.json`.

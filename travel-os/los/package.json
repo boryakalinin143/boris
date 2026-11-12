@@ -1,0 +1,12 @@
+{
+  "name": "travel-os-los",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Travel OS: адаптер LOS/1 для LIFE MANAGER OS",
+  "type": "module",
+  "engines": { "node": ">=22.9" },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env src/server.js",
+    "test": "node --test test/*.test.js"
+  }
+}

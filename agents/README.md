@@ -10,15 +10,13 @@
 | Дневник и привычки | `journal` | [PROMPT](journal/PROMPT.md) | `journal-os/` | Блокнот в точку: бумага, шалфей |
 | Юрист и документы | `lawyer` | [PROMPT](lawyer/PROMPT.md) | `legal-os/` | Досье: графит, бордо |
 | Повар | `chef` | [PROMPT](chef/PROMPT.md) | `chef-os/` | Бистро: томат, базилик |
-| Чашечки ⚠️ | `chashechki` | [PROMPT](chashechki/PROMPT.md) | `coffee-lab-os/cupping/` | Фарфор: кобальт по белому |
+| Чашечки | `chashechki` | [PROMPT](chashechki/PROMPT.md) · [сводка](chashechki/handoff.md) | `agents/chashechki/` | Фарфор: кобальт по белому |
 | Петр Генадич, врач и тренер | `doctor` | [PROMPT](doctor/PROMPT.md) | `health-os/` + `fitness-coach-os/` | Спортивная медицина: изумруд, мята |
 | Людмила, бухгалтер | `lyudmila` | [PROMPT](lyudmila/PROMPT.md) | `finance-os/` | Гроссбух: бухгалтерский зелёный |
 | Поездка по Европе + Испания | `travel` | [PROMPT](travel/PROMPT.md) | `travel-os/` | Открытка: море и закат |
 | suroast | `suroast` | [PROMPT](suroast/PROMPT.md) | `brand/`, `offices/` | Бренд-бриф: Agtron-палитра |
 | Vadim, обжарщик | `vadim` | [PROMPT](vadim/PROMPT.md) | `roasting-knowledge/` | Ростер-лаборатория: сталь и пламя |
 | Переводчик | `translator` | [PROMPT](translator/PROMPT.md) | `language-os/` | Пузыри диалога: фиолетовый, мята |
-
-⚠️ Назначение «Чашечки» — предположение (каппинг и дегустация кофе). Борис, поправь, если это не так.
 
 Каждый `PROMPT.md` самодостаточен: в конце у всех одинаковый блок общих правил (копия в `COMMON_RULES.md`). Если меняешь общие правила, меняй их во всех файлах.
 

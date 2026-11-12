@@ -272,13 +272,13 @@ const AGENTS = [
  {id:"mentor",name:"Наставник",full:"Наставник по обучению",role:"Карта навыков, учебные планы, конспекты и интервальное повторение.",sys:"knowledge-os/",lvl:"READ → PROPOSE",style:"Библиотека",hand:["journal","vadim","translator"]},
  {id:"journal",name:"Дневник",full:"Дневник и привычки",role:"Запись дня, настроение, энергия и трекер привычек без стыда за пропуски.",sys:"journal-os/",lvl:"READ, только сводки",style:"Блокнот в точку",hand:["doctor","mentor","lyudmila"]},
  {id:"lawyer",name:"Юрист",full:"Юрист и документы",role:"Реестр документов со сроками, разбор договоров, чек-листы для чешских ведомств.",sys:"legal-os/",lvl:"READ, PROPOSE",style:"Досье",hand:["lyudmila","suroast","travel","translator"]},
- {id:"chef",name:"Повар",full:"Повар",role:"Меню на неделю, список покупок для чешских магазинов, рецепты с режимом готовки.",sys:"chef-os/",lvl:"PROPOSE, без заказов",style:"Бистро",hand:["doctor","lyudmila","chashechki"]},
- {id:"chashechki",name:"Чашечки",full:"Чашечки",role:"Каппинг и дегустация кофе по протоколу SCA, калибровка вкуса команды.",sys:"coffee-lab-os/cupping/",lvl:"READ",style:"Фарфор",hand:["vadim","suroast"],guess:true},
+ {id:"chef",name:"Повар",full:"Повар",role:"Меню на неделю, список покупок для чешских магазинов, рецепты с режимом готовки.",sys:"chef-os/",lvl:"PROPOSE, без заказов",style:"Бистро",hand:["doctor","lyudmila"]},
+ {id:"chashechki",name:"Чашечки",full:"Чашечки",role:"Своя серия из 5 кофейных чашек с керамической студией: форма, глазурь и фактура под вкус и аромат.",sys:"agents/chashechki/",lvl:"READ",style:"Фарфор",hand:["suroast","lawyer","lyudmila"]},
  {id:"doctor",name:"Петр Генадич",full:"Петр Генадич, врач и тренер",role:"Тренировки на неделю, журнал показателей, подготовка к врачу. Без диагнозов.",sys:"health-os/ + fitness-coach-os/",lvl:"ANALYZE / READ",style:"Спортивная медицина",hand:["chef","journal"]},
  {id:"lyudmila",name:"Людмила",full:"Людмила, бухгалтер",role:"Бюджет-конверты, учёт трат, подписки, чешские налоги и сроки.",sys:"finance-os/",lvl:"ANALYZE, без платежей",style:"Гроссбух",hand:["lawyer","travel","suroast"]},
  {id:"travel",name:"Поездки",full:"Поездка по Европе + Испания",role:"Маршрут, билеты, план по дням, бюджет поездки и SOS. База — Прага.",sys:"travel-os/",lvl:"PROPOSE, покупки по «да»",style:"Открытка",hand:["translator","lyudmila","lawyer"]},
  {id:"suroast",name:"suroast",full:"suroast",role:"Specialty-обжарка из Праги: бренд, финмодель, клиенты, инвесторы, вехи.",sys:"brand/ · offices/",lvl:"READ",style:"Бренд-бриф",hand:["vadim","chashechki","lyudmila","lawyer"]},
- {id:"vadim",name:"Vadim",full:"Vadim, виртуальный обжарщик",role:"Профили обжарки по книгам и пробам, журнал уроков, база лотов.",sys:"roasting-knowledge/",lvl:"READ",style:"Ростер-лаборатория",hand:["chashechki","suroast","mentor"]},
+ {id:"vadim",name:"Vadim",full:"Vadim, виртуальный обжарщик",role:"Профили обжарки по книгам и пробам, журнал уроков, база лотов.",sys:"roasting-knowledge/",lvl:"READ",style:"Ростер-лаборатория",hand:["suroast","mentor"]},
  {id:"translator",name:"Переводчик",full:"Переводчик",role:"Русский ↔ чешский, испанский, английский. Письма, разговорник, произношение.",sys:"language-os/",lvl:"READ",style:"Пузыри диалога",hand:["travel","lawyer","suroast"]}
 ];
 const A = Object.fromEntries(AGENTS.map(a=>[a.id,a]));
@@ -498,34 +498,30 @@ TOOLS.chef = el => {
 
 /* ---- chashechki ---- */
 TOOLS.chashechki = el => {
-  const ATT = [["fr","Аромат","Fragrance/Aroma"],["fl","Вкус","Flavor"],["af","Послевкусие","Aftertaste"],["ac","Кислотность","Acidity"],["bo","Тело","Body"],["ba","Баланс","Balance"],["ov","Общее","Overall"]];
-  const CUP = [["un","Однородность","Uniformity"],["cl","Чистота","Clean Cup"],["sw","Сладость","Sweetness"]];
-  const NOTES = ["цитрус","ягоды","косточковые","тропические","цветы","чай","карамель","шоколад","орех","специи","зерновые","землистые"];
-  let s = load("cup", {fr:8,fl:8,af:7.75,ac:8,bo:7.75,ba:7.75,ov:8,un:10,cl:10,sw:10,def:0,notes:["ягоды","шоколад"],name:"Образец A",ex:true});
+  const CUPS = [
+    ["filter","Фильтр","Тюльпан, сужение к краю, тонкие стенки 3 мм","≈230 / 465 мл · ≈116 мм","светлый селадон, фактура под пальцами",[]],
+    ["esp","Эспрессо","Яйцо, округлое дно, узкий край, стенки 7–8 мм","≈60 / 240 мл · ≈86 мм","тёмный тэммоку",["Сделать уже и выше, чтобы не путалась с капучино?"]],
+    ["flat","Флэт уайт","Низкая широкая чаша, край отогнут наружу","≈160–180 мл","гладкая",[]],
+    ["capp","Капучино","Круглая чаша, широкое горло под пену","≈180–220 мл","гладкая, сливочно-белая",["Тёплый розоватый цвет вместо белого?","Переделать по ANCAP: яйцо, край внутрь, ручка у дна?"]],
+    ["latte","Латте","Без ручки, круглое тело, прямые верхние 5 см","≈280 / 340 мл","мягкий голубой внутри и снаружи",[]]
+  ];
+  const STUDIO = ["Глина и температура обжига","Сертификат глазурей для пищи (без свинца и кадмия)","Толщина стенок по каждой чашке","Форма края","Слепая дегустация: дата и протокол"];
+  let s = load("cups", {done:{}});
   const draw = () => {
-    const tot = ATT.reduce((a,[k])=>a+ +s[k],0) + CUP.reduce((a,[k])=>a+ +s[k],0) - s.def;
-    const cx=130, cy=120, R=88, n=ATT.length;
-    const pt = (i,v) => { const ang=-Math.PI/2+i*2*Math.PI/n; const r=R*(v-6)/4; return [cx+r*Math.cos(ang), cy+r*Math.sin(ang)]; };
-    const poly = ATT.map(([k],i)=>pt(i,s[k]).join(",")).join(" ");
-    const rings = [7,8,9,10].map(v=>`<polygon points="${ATT.map((_,i)=>pt(i,v).join(",")).join(" ")}" fill="none" stroke="#C9D3EA" stroke-width="1"/>`).join("");
-    const labels = ATT.map(([k,r],i)=>{ const [x,y]=pt(i,10.9); return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${r}</text>`}).join("");
+    const q = CUPS.flatMap(c=>c[5].map((t,i)=>c[0]+i)).concat(STUDIO.map((t,i)=>"st"+i));
+    const left = q.filter(k=>!s.done[k]).length;
     el.innerHTML = `<div class="grid2">
-      <section class="panel"><h2 class="ph">Бланк каппинга SCA ${s.ex?'<span class="example">пример заполнения</span>':''}</h2>
-        <p class="sub">Атрибуты от 6,00 до 10,00 с шагом 0,25. Двигай ползунки, итог и диаграмма пересчитаются. Баллы ставишь ты.</p>
-        <div class="row" style="margin-bottom:10px"><input class="inp" id="cup-name" value="${esc(s.name)}" aria-label="Название образца" style="flex:1"></div>
-        <div class="attrs">${ATT.map(([k,r,e])=>`<label class="attr"><span>${r}<span class="en">${e}</span></span><input type="range" id="cup-${k}" min="6" max="10" step="0.25" value="${s[k]}" data-k="${k}"><span class="num">${fmt(s[k],2)}</span></label>`).join("")}
-        ${CUP.map(([k,r,e])=>`<label class="attr"><span>${r}<span class="en">${e} · 5 чашек × 2</span></span><input type="range" id="cup-${k}" min="0" max="10" step="2" value="${s[k]}" data-k="${k}"><span class="num">${fmt(s[k],0)}</span></label>`).join("")}
-        <label class="attr"><span>Дефекты<span class="en">вычитаются из итога</span></span><input type="range" id="cup-def" min="0" max="20" step="2" value="${s.def}" data-k="def"><span class="num">−${s.def}</span></label></div>
+      <section class="panel"><h2 class="ph">Серия из пяти чашек</h2>
+        <p class="sub">Размеры эскизные (оценка). Отметь вопрос, когда решение принято. Отметки хранятся только в этом браузере.</p>
+        <div class="shop">${CUPS.map(([id,n,f,v,g,qs])=>`<h4>${n}</h4><div>${esc(f)}</div><div class="sub" style="margin:2px 0 4px">${esc(v)} · глазурь: ${esc(g)}</div>${qs.length?qs.map((t,i)=>`<label class="row" style="flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-k="${id}${i}" ${s.done[id+i]?'checked':''}><span class="${s.done[id+i]?'done':''}">${esc(t)}</span></label>`).join(""):'<span class="chip">решено</span>'}`).join("")}</div>
       </section>
       <section class="panel" style="display:grid;gap:10px;align-content:start">
-        <div><span class="sub" style="margin:0">${esc(s.name)} · итог</span><div class="score">${fmt(tot,2)}</div>
-          <span class="chip">${tot>=90?'Outstanding':tot>=85?'Excellent':tot>=80?'Very Good · specialty':'ниже specialty'}</span></div>
-        <svg class="radar" viewBox="-34 0 328 240" role="img" aria-label="Диаграмма вкуса">${rings}<polygon points="${poly}" fill="rgba(31,72,168,.18)" stroke="#1F48A8" stroke-width="2"/>${ATT.map(([k],i)=>{const [x,y]=pt(i,s[k]);return `<circle cx="${x}" cy="${y}" r="3.5" fill="#1F48A8"/>`}).join("")}${labels}</svg>
-        <div><p class="sub" style="margin-bottom:6px">Ноты по колесу вкусов</p><div class="notes">${NOTES.map(x=>`<button class="note-c ${s.notes.includes(x)?'on':''}" data-n="${x}">${x}</button>`).join("")}</div></div>
+        <div><span class="sub" style="margin:0">Открытых вопросов</span><div class="score">${left}</div></div>
+        <h2 class="ph">Спросить у студии</h2>
+        <div class="shop">${STUDIO.map((t,i)=>`<label class="row" style="flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" data-k="st${i}" ${s.done["st"+i]?'checked':''}><span class="${s.done["st"+i]?'done':''}">${esc(t)}</span></label>`).join("")}</div>
+        <p class="sub"><a href="https://claude.ai/code/artifact/166e1ecb-cae0-48b2-aa3e-1dfe444390a6" target="_blank" rel="noopener">Пять чашек: разрезы</a> · <a href="https://claude.ai/code/artifact/2a5be93c-8f43-4d93-aee6-9461ff05fac9" target="_blank" rel="noopener">Научный разбор</a></p>
       </section></div>`;
-    el.querySelectorAll("input[type=range]").forEach(r=>r.oninput=()=>{ s[r.dataset.k]=+r.value; s.ex=false; save("cup",s); draw(); el.querySelector("#"+r.id).focus(); });
-    el.querySelector("#cup-name").onchange=e=>{ s.name=e.target.value||"Образец"; save("cup",s); draw(); };
-    el.querySelectorAll(".note-c").forEach(b=>b.onclick=()=>{ const n=b.dataset.n; s.notes = s.notes.includes(n)?s.notes.filter(x=>x!==n):[...s.notes,n]; save("cup",s); draw(); });
+    el.querySelectorAll("input[type=checkbox]").forEach(c=>c.onchange=()=>{ s.done[c.dataset.k]=c.checked; save("cups",s); draw(); });
   }; draw();
 };
 

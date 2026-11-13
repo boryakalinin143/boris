@@ -39,6 +39,7 @@ hypotheses/night-shift/        копии двух версий: v1 бренд-�
 references/festival-packaging/ 12 фото упаковки с кофейного фестиваля (Dark Arts / NOT, ilse, april, kolo, 2:AM, Paloma, Sprout, Foundation, MTPAK)
 sources/lyubov_original_brief.md   исходный бриф из файла «Любовь», с которого всё началось
 travel-os/                     личная система поездок Бориса (не про suroast): офлайн-приложение, см. travel-os/README.md
+chef-os/                       Personal Chef OS — личный шеф-повар Бориса (не про suroast), см. chef-os/README.md
 research/financing_debt_equity_hybrid.md  разбор «долг, доля или гибрид» для раунда 6 млн Kč (копия документа https://claude.ai/artifact/6tzhovLu9yMNebpTP7R5go)
 ```
 

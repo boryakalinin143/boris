@@ -40,6 +40,7 @@ references/festival-packaging/ 12 фото упаковки с кофейног�
 sources/lyubov_original_brief.md   исходный бриф из файла «Любовь», с которого всё началось
 travel-os/                     личная система поездок Бориса (не про suroast): офлайн-приложение, см. travel-os/README.md
 research/financing_debt_equity_hybrid.md  разбор «долг, доля или гибрид» для раунда 6 млн Kč (копия документа https://claude.ai/artifact/6tzhovLu9yMNebpTP7R5go)
+merch/                         мерч: принты футболок (EN/CZ/RU, светлые/тёмные, v2 белые), превью и файлы для печати, см. merch/README_print.md
 ```
 
 Оригиналы Night Shift: бренд-бук https://claude.ai/artifact/HV3reU8X1qDMFCuYisqeGx · презентация https://claude.ai/artifact/1HwcTXNaSJX5ui89ZtJgX6
